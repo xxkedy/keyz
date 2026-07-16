@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e1114">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" href="./icon-192.png">
+<title>Keyz — ショートカット早見表</title>
+<style>
+  :root{
+    --bg:#0e1114; --panel:#151a20; --panel2:#12161b; --line:#242d36;
+    --text:#e8edf2; --sub:#96a3b0; --faint:#66727d;
+    --amber:#fbbf24; --cyan:#22d3ee; --coral:#f87171; --green:#4ade80;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text)}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+    font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
+    padding-bottom:env(safe-area-inset-bottom)}
+
+  header{position:sticky;top:0;z-index:10;background:var(--bg);
+    border-bottom:1px solid var(--line);padding:10px 14px 0;
+    padding-top:calc(10px + env(safe-area-inset-top))}
+  .bar{display:flex;align-items:center;gap:10px;max-width:1120px;margin:0 auto}
+  .bar h1{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:17px;margin:0;
+    color:var(--amber);letter-spacing:.05em;white-space:nowrap}
+  #q{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    color:var(--text);font-size:14px;padding:8px 12px;outline:none}
+  #q:focus{border-color:var(--amber)}
+  #q::placeholder{color:var(--faint)}
+  nav{display:flex;gap:6px;overflow-x:auto;padding:10px 0;max-width:1120px;margin:0 auto;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  .pill{flex:0 0 auto;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;
+    background:var(--panel);border:1px solid var(--line);color:var(--sub);cursor:pointer;
+    user-select:none;-webkit-user-select:none;white-space:nowrap}
+  .pill.on{color:#0e1114;font-weight:800}
+  .pill.cat-sys.on{background:var(--amber);border-color:var(--amber)}
+  .pill.cat-memo.on{background:var(--cyan);border-color:var(--cyan)}
+  .pill.cat-daw.on{background:var(--coral);border-color:var(--coral)}
+  .pill.cat-dev.on{background:var(--green);border-color:var(--green)}
+
+  main{max-width:1120px;margin:0 auto;padding:14px}
+  .note{background:var(--panel2);border:1px dashed var(--line);border-radius:10px;
+    padding:9px 13px;color:var(--sub);font-size:13px;margin:0 0 12px}
+
+  .lchips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+  .lchip{font-size:13px;font-weight:700;padding:6px 13px;border-radius:9px;cursor:pointer;
+    background:var(--panel);border:1px solid var(--line);color:var(--sub);
+    user-select:none;-webkit-user-select:none}
+  .cat-sys .lchip.on{color:var(--amber);border-color:var(--amber);background:rgba(251,191,36,.1)}
+  .cat-memo .lchip.on{color:var(--cyan);border-color:var(--cyan);background:rgba(34,211,238,.1)}
+  .cat-daw .lchip.on{color:var(--coral);border-color:var(--coral);background:rgba(248,113,113,.1)}
+  .cat-dev .lchip.on{color:var(--green);border-color:var(--green);background:rgba(74,222,128,.1)}
+
+  .kb{background:var(--panel2);border:1px solid var(--line);border-radius:14px;
+    padding:14px 14px 10px;overflow-x:auto}
+  .kbi{min-width:780px}
+  .krow{display:flex;gap:4px;margin-bottom:4px}
+  .r1{margin-left:0}.r2{margin-left:14px}.r3{margin-left:24px}.r4{margin-left:40px}
+  .key{flex:0 0 auto;min-width:46px;height:47px;background:#1a2027;border:1px solid #2a333d;
+    border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:0 6px}
+  .fk{min-width:41px;height:38px}
+  .cap{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:#8b98a5;white-space:nowrap}
+  .out{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:9.5px;font-weight:700;
+    margin-top:1px;white-space:nowrap}
+  .dimk{opacity:.35}
+  .cat-sys .hit{border-color:var(--amber)} .cat-sys .hit .out{color:var(--amber)}
+  .cat-memo .hit{border-color:var(--cyan)} .cat-memo .hit .out{color:var(--cyan)}
+  .cat-daw .hit{border-color:var(--coral)} .cat-daw .hit .out{color:var(--coral)}
+  .cat-dev .hit{border-color:var(--green)} .cat-dev .hit .out{color:var(--green)}
+  .hold{border-color:var(--amber);background:#2a2213;box-shadow:0 0 10px rgba(251,191,36,.35);opacity:1}
+  .hold .cap{color:var(--amber);font-weight:800}
+  .hold .out{color:var(--amber)}
+  .kspace{flex:1 1 auto;min-width:180px}
+  .kwide{min-width:68px}
+  .kgap{flex:0 0 18px}
+
+  .exh{font-size:12.5px;font-weight:700;color:var(--sub);margin:14px 2px 8px;
+    padding-left:9px;border-left:3px solid var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:8px}
+  .row{display:flex;align-items:center;gap:12px;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+  .k{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12.5px;font-weight:700;
+    flex:0 0 auto;padding:3px 9px;border-radius:7px;background:#1a2027;border:1px solid var(--line)}
+  .cat-sys .k{color:var(--amber);border-color:rgba(251,191,36,.4)}
+  .cat-memo .k{color:var(--cyan);border-color:rgba(34,211,238,.4)}
+  .cat-daw .k{color:var(--coral);border-color:rgba(248,113,113,.4)}
+  .cat-dev .k{color:var(--green);border-color:rgba(74,222,128,.4)}
+  .a{color:#cdd6df;font-size:13.5px;min-width:0}
+
+  .rz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:560px}
+  .rzb{background:var(--panel);border:1px solid rgba(74,222,128,.4);border-radius:10px;
+    padding:10px 8px;text-align:center}
+  .rzb .num{font-size:15px;color:var(--green);font-weight:800}
+  .rzb .kk{font-family:ui-monospace,monospace;font-size:12px;color:var(--text);font-weight:700;margin:2px 0}
+  .rzb .aa{font-size:11.5px;color:var(--sub)}
+
+  .shead{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;margin:20px 2px 8px}
+  .shead:first-child{margin-top:2px}
+  .shead .dot{width:10px;height:10px;border-radius:3px}
+  .cat-sys .dot{background:var(--amber)} .cat-memo .dot{background:var(--cyan)}
+  .cat-daw .dot{background:var(--coral)} .cat-dev .dot{background:var(--green)}
+  .count{color:var(--faint);font-size:12.5px;margin:2px 2px 10px}
+  .empty{color:var(--sub);text-align:center;padding:40px 0}
+
+  footer{text-align:center;color:var(--faint);font-size:12px;
+    border-top:1px solid var(--line);padding:16px 0 22px;margin-top:30px;
+    font-family:ui-monospace,monospace}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <h1>⌨️ Keyz</h1>
+    <input id="q" type="search" placeholder="全タブ横断検索（閉じ／スクショ／分割…）" autocomplete="off">
+  </div>
+  <nav id="tabs"></nav>
+</header>
+<main id="view"></main>
+<footer>2026-07-16 ・ v2.0 ・ Keyz — ショートカット早見表</footer>
+
+<script>
+const CAP={esc:'esc',prt:'PrtScn',minus:'-',hat:'^',yen:'¥',bs:'⌫',tab:'Tab',at:'@',lbr:'[',
+ semi:';',colon:':',rbr:']',enter:'⏎',comma:',',dot:'.',slash:'/',bslash:'＼',space:'Space',
+ left:'←',up:'↑',down:'↓',right:'→',eisuu:'英数',kana:'かな',muhenkan:'無変換',henkan:'変換'};
+for(const c of '1234567890')CAP[c]=c;
+for(const c of 'abcdefghijklmnopqrstuvwxyz')CAP[c]=c.toUpperCase();
+for(let i=1;i<=12;i++)CAP['f'+i]='F'+i;
+const cap=id=>CAP[id]||id;
+
+const KROWS=[
+ ['esc','f1','f2','f3','f4','f5','f6','f7','f8','f9','f10','f11','f12','prt'],
+ ['1','2','3','4','5','6','7','8','9','0','minus','hat','yen','bs'],
+ ['tab','q','w','e','r','t','y','u','i','o','p','at','lbr'],
+ ['a','s','d','f','g','h','j','k','l','semi','colon','rbr','enter'],
+ ['z','x','c','v','b','n','m','comma','dot','slash','bslash']
+];
+
+const TABS=[
+ {id:'mac',l:'🍎 Mac',cat:'sys',os:'mac',layers:[
+  {n:'⌘',map:{left:'行頭',right:'行末',bs:'行ごと削除',w:'閉じる',q:'アプリ終了',m:'最小化',h:'隠す',tab:'アプリ切替',space:'Spotlight',z:'取り消し',c:'コピー',v:'貼付',x:'切取',a:'全選択',s:'保存',f:'検索',t:'新規タブ'},
+   ex:[{k:'⌘ + `',a:'同アプリ内のウィンドウ切替'},{k:'⌘ + ⌫（Finder）',a:'選択をゴミ箱へ'},{k:'⌘⌥ + Esc',a:'強制終了メニュー'}]},
+  {n:'⌘⇧',map:{z:'やり直し',t:'タブ復活','3':'全画面SS','4':'範囲SS','5':'SSメニュー'},
+   ex:[{k:'⌃⌘⇧ + 3',a:'全画面→クリップボード（すぐ貼付）'}]},
+  {n:'⌥',map:{left:'単語←',right:'単語→',bs:'単語削除'},
+   ex:[{k:'⌃⌘ + Space',a:'絵文字パレット'},{k:'⌥ + Dockクリック',a:'アプリを隠す（再度で戻る）'}]},
+  {n:'🖐 パッド他',nokb:true,ex:[{k:'3本指 上',a:'Mission Control（全ウィンドウ一覧）'},{k:'3本指 下',a:'今のアプリのウィンドウだけ'},{k:'親指＋3本指 広げる',a:'デスクトップ表示'}]}
+ ]},
+ {id:'eisuu',l:'⚡ 英数',cat:'dev',os:'mac',note:'MacのKarabinerレイヤー。「英数」を押しながら各キー。v2予定：かなレイヤー＋Caps=Hyper。',layers:[
+  {n:'英数ホールド',hold:'eisuu',map:{i:'↑',k:'↓',j:'←',l:'→','1':'↑','2':'↓','3':'←','4':'→',o:'⌫',s:'⌫',d:'⌦',a:'行頭',e:'行末',space:'⏎ Enter','8':'クリック',w:'⌘W 閉じ'},
+   ex:[{k:'英数 単押し',a:'英数（IMEオフ）いつも通り'},{k:'Ctrl + K',a:'カタカナ変換（Mac標準）'},{k:'Shift + /',a:'？を出す（IMEオン中）'},{k:'Shift併用',a:'移動キーで範囲選択'}]}
+ ]},
+ {id:'win',l:'🪟 Win',cat:'sys',os:'win',layers:[
+  {n:'Ctrl',map:{left:'単語←',right:'単語→',bs:'単語削除',w:'タブ閉じ',z:'取消',y:'やり直し',c:'コピー',v:'貼付',a:'全選択',s:'保存'},
+   ex:[{k:'Ctrl⇧ + T',a:'閉じたタブ復活'},{k:'Ctrl⇧ + Esc',a:'タスクマネージャー'}]},
+  {n:'Win',map:{d:'デスクトップ',up:'最大化',down:'最小化',left:'左分割',right:'右分割',tab:'タスクビュー',e:'ｴｸｽﾌﾟﾛｰﾗ',l:'ロック',v:'クリップ履歴',prt:'保存+コピー'},
+   ex:[{k:'Win⇧ + S',a:'範囲を選んでクリップボード'}]},
+  {n:'Alt',map:{f4:'閉じる/終了',tab:'アプリ切替',prt:'ウィンドウのみコピー'},ex:[]},
+  {n:'素押し',plain:true,map:{prt:'全画面コピー'},ex:[{k:'PrtScn',a:'全画面→クリップボード（Ctrl+Vで貼付）'}]}
+ ]},
+ {id:'ahk',l:'⚡ AHK',cat:'dev',os:'win',note:'Win自作レイヤー（kedy_keys_v2.ahk）。無変換＝文字まわり／変換＝画面まわり。',layers:[
+  {n:'無変換ホールド',hold:'muhenkan',map:{i:'↑',k:'↓',j:'←',l:'→','1':'↑','2':'↓','3':'←','4':'→',o:'⌫',s:'⌫',d:'⌦',a:'行頭 Home',e:'行末 End',space:'⏎ Enter','8':'クリック',h:'？',f:'！',w:'^W 閉じ'},
+   ex:[{k:'単押し / 2度押し',a:'無変換 / F7（カタカナ）'},{k:'無変換 + Delete',a:'⌫'}]},
+  {n:'変換ホールド',hold:'henkan',map:{j:'左½',k:'最大化',l:'右½','1':'Brave','2':'FL Studio','3':'Cubase','4':'ｴｸｽﾌﾟﾛｰﾗ',c:'Clibor履歴'},
+   ex:[{k:'変換 単押し',a:'⏎ Enter（離した時に発火）'},{k:'Shift併用 J/K/L',a:'別モニタへ移動'}]},
+  {n:'🖱 マウス他',nokb:true,ex:[{k:'右押しながら 左クリック',a:'Ctrl+F4 タブ閉じ'},{k:'左押しながら 右クリック',a:'Ctrl+F4 タブ閉じ'},{k:'左押しながら ホイール←',a:'⌫ Backspace'},{k:'F13',a:'Winキー'},{k:'CapsLock',a:'常時OFF固定'}]}
+ ]},
+ {id:'split',l:'🔲 分割',cat:'sys',os:'mac',note:'左Claude・右作業：①Claudeを左固定 fn⌃← ②右に出すアプリを前面にして fn⌃→。fn＝🌐キー。',layers:[
+  {n:'fn⌃',map:{left:'左半分',right:'右半分',up:'上半分',down:'下半分',f:'画面いっぱい',r:'元に戻す'},
+   ex:[{k:'fn⌃⇧ + ←/→',a:'一発で左右2分割'}]},
+  {n:'🌐 ブラウザ/Win',nokb:true,ex:[{k:'⌘⌥ + →/←',a:'（Brave）次 / 前のタブ'},{k:'⌘1〜8 / ⌘9',a:'タブ番号へ / 一番右へ'},{k:'Win + ←/→',a:'（Win）左右スナップ'},{k:'Win + ↑/↓',a:'（Win）最大化 / 最小化'}]}
+ ]},
+ {id:'notion',l:'🔵 Notion',cat:'memo',os:'mac',layers:[
+  {n:'⌘',map:{p:'検索/ジャンプ',k:'リンク',l:'URLコピー',t:'新規タブ',b:'太字',i:'斜体',u:'下線',e:'コード',d:'ブロック複製',lbr:'前のページ',rbr:'次のページ',bslash:'サイドバー'},ex:[]},
+  {n:'⌘⇧',map:{l:'ダーク/ライト',s:'取り消し線',h:'色を再適用',up:'ブロック↑',down:'ブロック↓',at:'今日の日付'},ex:[]},
+  {n:'⌘⌥',map:{t:'トグル全開閉','1':'見出し1','2':'見出し2','3':'見出し3'},ex:[{k:'Win表記',a:'見出しは Ctrl⇧ + 数字'}]},
+  {n:'✍ 入力',nokb:true,ex:[{k:'# ␣ / - ␣',a:'見出し / 箇条書き'},{k:'[] ␣ / > ␣',a:'チェックボックス / トグル'},{k:'Tab / ⇧Tab',a:'インデント / 解除'}]}
+ ]},
+ {id:'ncal',l:'📅 Cal',cat:'memo',os:'mac',note:'Notion Calendar。',layers:[
+  {n:'素押し',plain:true,map:{t:'今日へ',d:'日ビュー',w:'週ビュー',m:'月ビュー',s:'空き時間',p:'重ね表示',z:'ﾀｲﾑｿﾞｰﾝ'},
+   ex:[{k:'1〜9',a:'その日数だけ表示'},{k:'?',a:'全ショートカット一覧'}]},
+  {n:'⌘',map:{k:'ｺﾏﾝﾄﾞﾒﾆｭｰ'},ex:[{k:'⌘⇧ + . / , / 0',a:'拡大 / 縮小 / リセット'}]}
+ ]},
+ {id:'cubase',l:'🔴 Cubase',cat:'daw',os:'mac',note:'Mac基準。Winは ⌘→Ctrl・⌥→Alt に読み替え。',layers:[
+  {n:'素押し',plain:true,map:{space:'再生/停止',r:'録音待機','1':'選択','2':'範囲','3':'分割','6':'ズーム',q:'ｸｵﾝﾀｲｽﾞ',j:'スナップ',g:'横ズーム−',h:'横ズーム＋',p:'ロケーター',l:'選択範囲へ',f5:'MediaBay'},ex:[]},
+  {n:'⌘',map:{k:'リピート複製',e:'エディター',z:'取消',s:'保存'},ex:[{k:'⌘⇧ + Z',a:'やり直し'}]},
+  {n:'⇧/⌥/テンキー',nokb:true,ex:[{k:'⇧G / ⇧H',a:'縦ズーム − / ＋'},{k:'⌥X',a:'カーソル位置で分割'},{k:'テンキー *',a:'録音'},{k:'テンキー .',a:'頭に戻る'}]}
+ ]},
+ {id:'fl',l:'🔴 FL',cat:'daw',os:'win',note:'Mac注意：Fキーは「F1,F2を標準に」ON、または fn＋F5。',layers:[
+  {n:'素押し',plain:true,map:{space:'再生/停止',r:'録音',l:'PAT/SONG',f5:'ﾌﾟﾚｲﾘｽﾄ',f6:'ﾁｬﾝﾈﾙﾗｯｸ',f7:'ﾋﾟｱﾉﾛｰﾙ',f8:'ピッカー',f9:'ミキサー',f12:'全窓閉じ',f2:'名前/色',enter:'最大化'},
+   ex:[{k:'Alt',a:'ドラッグ中スナップ解除'},{k:'⌥右クリック',a:'その位置から試聴'}]},
+  {n:'Ctrl',map:{z:'取消',a:'全選択',b:'複製',c:'コピー',v:'貼付',x:'切取',l:'レガート(PR)',q:'ｸｵﾝﾀｲｽﾞ(PR)'},
+   ex:[{k:'Ctrl⇧ + Z',a:'やり直し'}]}
+ ]},
+ {id:'razer',l:'🟢 Razer',cat:'dev',os:'win',note:'Naga V2 HyperSpeed・親指側12ボタンの実割当。'}
+];
+
+const RZ=[['①','Ctrl+X','切り取り'],['②','Alt+A','全選択'],['③','Ctrl+⇧+T','閉じたタブ復元'],
+['④','Ctrl+C','コピー'],['⑤','Ctrl+V','貼り付け'],['⑥','Win+⇧+S','範囲スクショ'],
+['⑦','Delete','削除'],['⑧','Enter','決定'],['⑨','Win+H','音声入力'],
+['⑩','Ctrl','＋ホイールで拡大縮小'],['⑪','Ctrl+Z','戻す'],['⑫','Ctrl+L','アドレスバー']];
+
+// 検索インデックス
+const INDEX=[];
+TABS.forEach(t=>{
+  if(t.id==='razer'){RZ.forEach(r=>INDEX.push({t,k:r[0]+' '+r[1],a:r[2]}));return}
+  t.layers.forEach(L=>{
+    if(L.map)for(const id in L.map){
+      const k=L.hold?cap(L.hold)+' + '+cap(id):(L.plain?cap(id):L.n+' + '+cap(id));
+      INDEX.push({t,k,a:L.map[id]});
+    }
+    (L.ex||[]).forEach(e=>INDEX.push({t,k:e.k,a:e.a}));
+  });
+});
+
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+          set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let active=ls.get('keyz_tab')||'mac';
+if(!TABS.some(t=>t.id===active))active='mac';
+let layerIdx=0,query='';
+
+const $tabs=document.getElementById('tabs');
+const $view=document.getElementById('view');
+const $q=document.getElementById('q');
+const esc_=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const rowHTML=r=>'<div class="row"><span class="k">'+esc_(r.k)+'</span><span class="a">'+esc_(r.a)+'</span></div>';
+
+function keyHTML(id,L,extraCls){
+  const lbl=L.map&&L.map[id];
+  const isHold=L.hold===id;
+  let cls='key'+(extraCls||'');
+  if(isHold)cls+=' hold';else if(lbl)cls+=' hit';else cls+=' dimk';
+  let inner='<span class="cap">'+esc_(cap(id))+'</span>';
+  if(isHold)inner+='<span class="out">HOLD</span>';
+  else if(lbl)inner+='<span class="out">'+esc_(lbl)+'</span>';
+  return '<div class="'+cls+'">'+inner+'</div>';
+}
+function kbHTML(t,L){
+  let h='<div class="kb"><div class="kbi">';
+  KROWS.forEach((row,i)=>{
+    h+='<div class="krow r'+i+'">';
+    row.forEach(id=>{h+=keyHTML(id,L,i===0?' fk':'')});
+    h+='</div>';
+  });
+  // 最下段
+  h+='<div class="krow">';
+  if(!L.plain&&!L.hold)h+='<div class="key hold kwide"><span class="cap">'+esc_(L.n)+'</span><span class="out">HOLD</span></div>';
+  const lm=t.os==='win'?'muhenkan':'eisuu', rm=t.os==='win'?'henkan':'kana';
+  h+=keyHTML(lm,L,' kwide');
+  h+=keyHTML('space',L,' kspace');
+  h+=keyHTML(rm,L,' kwide');
+  h+='<div class="kgap"></div>';
+  ['left','up','down','right'].forEach(id=>{h+=keyHTML(id,L)});
+  h+='</div></div></div>';
+  return h;
+}
+function renderTabs(){
+  $tabs.innerHTML=TABS.map(t=>'<div class="pill cat-'+t.cat+(t.id===active&&!query?' on':'')+'" data-id="'+t.id+'">'+t.l+'</div>').join('');
+}
+function renderTab(){
+  const t=TABS.find(x=>x.id===active);
+  let h='<div class="cat-'+t.cat+'">';
+  if(t.note)h+='<div class="note">'+esc_(t.note)+'</div>';
+  if(t.id==='razer'){
+    h+='<div class="rz">'+RZ.map(r=>'<div class="rzb"><div class="num">'+r[0]+'</div><div class="kk">'+esc_(r[1])+'</div><div class="aa">'+esc_(r[2])+'</div></div>').join('')+'</div></div>';
+    $view.innerHTML=h;return;
+  }
+  const L=t.layers[Math.min(layerIdx,t.layers.length-1)];
+  h+='<div class="lchips">'+t.layers.map((x,i)=>'<div class="lchip'+(x===L?' on':'')+'" data-i="'+i+'">'+esc_(x.n)+'</div>').join('')+'</div>';
+  if(!L.nokb)h+=kbHTML(t,L);
+  if(L.ex&&L.ex.length){
+    h+='<div class="exh">'+(L.nokb?'一覧':'キー外・補足')+'</div><div class="grid">'+L.ex.map(rowHTML).join('')+'</div>';
+  }
+  h+='</div>';
+  $view.innerHTML=h;
+}
+function renderSearch(){
+  const q=query.toLowerCase();
+  let total=0,h='';
+  TABS.forEach(t=>{
+    const hits=INDEX.filter(r=>r.t===t&&(r.k+' '+r.a+' '+t.l).toLowerCase().includes(q));
+    if(!hits.length)return;
+    total+=hits.length;
+    h+='<div class="cat-'+t.cat+'"><div class="shead"><span class="dot"></span>'+t.l+'</div><div class="grid">'+hits.map(rowHTML).join('')+'</div></div>';
+  });
+  $view.innerHTML=total?('<div class="count">'+total+'件ヒット</div>'+h):'<div class="empty">見つからん。別の言葉で試して</div>';
+}
+function render(){renderTabs();query?renderSearch():renderTab()}
+
+$tabs.addEventListener('click',e=>{
+  const p=e.target.closest('.pill');if(!p)return;
+  active=p.dataset.id;layerIdx=0;ls.set('keyz_tab',active);
+  query='';$q.value='';render();
+});
+$view.addEventListener('click',e=>{
+  const c=e.target.closest('.lchip');if(!c)return;
+  layerIdx=+c.dataset.i;renderTab();
+});
+$q.addEventListener('input',()=>{query=$q.value.trim();render()});
+render();
+
+if('serviceWorker' in navigator){
+  addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{})});
+}
+</script>
+</body>
+</html>
