@@ -1,6 +1,6 @@
 # make_icons.py — kedyアプリ共通アイコン一括生成
 # 方針（App Hub）: 黒地×白抜きAnton・記号1つ・上下ルール線で統一
-# Digz / Keyzは読みやすさ優先で均一サイズのタイトル表記
+# Digz / Tagz / Keyzは先頭のみ大文字の均一サイズ表記
 # 使い方: python3 make_icons.py keyz        → keyzだけ生成（icon-512.png / icon-192.png）
 #         python3 make_icons.py all         → 全アプリを icons/ に一括生成＋contact sheet
 import sys, math
@@ -11,7 +11,7 @@ S = 1024          # 原寸
 W = 26            # 記号の線幅
 WHITE = "#ffffff"
 BLACK = "#000000"
-AMBER = "#ff9e2c"
+UNIFORM_WORDMARK_SIZE = 205
 
 
 def sym_keyz(d, cx, cy):      # キーキャップ
@@ -50,11 +50,16 @@ def sym_gainz(d, cx, cy):     # ダンベル
         d.rounded_rectangle([cx+sgn*135-(24 if sgn < 0 else 0), cy-58, cx+sgn*135+(0 if sgn < 0 else 24), cy+58], radius=12, fill=WHITE)
 
 
-def sym_tagz(d, cx, cy):      # スプレー缶
-    d.rounded_rectangle([cx-70, cy-55, cx+70, cy+130], radius=26, outline=WHITE, width=W)
-    d.rounded_rectangle([cx-38, cy-105, cx+38, cy-55], radius=12, fill=WHITE)
-    for dx, dy in [(70, -125), (110, -100), (95, -155)]:
-        d.ellipse([cx+dx-11, cy+dy-11, cx+dx+11, cy+dy+11], fill=WHITE)
+def sym_tagz(d, cx, cy):      # 価格タグ
+    points = [
+        (cx-155, cy-110),
+        (cx+35, cy-110),
+        (cx+155, cy),
+        (cx+35, cy+110),
+        (cx-155, cy+110),
+    ]
+    d.line(points + [points[0]], fill=WHITE, width=W, joint="curve")
+    d.ellipse([cx+24, cy-26, cx+76, cy+26], outline=WHITE, width=14)
 
 
 APPS = {
@@ -68,7 +73,7 @@ APPS = {
 }
 
 
-def uniform_wordmark(d, text, base_y, size, colors=None):
+def uniform_wordmark(d, text, base_y, size):
     font = ImageFont.truetype(FONT, size)
     gap = 7
     widths = []
@@ -77,21 +82,17 @@ def uniform_wordmark(d, text, base_y, size, colors=None):
         widths.append(b[2] - b[0])
     total = sum(widths) + gap * (len(text) - 1)
     x = (S - total) / 2
-    for i, (ch, width) in enumerate(zip(text, widths)):
-        fill = colors[i] if colors else WHITE
-        d.text((x, base_y), ch, font=font, fill=fill, anchor="ls")
+    for ch, width in zip(text, widths):
+        d.text((x, base_y), ch, font=font, fill=WHITE, anchor="ls")
         x += width + gap
 
 
 def wordmark(d, name, base_y):
-    if name == "digz":
-        uniform_wordmark(d, "Digz", base_y, 185)
-        return
-    if name == "keyz":
-        uniform_wordmark(d, "Keyz", base_y, 195, [WHITE, WHITE, WHITE, AMBER])
+    if name in {"digz", "tagz", "keyz"}:
+        uniform_wordmark(d, name.capitalize(), base_y, UNIFORM_WORDMARK_SIZE)
         return
 
-    # 既存6文字系は従来の大小交互表記を維持
+    # 既存アプリは従来の大小交互表記を維持
     big, small = 250, 175
     word = name.capitalize()
     fonts = [ImageFont.truetype(FONT, big if i % 2 == 0 else small) for i in range(len(word))]
