@@ -1,0 +1,32 @@
+name: Refresh Appz icon cache
+
+on:
+  push:
+    branches:
+      - agent/appz-icon-cache
+    paths:
+      - .github/workflows/refresh-appz-cache.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bump icon URLs and service worker cache
+        run: |
+          sed -i 's#https://xxkedy.github.io/digz/icon-180.png#https://xxkedy.github.io/digz/icon-180.png?v=20260717-2#g' appz/index.html
+          sed -i 's#https://xxkedy.github.io/tagz/icon-180.png#https://xxkedy.github.io/tagz/icon-180.png?v=20260717-2#g' appz/index.html
+          sed -i 's#https://xxkedy.github.io/keyz/icon-192.png#https://xxkedy.github.io/keyz/icon-192.png?v=20260717-2#g' appz/index.html
+          sed -i "s/const CACHE='appz-v1';/const CACHE='appz-v2';/" appz/sw.js
+          rm .github/workflows/refresh-appz-cache.yml
+      - name: Commit cache refresh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add appz/index.html appz/sw.js .github/workflows/refresh-appz-cache.yml
+          git commit -m "Refresh Appz icon cache"
+          git push
