@@ -3,7 +3,7 @@ name: Generate Keyz icon
 on:
   push:
     branches:
-      - agent/icon-balance
+      - 'agent/**'
     paths:
       - make_icons.py
       - Anton.ttf
