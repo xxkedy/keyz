@@ -1,0 +1,36 @@
+name: Generate Keyz icon
+
+on:
+  push:
+    branches:
+      - agent/icon-balance
+    paths:
+      - make_icons.py
+      - Anton.ttf
+      - .github/workflows/generate-keyz-icon.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check pillow
+      - name: Generate icon files
+        run: python make_icons.py keyz
+      - name: Commit generated PNGs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add icon-192.png icon-512.png
+          if git diff --cached --quiet; then
+            echo "No icon changes"
+            exit 0
+          fi
+          git commit -m "Regenerate Keyz icon"
+          git push
