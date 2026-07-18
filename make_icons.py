@@ -11,7 +11,8 @@ S = 1024          # 原寸
 W = 26            # 記号の線幅
 WHITE = "#ffffff"
 BLACK = "#000000"
-UNIFORM_WORDMARK_SIZE = 205
+UNIFORM_WORDMARK_SIZE = 265
+UNIFORM_WORDMARK_TOP = 436
 
 
 def sym_keyz(d, cx, cy):      # キーキャップ
@@ -75,7 +76,7 @@ APPS = {
 
 def uniform_wordmark(d, text, base_y, size):
     font = ImageFont.truetype(FONT, size)
-    gap = 7
+    gap = 0
     widths = []
     for ch in text:
         b = d.textbbox((0, 0), ch, font=font)
@@ -83,13 +84,13 @@ def uniform_wordmark(d, text, base_y, size):
     total = sum(widths) + gap * (len(text) - 1)
     x = (S - total) / 2
     for ch, width in zip(text, widths):
-        d.text((x, base_y), ch, font=font, fill=WHITE, anchor="ls")
+        d.text((x, base_y), ch, font=font, fill=WHITE)
         x += width + gap
 
 
 def wordmark(d, name, base_y):
     if name in {"digz", "tagz", "keyz"}:
-        uniform_wordmark(d, name.capitalize(), base_y, UNIFORM_WORDMARK_SIZE)
+        uniform_wordmark(d, name.capitalize(), UNIFORM_WORDMARK_TOP, UNIFORM_WORDMARK_SIZE)
         return
 
     # 既存アプリは従来の大小交互表記を維持
@@ -119,8 +120,8 @@ def wordmark(d, name, base_y):
 def make(name):
     img = Image.new("RGB", (S, S), BLACK)
     d = ImageDraw.Draw(img)
-    d.rectangle([120, 112, S-120, 126], fill=WHITE)
-    d.rectangle([120, S-126, S-120, S-112], fill=WHITE)
+    d.rectangle([132, 168, S-132, 180], fill=WHITE)
+    d.rectangle([132, 844, S-132, 856], fill=WHITE)
     APPS[name](d, S/2, 330)
     wordmark(d, name, 860)
     return img
