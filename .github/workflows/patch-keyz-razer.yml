@@ -1,4 +1,4 @@
-name: Patch Keyz Razer assignments
+name: Patch Keyz G604 tab
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update Keyz Razer assignments
+      - name: Add Logicool G604 tab to Keyz
         shell: python
         run: |
           from pathlib import Path
@@ -25,29 +25,36 @@ jobs:
 
           index = index_path.read_text(encoding='utf-8')
 
-          old = """const RZ=[['①','Ctrl+X','切り取り'],['②','Alt+A','全選択'],['③','Ctrl+⇧+T','閉じたタブ復元'],
-          ['④','Ctrl+C','コピー'],['⑤','Ctrl+V','貼り付け'],['⑥','Win+⇧+S','範囲スクショ'],
-          ['⑦','Delete','削除'],['⑧','Enter','決定'],['⑨','Win+H','音声入力'],
-          ['⑩','Ctrl','＋ホイールで拡大縮小'],['⑪','Ctrl+Z','戻す'],['⑫','Ctrl+L','アドレスバー']];"""
+          old_tab = """ {id:'razer',l:'🟢 Razer',cat:'dev',os:'win',note:'Naga V2 HyperSpeed・親指側12ボタンの実割当。'}
+          ];"""
 
-          new = """const RZ=[['①','Ctrl+X','切り取り'],['②','F5','Playlist'],['③','F6','Channel Rack'],
-          ['④','Ctrl+C','コピー'],['⑤','Ctrl+V','貼り付け'],['⑥','F7','Piano Roll'],
-          ['⑦','Delete','削除'],['⑧','Num Enter','決定'],['⑨','Win+H','音声入力'],
-          ['⑩','F9','Mixer'],['⑪','Alt+PrtScn','前面ウィンドウをコピー'],['⑫','F12','FLの全小窓を閉じる']];"""
+          new_tab = """ {id:'g604',l:'🖱 G604',cat:'dev',os:'mac',note:'Logicool G604・Mac「デスクトップ：デフォルト」の確定配置。',layers:[
+            {n:'6ボタン',nokb:true,ex:[
+              {k:'左上 / G6',a:'Mac音声入力（⌃⇧D）'},
+              {k:'右上 / G9',a:'全画面スクショをコピー（⌃⇧⌘3）'},
+              {k:'左中央',a:'コピー（⌘C）'},
+              {k:'右中央 / G8',a:'貼り付け（⌘V）'},
+              {k:'左下',a:'削除（Delete）'},
+              {k:'右下',a:'確定・送信（Enter）'}
+            ]}
+           ]},
+           {id:'razer',l:'🟢 Razer',cat:'dev',os:'win',note:'Naga V2 HyperSpeed・親指側12ボタンの実割当。'}
+          ];"""
 
-          if old not in index:
-              raise SystemExit('Expected old Razer block not found; stopping safely.')
+          if "{id:'g604'" not in index:
+              if old_tab not in index:
+                  raise SystemExit('Expected Razer tab anchor not found; stopping safely.')
+              index = index.replace(old_tab, new_tab, 1)
 
-          index = index.replace(old, new, 1)
           index = index.replace(
-              '2026-07-19 ・ v2.1 ・ Keyz — ショートカット早見表',
               '2026-07-30 ・ v2.2 ・ Keyz — ショートカット早見表',
+              '2026-08-05 ・ v2.3 ・ Keyz — ショートカット早見表',
               1,
           )
           index_path.write_text(index, encoding='utf-8')
 
           sw = sw_path.read_text(encoding='utf-8')
-          sw = sw.replace("const C = 'keyz-v4';", "const C = 'keyz-v5';", 1)
+          sw = sw.replace("const C = 'keyz-v5';", "const C = 'keyz-v6';", 1)
           sw_path.write_text(sw, encoding='utf-8')
 
       - name: Commit and push
@@ -55,5 +62,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html sw.js
-          git commit -m "Update Razer Naga assignments in Keyz"
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git commit -m "Add Logicool G604 tab to Keyz"
           git push
