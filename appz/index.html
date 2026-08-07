@@ -1,22 +1,84 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0b0e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Appz"><link rel="manifest" href="./manifest.json?v=20260806-1"><link rel="apple-touch-icon" href="./icon-180.png?v=20260729-1"><link rel="icon" href="./icon-192.png?v=20260729-1"><title>Appz</title>
-<style>:root{--bg:#0b0b0e;--panel:#15151b;--panel2:#1d1d25;--line:#2b2b35;--text:#f5f3ee;--muted:#9898a4;--amber:#ff9e2c;--cyan:#22d3ee;--green:#4ade80;--orange:#ff6b35}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif}body{min-height:100dvh;padding:max(18px,env(safe-area-inset-top)) 15px calc(30px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto}header{display:flex;align-items:flex-end;justify-content:space-between;margin:4px 2px 20px}.brand h1{font-size:42px;line-height:.9;margin:0;font-weight:950;letter-spacing:-1px}.brand h1 span{color:var(--amber)}.brand p{font-size:10px;color:var(--muted);letter-spacing:2.5px;margin:8px 0 0;font-weight:800}.clock{text-align:right}.clock b{display:block;font-size:22px;line-height:1;font-variant-numeric:tabular-nums;color:var(--cyan)}.clock small{font-size:11px;color:var(--muted)}.hero{background:linear-gradient(145deg,#21170c,var(--panel));border:1px solid #4b3420;border-radius:20px;padding:16px;margin-bottom:18px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,158,44,.09);right:-45px;top:-70px}.hero .eyebrow{font-size:10px;letter-spacing:2px;color:var(--amber);font-weight:900}.hero h2{font-size:21px;margin:5px 0 3px;position:relative;z-index:1}.hero p{font-size:12px;color:var(--muted);margin:0;position:relative;z-index:1}.recent{display:none;margin-top:13px;position:relative;z-index:1}.recent.on{display:flex}.recent button{width:100%;border:0;border-radius:12px;padding:12px 14px;background:var(--amber);color:#221304;font-weight:900;font-size:14px;text-align:left}.sec{font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:900;margin:18px 3px 9px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{--accent:var(--amber);display:flex;align-items:center;gap:11px;min-height:92px;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:17px;color:var(--text);text-decoration:none;position:relative;overflow:hidden;transition:.08s}.card:active{transform:scale(.975);background:var(--panel2)}.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}.card.cyan{--accent:var(--cyan)}.card.green{--accent:var(--green)}.card.orange{--accent:var(--orange)}.icon{width:45px;height:45px;border-radius:12px;background:#09090b;flex:none;object-fit:cover;border:1px solid #33333c}.fallback{width:45px;height:45px;border-radius:12px;background:var(--accent);color:#101014;display:none;align-items:center;justify-content:center;font-weight:950;font-size:20px;flex:none}.card h3{font-size:17px;line-height:1.1;margin:0}.card p{font-size:10.5px;line-height:1.35;color:var(--muted);margin:5px 0 0}.card .arrow{margin-left:auto;color:var(--accent);font-size:17px;font-weight:900}.full{grid-column:1/-1;min-height:76px}.status{display:flex;justify-content:center;gap:7px;margin-top:20px;color:var(--muted);font-size:10px}.status i{width:7px;height:7px;border-radius:50%;background:var(--green);margin-top:3px}footer{text-align:center;color:#555560;font-size:10px;margin-top:18px;letter-spacing:1px}@media(max-width:360px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}</style></head>
-<body><header><div class="brand"><h1>App<span>z</span></h1><p>KEDY TOOL DECK</p></div><div class="clock"><b id="time">--:--</b><small id="date">----</small></div></header>
-<section class="hero"><div class="eyebrow">9 APPS · GITHUB PAGES</div><h2>使う道具を、ここから。</h2><p>英語・音楽・ラップ・制作・食事・トレーニングを1画面に集約。</p><div class="recent" id="recent"><button id="recentBtn"></button></div></section>
-<div class="sec">LEARN</div><div class="grid">
-<a class="card cyan" data-id="flowz" data-name="Flowz" href="https://xxkedy.github.io/flowz/"><img class="icon" src="https://xxkedy.github.io/flowz/icon-180.png" alt=""><span class="fallback">F</span><span><h3>Flowz</h3><p>英語スピーキング</p></span><span class="arrow">›</span></a>
-<a class="card" data-id="slango" data-name="Slango" href="https://xxkedy.github.io/slango/"><img class="icon" src="https://xxkedy.github.io/slango/icon-180.png" alt=""><span class="fallback">S</span><span><h3>Slango</h3><p>スラング4択ドリル</p></span><span class="arrow">›</span></a>
-<a class="card orange" data-id="digz" data-name="Digz" href="https://xxkedy.github.io/digz/"><img class="icon" src="https://xxkedy.github.io/digz/icon-180.png?v=20260718-3" alt=""><span class="fallback">D</span><span><h3>Digz</h3><p>歌詞ディグ管理</p></span><span class="arrow">›</span></a>
-<a class="card green" data-id="earz" data-name="Earz" href="https://xxkedy.github.io/earz/"><img class="icon" src="https://xxkedy.github.io/earz/icon.png" alt=""><span class="fallback">E</span><span><h3>Earz</h3><p>耳トレ・コード聴取</p></span><span class="arrow">›</span></a>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Appz">
+<link rel="manifest" href="./manifest.json?v=20260806-1">
+<link rel="apple-touch-icon" href="./icon-180.png?v=20260729-1">
+<link rel="icon" href="./icon-192.png?v=20260729-1">
+<title>Appz</title>
+<style>
+:root{--bg:#0b0b0e;--panel:#15151b;--panel2:#1c1c23;--line:#2b2b35;--text:#f5f3ee;--muted:#9898a4;--dim:#666671;--amber:#ff9e2c;--cyan:#22d3ee;--green:#4ade80;--orange:#ff6b35}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif}
+body{min-height:100dvh;padding:max(20px,env(safe-area-inset-top)) 15px calc(30px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
+header{margin:4px 3px 17px}.brand h1{font-size:42px;line-height:.9;margin:0;font-weight:950;letter-spacing:-1px}.brand h1 span{color:var(--amber)}.brand p{font-size:10px;color:var(--muted);letter-spacing:2.5px;margin:8px 0 0;font-weight:800}
+.hero{background:linear-gradient(145deg,#21170c,var(--panel));border:1px solid #4b3420;border-radius:20px;padding:15px;margin-bottom:17px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:145px;height:145px;border-radius:50%;background:rgba(255,158,44,.09);right:-48px;top:-76px}.hero .eyebrow{font-size:10px;letter-spacing:1.8px;color:var(--amber);font-weight:900}.hero h2{font-size:21px;margin:5px 0 3px;position:relative;z-index:1}.hero p{font-size:11.5px;line-height:1.5;color:var(--muted);margin:0;position:relative;z-index:1}.recent{display:none;margin-top:12px;position:relative;z-index:1}.recent.on{display:flex}.recent button{width:100%;border:0;border-radius:12px;padding:12px 14px;background:var(--amber);color:#221304;font-weight:900;font-size:14px;text-align:left}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 3px 9px}.section-head b{font-size:10px;letter-spacing:2px;color:var(--muted)}.section-head span{font-size:10px;color:var(--dim)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{--accent:var(--amber);display:flex;align-items:center;gap:10px;min-width:0;min-height:88px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:17px;color:var(--text);text-decoration:none;position:relative;overflow:hidden;transition:.08s}.card:active{transform:scale(.975);background:var(--panel2)}.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}.card.cyan{--accent:var(--cyan)}.card.green{--accent:var(--green)}.card.orange{--accent:var(--orange)}
+.icon{width:45px;height:45px;border-radius:12px;background:#09090b;flex:none;object-fit:cover;border:1px solid #34343d;filter:grayscale(1) contrast(1.08);opacity:.96}.fallback{width:45px;height:45px;border-radius:12px;background:#09090b;color:#f6f4ef;border:1px solid #34343d;display:none;align-items:center;justify-content:center;font-weight:950;font-size:18px;flex:none}.copy{min-width:0}.card h3{font-size:17px;line-height:1.1;margin:0}.card p{font-size:10.5px;line-height:1.35;color:var(--muted);margin:5px 0 0}.card .arrow{margin-left:auto;color:var(--accent);font-size:17px;font-weight:900}.active-dot{position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.standby{margin-top:17px;border:1px solid var(--line);border-radius:17px;background:#111116;overflow:hidden}.standby summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:14px 15px;cursor:pointer}.standby summary::-webkit-details-marker{display:none}.standby-title{font-size:11px;font-weight:900;letter-spacing:1.7px;color:var(--muted)}.standby-meta{font-size:10px;color:var(--dim)}.standby[open] summary{border-bottom:1px solid var(--line)}.standby .inner{padding:10px}.standby .card{min-height:80px;background:#121218;opacity:.82}.standby .card:before{background:#565661}.standby .card .arrow{color:#777782}.badge{display:inline-flex;margin-top:6px;padding:3px 6px;border:1px solid #34343d;border-radius:999px;color:#777782;font-size:9px;font-weight:800}
+.status{display:flex;justify-content:center;gap:7px;margin-top:19px;color:var(--muted);font-size:10px}.status i{width:7px;height:7px;border-radius:50%;background:var(--green);margin-top:3px}footer{text-align:center;color:#555560;font-size:10px;margin-top:17px;letter-spacing:1px}
+@media(max-width:360px){.grid{grid-template-columns:1fr}.card{min-height:78px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="brand"><h1>App<span>z</span></h1><p>KEDY TOOL DECK</p></div></header>
+<section class="hero">
+<div class="eyebrow">4 ACTIVE · 5 STANDBY</div>
+<h2>使う4つを、最初に。</h2>
+<p>普段使う道具だけ上へ固定。未運用と改修待ちは下に畳んだ。</p>
+<div class="recent" id="recent"><button id="recentBtn"></button></div>
+</section>
+<div class="section-head"><b>ACTIVE</b><span>今使う</span></div>
+<div class="grid" id="activeGrid">
+<a class="card cyan active-card" data-id="flowz" data-name="Flowz" href="https://xxkedy.github.io/flowz/"><span class="active-dot"></span><img class="icon" src="https://xxkedy.github.io/flowz/icon-180.png" alt=""><span class="fallback">F</span><span class="copy"><h3>Flowz</h3><p>英語スピーキング</p></span><span class="arrow">›</span></a>
+<a class="card orange active-card" data-id="barz" data-name="Barz" href="https://xxkedy.github.io/keyz/barz/"><span class="active-dot"></span><img class="icon" src="https://xxkedy.github.io/keyz/barz/icon.svg?v=20260806-1" alt=""><span class="fallback">B</span><span class="copy"><h3>Barz</h3><p>フリースタイル・歌詞KEEP</p></span><span class="arrow">›</span></a>
+<a class="card green active-card" data-id="gainz" data-name="Gainz" href="https://xxkedy.github.io/gainz/"><span class="active-dot"></span><img class="icon" src="https://xxkedy.github.io/gainz/icon-180.png" alt=""><span class="fallback">G</span><span class="copy"><h3>Gainz</h3><p>家トレ・動画・記録</p></span><span class="arrow">›</span></a>
+<a class="card active-card" data-id="keyz" data-name="Keyz" href="https://xxkedy.github.io/keyz/"><span class="active-dot"></span><img class="icon" src="https://xxkedy.github.io/keyz/icon-192.png?v=20260718-3" alt=""><span class="fallback">K</span><span class="copy"><h3>Keyz</h3><p>ショートカット早見表</p></span><span class="arrow">›</span></a>
 </div>
-<div class="sec">CREATE</div><div class="grid">
-<a class="card orange full" data-id="barz" data-name="Barz" href="https://xxkedy.github.io/keyz/barz/"><img class="icon" src="https://xxkedy.github.io/keyz/barz/icon.svg?v=20260806-1" alt=""><span class="fallback">B</span><span><h3>Barz</h3><p>DAWなしフリースタイル・歌詞KEEP</p></span><span class="arrow">›</span></a>
-<a class="card" data-id="tagz" data-name="Tagz" href="https://xxkedy.github.io/tagz/"><img class="icon" src="https://xxkedy.github.io/tagz/icon-180.png?v=20260718-3" alt=""><span class="fallback">T</span><span><h3>Tagz</h3><p>ビート名・出品ブロック</p></span><span class="arrow">›</span></a>
-<a class="card cyan" data-id="keyz" data-name="Keyz" href="https://xxkedy.github.io/keyz/"><img class="icon" src="https://xxkedy.github.io/keyz/icon-192.png?v=20260718-3" alt=""><span class="fallback">K</span><span><h3>Keyz</h3><p>ショートカット早見表</p></span><span class="arrow">›</span></a>
-</div>
-<div class="sec">LIFE</div><div class="grid"><a class="card orange full" data-id="spotz" data-name="Spotz" href="https://xxkedy.github.io/spotz/"><img class="icon" src="https://xxkedy.github.io/spotz/icons/spotz-192.png" alt=""><span class="fallback">S</span><span><h3>Spotz</h3><p>大分の店選び・食事記録</p></span><span class="arrow">›</span></a></div>
-<div class="sec">BODY</div><div class="grid"><a class="card green full" data-id="gainz" data-name="Gainz" href="https://xxkedy.github.io/gainz/"><img class="icon" src="https://xxkedy.github.io/gainz/icon-180.png" alt=""><span class="fallback">G</span><span><h3>Gainz</h3><p>Push / Pull / Light · 家トレ記録</p></span><span class="arrow">›</span></a></div>
-<div class="status"><i></i><span>9 apps online</span></div><footer>Appz v5 · 2026.08.06</footer>
-<script>(function(){var LAST_KEY='appz_last',cards=[].slice.call(document.querySelectorAll('.card'));function tick(){var d=new Date();document.getElementById('time').textContent=d.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});document.getElementById('date').textContent=d.toLocaleDateString('ja-JP',{month:'numeric',day:'numeric',weekday:'short'})}function showRecent(){var raw=null;try{raw=localStorage.getItem(LAST_KEY)}catch(e){}if(!raw)return;try{var x=JSON.parse(raw),card=cards.find(function(c){return c.dataset.id===x.id});if(!card)return;var box=document.getElementById('recent'),btn=document.getElementById('recentBtn');btn.textContent='前回の '+x.name+' を開く  →';btn.onclick=function(){location.href=card.href};box.classList.add('on')}catch(e){}}cards.forEach(function(card){var img=card.querySelector('img'),fallback=card.querySelector('.fallback');img.addEventListener('error',function(){img.style.display='none';fallback.style.display='flex'});card.addEventListener('click',function(){try{localStorage.setItem(LAST_KEY,JSON.stringify({id:card.dataset.id,name:card.dataset.name}))}catch(e){}if(navigator.vibrate)navigator.vibrate(12)})});tick();setInterval(tick,30000);showRecent();if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(function(){})})();</script></body></html>
+<details class="standby">
+<summary><span class="standby-title">STANDBY</span><span class="standby-meta">未運用・改修待ち 5 ›</span></summary>
+<div class="inner"><div class="grid">
+<a class="card" data-id="slango" data-name="Slango" href="https://xxkedy.github.io/slango/"><img class="icon" src="https://xxkedy.github.io/slango/icon-180.png" alt=""><span class="fallback">S</span><span class="copy"><h3>Slango</h3><p>スラング4択ドリル</p><span class="badge">未運用</span></span><span class="arrow">›</span></a>
+<a class="card" data-id="digz" data-name="Digz" href="https://xxkedy.github.io/digz/"><img class="icon" src="https://xxkedy.github.io/digz/icon-180.png?v=20260718-3" alt=""><span class="fallback">D</span><span class="copy"><h3>Digz</h3><p>歌詞ディグ管理</p><span class="badge">未運用</span></span><span class="arrow">›</span></a>
+<a class="card" data-id="earz" data-name="Earz" href="https://xxkedy.github.io/earz/"><img class="icon" src="https://xxkedy.github.io/earz/icon.png" alt=""><span class="fallback">E</span><span class="copy"><h3>Earz</h3><p>耳トレ・コード聴取</p><span class="badge">未運用</span></span><span class="arrow">›</span></a>
+<a class="card" data-id="tagz" data-name="Tagz" href="https://xxkedy.github.io/tagz/"><img class="icon" src="https://xxkedy.github.io/tagz/icon-180.png?v=20260718-3" alt=""><span class="fallback">T</span><span class="copy"><h3>Tagz</h3><p>ビート名・出品ブロック</p><span class="badge">ビート制作後</span></span><span class="arrow">›</span></a>
+<a class="card" data-id="spotz" data-name="Spotz" href="https://xxkedy.github.io/spotz/"><img class="icon" src="https://xxkedy.github.io/spotz/icons/spotz-192.png" alt=""><span class="fallback">S</span><span class="copy"><h3>Spotz</h3><p>大分の店選び・食事記録</p><span class="badge">大規模改修待ち</span></span><span class="arrow">›</span></a>
+</div></div>
+</details>
+<div class="status"><i></i><span>4 active apps</span></div>
+<footer>Appz v6 · 2026.08.07</footer>
+<script>
+(function(){
+  var LAST_KEY='appz_last',cards=[].slice.call(document.querySelectorAll('.card')),activeCards=[].slice.call(document.querySelectorAll('.active-card'));
+  function showRecent(){
+    var raw=null;try{raw=localStorage.getItem(LAST_KEY)}catch(e){}
+    if(!raw)return;
+    try{
+      var x=JSON.parse(raw),card=activeCards.find(function(c){return c.dataset.id===x.id});
+      if(!card)return;
+      var box=document.getElementById('recent'),btn=document.getElementById('recentBtn');
+      btn.textContent='前回の '+x.name+' を開く  →';
+      btn.onclick=function(){location.href=card.href};box.classList.add('on');
+    }catch(e){}
+  }
+  cards.forEach(function(card){
+    var img=card.querySelector('img'),fallback=card.querySelector('.fallback');
+    img.addEventListener('error',function(){img.style.display='none';fallback.style.display='flex'});
+    card.addEventListener('click',function(){
+      if(card.classList.contains('active-card')){try{localStorage.setItem(LAST_KEY,JSON.stringify({id:card.dataset.id,name:card.dataset.name}))}catch(e){}}
+      if(navigator.vibrate)navigator.vibrate(12);
+    });
+  });
+  showRecent();
+  if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(function(){});
+})();
+</script>
+</body>
+</html>
