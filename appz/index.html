@@ -15,123 +15,63 @@
 :root{--bg:#0b0b0e;--panel:#15151b;--panel2:#1c1c23;--line:#2b2b35;--text:#f5f3ee;--muted:#9898a4;--dim:#666671;--amber:#ff9e2c;--cyan:#22d3ee;--green:#4ade80;--orange:#ff6b35}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif}
-body{min-height:100dvh;padding:max(20px,env(safe-area-inset-top)) 15px calc(30px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
-header{margin:4px 3px 17px}.brand h1{font-size:42px;line-height:.9;margin:0;font-weight:950;letter-spacing:-1px}.brand h1 span{color:var(--amber)}.brand p{font-size:10px;color:var(--muted);letter-spacing:2.5px;margin:8px 0 0;font-weight:800}
-.hero{background:linear-gradient(145deg,#21170c,var(--panel));border:1px solid #4b3420;border-radius:20px;padding:15px;margin-bottom:17px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:145px;height:145px;border-radius:50%;background:rgba(255,158,44,.09);right:-48px;top:-76px}.hero .eyebrow{font-size:10px;letter-spacing:1.8px;color:var(--amber);font-weight:900}.hero h2{font-size:21px;margin:5px 0 3px;position:relative;z-index:1}.hero p{font-size:11.5px;line-height:1.5;color:var(--muted);margin:0;position:relative;z-index:1}.recent{display:none;margin-top:12px;position:relative;z-index:1}.recent.on{display:flex}.recent button{width:100%;border:0;border-radius:12px;padding:12px 14px;background:var(--amber);color:#221304;font-weight:900;font-size:14px;text-align:left}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 3px 9px}.section-head b{font-size:10px;letter-spacing:2px;color:var(--muted)}.section-head span{font-size:10px;color:var(--dim)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{--accent:var(--amber);display:flex;align-items:center;gap:10px;min-width:0;min-height:88px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:17px;color:var(--text);text-decoration:none;position:relative;overflow:hidden;transition:.08s}.card:active{transform:scale(.975);background:var(--panel2)}.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}.card.cyan{--accent:var(--cyan)}.card.green{--accent:var(--green)}.card.orange{--accent:var(--orange)}
-.icon{width:45px;height:45px;border-radius:12px;background:#09090b;flex:none;object-fit:cover;border:1px solid #34343d;filter:grayscale(1) contrast(1.08);opacity:.96}.fallback{width:45px;height:45px;border-radius:12px;background:#09090b;color:#f6f4ef;border:1px solid #34343d;display:none;align-items:center;justify-content:center;font-weight:950;font-size:18px;flex:none}.copy{min-width:0}.card h3{font-size:17px;line-height:1.1;margin:0}.card p{font-size:10.5px;line-height:1.35;color:var(--muted);margin:5px 0 0}.card .arrow{margin-left:auto;color:var(--accent);font-size:17px;font-weight:900}.active-dot{position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
-.quick-card{width:100%;min-height:70px;border:1px solid #3a3123;background:linear-gradient(145deg,#17130e,var(--panel));font:inherit;text-align:left;cursor:pointer}.quick-card.running{border-color:#3c4750;background:linear-gradient(145deg,#102028,var(--panel))}.quick-card.done{border-color:#2f4b39;background:linear-gradient(145deg,#102018,var(--panel))}.quick-icon{width:45px;height:45px;border-radius:12px;background:#09090b;color:var(--amber);border:1px solid #34343d;display:flex;align-items:center;justify-content:center;font-weight:950;font-size:16px;flex:none;letter-spacing:-.5px}.quick-card.running .quick-icon{color:var(--cyan)}.quick-card.done .quick-icon{color:var(--green)}
-.standby{margin-top:17px;border:1px solid var(--line);border-radius:17px;background:#111116;overflow:hidden}.standby summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:14px 15px;cursor:pointer}.standby summary::-webkit-details-marker{display:none}.standby-title{font-size:11px;font-weight:900;letter-spacing:1.7px;color:var(--muted)}.standby-meta{font-size:10px;color:var(--dim)}.standby[open] summary{border-bottom:1px solid var(--line)}.standby .inner{padding:10px}.standby .card{min-height:80px;background:#121218;opacity:.82}.standby .card:before{background:#565661}.standby .card .arrow{color:#777782}.badge{display:inline-flex;margin-top:6px;padding:3px 6px;border:1px solid #34343d;border-radius:999px;color:#777782;font-size:9px;font-weight:800}
-.status{display:flex;justify-content:center;gap:7px;margin-top:19px;color:var(--muted);font-size:10px}.status i{width:7px;height:7px;border-radius:50%;background:var(--green);margin-top:3px}footer{text-align:center;color:#555560;font-size:10px;margin-top:17px;letter-spacing:1px}
-@media(max-width:360px){.grid{grid-template-columns:1fr}.card{min-height:78px}.quick-card{min-height:70px}}
+body{min-height:100dvh;padding:max(18px,env(safe-area-inset-top)) 15px calc(28px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
+header{display:flex;align-items:end;justify-content:space-between;margin:2px 3px 14px}.brand h1{font-size:40px;line-height:.9;margin:0;font-weight:950;letter-spacing:-1px}.brand h1 span{color:var(--amber)}.brand p{font-size:9px;color:var(--muted);letter-spacing:2.2px;margin:7px 0 0;font-weight:800}.version{font-size:9px;color:var(--dim);letter-spacing:.7px;margin-bottom:1px}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:16px 3px 8px}.section-head b{font-size:10px;letter-spacing:1.5px;color:var(--muted)}.section-head span{font-size:9.5px;color:var(--dim)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.card{--accent:var(--amber);display:flex;align-items:center;gap:10px;min-width:0;min-height:82px;padding:11px;background:var(--panel);border:1px solid var(--line);border-radius:16px;color:var(--text);text-decoration:none;position:relative;overflow:hidden;transition:.08s}.card:active{transform:scale(.976);background:var(--panel2)}.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}.card.cyan{--accent:var(--cyan)}.card.green{--accent:var(--green)}.card.orange{--accent:var(--orange)}
+.iconbox{width:43px;height:43px;border-radius:12px;background:#09090b;border:1px solid #34343d;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}.copy{min-width:0}.card h3{font-size:16px;line-height:1.1;margin:0}.card p{font-size:10px;line-height:1.35;color:var(--muted);margin:5px 0 0}.arrow{margin-left:auto;color:var(--accent);font-size:17px;font-weight:900;flex:none}
+.quick{--accent:var(--amber);width:100%;min-height:74px;border:1px solid #4a3822;background:linear-gradient(145deg,#20170d,var(--panel));font:inherit;text-align:left;cursor:pointer}.quick.running{--accent:var(--cyan);border-color:#27505a;background:linear-gradient(145deg,#0e2025,var(--panel))}.quick.done{--accent:var(--green);border-color:#294936;background:linear-gradient(145deg,#0e1d14,var(--panel))}.quick-time{min-width:54px;text-align:right;color:var(--accent);font-size:14px;font-weight:950;font-variant-numeric:tabular-nums;letter-spacing:-.4px}
+.standby{margin-top:16px;border:1px solid var(--line);border-radius:16px;background:#111116;overflow:hidden}.standby summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:13px 14px;cursor:pointer}.standby summary::-webkit-details-marker{display:none}.standby-title{font-size:10px;font-weight:900;letter-spacing:1.5px;color:var(--muted)}.standby-meta{font-size:9.5px;color:var(--dim)}.standby[open] summary{border-bottom:1px solid var(--line)}.standby .inner{padding:9px}.standby .card{min-height:76px;background:#121218;opacity:.86}.standby .card:before{background:#565661}.standby .arrow{color:#777782}.badge{display:inline-flex;margin-top:5px;padding:3px 6px;border:1px solid #34343d;border-radius:999px;color:#777782;font-size:8.5px;font-weight:800}
+footer{text-align:center;color:#4f4f59;font-size:9px;margin-top:18px;letter-spacing:.8px}
+@media(max-width:360px){.grid{grid-template-columns:1fr}.card{min-height:76px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<header><div class="brand"><h1>App<span>z</span></h1><p>KEDY TOOL DECK</p></div></header>
-<section class="hero">
-<div class="eyebrow">4 ACTIVE · 1 QUICK · 5 STANDBY</div>
-<h2>使う4つと、すぐやる1つ。</h2>
-<p>普段使う道具はACTIVE。1タップで始める行動はQUICK。未運用と改修待ちは下に畳む。</p>
-<div class="recent" id="recent"><button id="recentBtn"></button></div>
-</section>
-<div class="section-head"><b>ACTIVE</b><span>今使う</span></div>
-<div class="grid" id="activeGrid">
-<a class="card cyan active-card" data-id="flowz" data-name="Flowz" href="https://xxkedy.github.io/flowz/"><span class="active-dot"></span><img class="icon" src="https://xxkedy.github.io/flowz/icon-180.png" alt=""><span class="fallback">F</span><span class="copy"><h3>Flowz</h3><p>英語スピーキング</p></span><span class="arrow">›</span></a>
-<a class="card orange active-card" data-id="barz" data-name="Barz" href="https://xxkedy.github.io/keyz/barz/"><span class="active-dot"></span><img class="icon" src="https://xxkedy.github.io/keyz/barz/icon.svg?v=20260806-1" alt=""><span class="fallback">B</span><span class="copy"><h3>Barz</h3><p>フリースタイル・歌詞KEEP</p></span><span class="arrow">›</span></a>
-<a class="card green active-card" data-id="gainz" data-name="Gainz" href="https://xxkedy.github.io/gainz/"><span class="active-dot"></span><img class="icon" src="https://xxkedy.github.io/gainz/icon-180.png" alt=""><span class="fallback">G</span><span class="copy"><h3>Gainz</h3><p>家トレ・動画・記録</p></span><span class="arrow">›</span></a>
-<a class="card active-card" data-id="keyz" data-name="Keyz" href="https://xxkedy.github.io/keyz/"><span class="active-dot"></span><img class="icon" src="https://xxkedy.github.io/keyz/icon-192.png?v=20260718-3" alt=""><span class="fallback">K</span><span class="copy"><h3>Keyz</h3><p>ショートカット早見表</p></span><span class="arrow">›</span></a>
-</div>
-<div class="section-head"><b>QUICK</b><span>1タップで開始</span></div>
-<button class="card quick-card" type="button" id="shadowBtn">
-<span class="quick-icon" id="shadowIcon">15</span>
-<span class="copy"><h3>Shadow 15</h3><p id="shadowStatus">Netflix · 15分シャドーイング</p></span>
-<span class="arrow" id="shadowArrow">▶</span>
+<header><div class="brand"><h1>App<span>z</span></h1><p>YOUR TOOL DECK</p></div><div class="version">v8 · 2026.08.08</div></header>
+
+<div class="section-head"><b>⚡ QUICK</b><span>すぐ始める</span></div>
+<button class="card quick" type="button" id="shadowBtn">
+<span class="iconbox">🎧</span>
+<span class="copy"><h3>Shadowz</h3><p id="shadowStatus">Netflix · 15分シャドーイング</p></span>
+<span class="quick-time" id="shadowTime">15:00</span>
 </button>
+
+<div class="section-head"><b>🚀 ACTIVE</b><span>よく使う</span></div>
+<div class="grid">
+<a class="card cyan" href="https://xxkedy.github.io/flowz/"><span class="iconbox">🗣️</span><span class="copy"><h3>Flowz</h3><p>英語スピーキング</p></span><span class="arrow">›</span></a>
+<a class="card orange" href="https://xxkedy.github.io/keyz/barz/"><span class="iconbox">🎤</span><span class="copy"><h3>Barz</h3><p>フリースタイル・歌詞KEEP</p></span><span class="arrow">›</span></a>
+<a class="card green" href="https://xxkedy.github.io/gainz/"><span class="iconbox">💪</span><span class="copy"><h3>Gainz</h3><p>家トレ・動画・記録</p></span><span class="arrow">›</span></a>
+<a class="card" href="https://xxkedy.github.io/keyz/"><span class="iconbox">⌨️</span><span class="copy"><h3>Keyz</h3><p>ショートカット早見表</p></span><span class="arrow">›</span></a>
+<a class="card cyan" href="https://xxkedy.github.io/digz/"><span class="iconbox">📖</span><span class="copy"><h3>Digz</h3><p>好きな曲の歌詞をディグ</p></span><span class="arrow">›</span></a>
+<a class="card orange" href="https://xxkedy.github.io/tagz/"><span class="iconbox">🏷️</span><span class="copy"><h3>Tagz</h3><p>ビート名・出品ブロック</p></span><span class="arrow">›</span></a>
+</div>
+
 <details class="standby">
-<summary><span class="standby-title">STANDBY</span><span class="standby-meta">未運用・改修待ち 5 ›</span></summary>
-<div class="inner"><div class="grid">
-<a class="card" data-id="slango" data-name="Slango" href="https://xxkedy.github.io/slango/"><img class="icon" src="https://xxkedy.github.io/slango/icon-180.png" alt=""><span class="fallback">S</span><span class="copy"><h3>Slango</h3><p>スラング4択ドリル</p><span class="badge">未運用</span></span><span class="arrow">›</span></a>
-<a class="card" data-id="digz" data-name="Digz" href="https://xxkedy.github.io/digz/"><img class="icon" src="https://xxkedy.github.io/digz/icon-180.png?v=20260718-3" alt=""><span class="fallback">D</span><span class="copy"><h3>Digz</h3><p>歌詞ディグ管理</p><span class="badge">未運用</span></span><span class="arrow">›</span></a>
-<a class="card" data-id="earz" data-name="Earz" href="https://xxkedy.github.io/earz/"><img class="icon" src="https://xxkedy.github.io/earz/icon.png" alt=""><span class="fallback">E</span><span class="copy"><h3>Earz</h3><p>耳トレ・コード聴取</p><span class="badge">未運用</span></span><span class="arrow">›</span></a>
-<a class="card" data-id="tagz" data-name="Tagz" href="https://xxkedy.github.io/tagz/"><img class="icon" src="https://xxkedy.github.io/tagz/icon-180.png?v=20260718-3" alt=""><span class="fallback">T</span><span class="copy"><h3>Tagz</h3><p>ビート名・出品ブロック</p><span class="badge">ビート制作後</span></span><span class="arrow">›</span></a>
-<a class="card" data-id="spotz" data-name="Spotz" href="https://xxkedy.github.io/spotz/"><img class="icon" src="https://xxkedy.github.io/spotz/icons/spotz-192.png" alt=""><span class="fallback">S</span><span class="copy"><h3>Spotz</h3><p>大分の店選び・食事記録</p><span class="badge">大規模改修待ち</span></span><span class="arrow">›</span></a>
-</div></div>
+<summary><span class="standby-title">📦 STANDBY</span><span class="standby-meta">後日改修 1 ›</span></summary>
+<div class="inner">
+<a class="card" href="https://xxkedy.github.io/spotz/"><span class="iconbox">📍</span><span class="copy"><h3>Spotz</h3><p>店選び・食事検索</p><span class="badge">大幅改修待ち</span></span><span class="arrow">›</span></a>
+</div>
 </details>
-<div class="status"><i></i><span>4 active · 1 quick</span></div>
-<footer>Appz v7 · 2026.08.08</footer>
+
+<footer>Appz · QUICK / ACTIVE / STANDBY</footer>
 <script>
 (function(){
-  var LAST_KEY='appz_last',SHADOW_KEY='appz_shadow15_end',SHADOW_MS=15*60*1000,cards=[].slice.call(document.querySelectorAll('.card')),activeCards=[].slice.call(document.querySelectorAll('.active-card')),shadowTimer=null,shadowTicker=null;
-  var shadowBtn=document.getElementById('shadowBtn'),shadowStatus=document.getElementById('shadowStatus'),shadowIcon=document.getElementById('shadowIcon'),shadowArrow=document.getElementById('shadowArrow');
-  function showRecent(){
-    var raw=null;try{raw=localStorage.getItem(LAST_KEY)}catch(e){}
-    if(!raw)return;
-    try{
-      var x=JSON.parse(raw),card=activeCards.find(function(c){return c.dataset.id===x.id});
-      if(!card)return;
-      var box=document.getElementById('recent'),btn=document.getElementById('recentBtn');
-      btn.textContent='前回の '+x.name+' を開く  →';
-      btn.onclick=function(){location.href=card.href};box.classList.add('on');
-    }catch(e){}
-  }
-  function getShadowEnd(){var n=0;try{n=Number(localStorage.getItem(SHADOW_KEY)||0)}catch(e){}return n}
-  function setShadowEnd(n){try{if(n)localStorage.setItem(SHADOW_KEY,String(n));else localStorage.removeItem(SHADOW_KEY)}catch(e){}}
-  function fmt(ms){var total=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(total/60),s=total%60;return m+':'+String(s).padStart(2,'0')}
-  function renderShadow(){
-    var end=getShadowEnd(),left=end-Date.now();
-    shadowBtn.classList.remove('running','done');
-    if(left>0){
-      shadowBtn.classList.add('running');shadowIcon.textContent=fmt(left);shadowStatus.textContent='Netflixでシャドーイング中';shadowArrow.textContent='■';
-    }else{
-      shadowIcon.textContent='15';shadowStatus.textContent='Netflix · 15分シャドーイング';shadowArrow.textContent='▶';
-    }
-  }
-  function notifyShadowDone(){
-    var title='🎧 Shadow 15 終了',body='15分完了。Netflixを閉じて今日は終了。';
-    if('serviceWorker' in navigator && 'Notification' in window && Notification.permission==='granted'){
-      navigator.serviceWorker.ready.then(function(reg){return reg.showNotification(title,{body:body,tag:'appz-shadow15',renotify:true})}).catch(function(){try{new Notification(title,{body:body})}catch(e){}});
-    }
-    document.title='✓ Shadow 15 終了 · Appz';
-  }
-  function finishShadow(){
-    if(!getShadowEnd())return;
-    clearTimeout(shadowTimer);clearInterval(shadowTicker);shadowTimer=null;shadowTicker=null;setShadowEnd(0);
-    shadowBtn.classList.remove('running');shadowBtn.classList.add('done');shadowIcon.textContent='✓';shadowStatus.textContent='15分完了 · Netflixを閉じて終了';shadowArrow.textContent='✓';
-    notifyShadowDone();
-    setTimeout(function(){shadowBtn.classList.remove('done');document.title='Appz';renderShadow()},9000);
-  }
-  function scheduleShadow(){
-    clearTimeout(shadowTimer);clearInterval(shadowTicker);
-    var left=getShadowEnd()-Date.now();
-    if(left<=0){renderShadow();return}
-    renderShadow();
-    shadowTimer=setTimeout(finishShadow,left);
-    shadowTicker=setInterval(function(){var remain=getShadowEnd()-Date.now();if(remain<=0)finishShadow();else renderShadow()},1000);
-  }
-  function startShadow(){
-    var existing=getShadowEnd()-Date.now();
-    if(existing>0){scheduleShadow();return}
-    var end=Date.now()+SHADOW_MS;setShadowEnd(end);scheduleShadow();
-    if('Notification' in window && Notification.permission==='default'){var p=Notification.requestPermission();if(p&&p.catch)p.catch(function(){})}
-    var tab=window.open('https://www.netflix.com/browse','_blank');
-    if(tab){try{tab.opener=null}catch(e){}}
-    if(navigator.vibrate)navigator.vibrate(12);
-  }
-  cards.forEach(function(card){
-    var img=card.querySelector('img'),fallback=card.querySelector('.fallback');
-    if(img&&fallback)img.addEventListener('error',function(){img.style.display='none';fallback.style.display='flex'});
-    if(card===shadowBtn)return;
-    card.addEventListener('click',function(){
-      if(card.classList.contains('active-card')){try{localStorage.setItem(LAST_KEY,JSON.stringify({id:card.dataset.id,name:card.dataset.name}))}catch(e){}}
-      if(navigator.vibrate)navigator.vibrate(12);
-    });
-  });
-  shadowBtn.addEventListener('click',startShadow);
-  showRecent();scheduleShadow();
-  document.addEventListener('visibilitychange',function(){if(!document.hidden)scheduleShadow()});
+  var KEY='appz_shadow15_end',MS=15*60*1000,timer=null,ticker=null;
+  var btn=document.getElementById('shadowBtn'),status=document.getElementById('shadowStatus'),time=document.getElementById('shadowTime');
+  function getEnd(){var n=0;try{n=Number(localStorage.getItem(KEY)||0)}catch(e){}return n}
+  function setEnd(n){try{if(n)localStorage.setItem(KEY,String(n));else localStorage.removeItem(KEY)}catch(e){}}
+  function fmt(ms){var s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return m+':'+String(s%60).padStart(2,'0')}
+  function render(){var end=getEnd(),left=end-Date.now();btn.classList.remove('running','done');if(left>0){btn.classList.add('running');status.textContent='Netflixでシャドーイング中';time.textContent=fmt(left)}else{status.textContent='Netflix · 15分シャドーイング';time.textContent='15:00'}}
+  function notifyDone(){var title='🎧 Shadowz 終了',body='15分完了。今日はここまで。';if('serviceWorker' in navigator&&'Notification' in window&&Notification.permission==='granted'){navigator.serviceWorker.ready.then(function(reg){return reg.showNotification(title,{body:body,tag:'appz-shadowz',renotify:true})}).catch(function(){try{new Notification(title,{body:body})}catch(e){}})}document.title='✓ Shadowz終了 · Appz'}
+  function finish(){if(!getEnd())return;clearTimeout(timer);clearInterval(ticker);timer=null;ticker=null;setEnd(0);btn.classList.remove('running');btn.classList.add('done');status.textContent='15分完了';time.textContent='✓';notifyDone()}
+  function arm(){clearTimeout(timer);clearInterval(ticker);var left=getEnd()-Date.now();if(left<=0){if(getEnd())finish();else render();return}render();timer=setTimeout(finish,left);ticker=setInterval(function(){var now=getEnd()-Date.now();if(now<=0)finish();else time.textContent=fmt(now)},1000)}
+  async function start(){if('Notification' in window&&Notification.permission==='default'){try{await Notification.requestPermission()}catch(e){}}setEnd(Date.now()+MS);document.title='Shadowz · Appz';arm();window.open('https://www.netflix.com/browse','_blank','noopener')}
+  btn.addEventListener('click',function(){if(getEnd()>Date.now()){window.open('https://www.netflix.com/browse','_blank','noopener');return}start()});
+  document.querySelectorAll('a.card').forEach(function(card){card.addEventListener('click',function(){if(navigator.vibrate)navigator.vibrate(12)})});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)arm()});
   if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(function(){});
+  arm();
 })();
 </script>
 </body>
