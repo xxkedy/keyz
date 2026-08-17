@@ -7,70 +7,76 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Islamz">
-<link rel="manifest" href="./manifest.json?v=20260817-1">
-<link rel="apple-touch-icon" href="./icon-180.png?v=20260817-1">
-<link rel="icon" href="./icon-192.png?v=20260817-1">
+<link rel="manifest" href="./manifest.json?v=20260817-2">
+<link rel="apple-touch-icon" href="./icon-180.png?v=20260817-2">
+<link rel="icon" href="./icon-192.png?v=20260817-2">
 <title>Islamz</title>
 <style>
 :root{
-  --bg:#0b0b0e;--panel:#15151b;--panel2:#1c1c23;--line:#2d2d37;
-  --text:#f5f3ee;--muted:#9b9ba7;--dim:#696975;
+  --bg:#0b0b0e;--panel:#15151b;--panel2:#1c1c23;--line:#34343f;
+  --text:#f8f7f3;--muted:#d2d0d6;--dim:#a8a6ae;
   --green:#4ade80;--amber:#ff9e2c;--cyan:#22d3ee;--orange:#ff6b35;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif}
-body{min-height:100dvh;padding:max(18px,env(safe-area-inset-top)) 15px calc(30px + env(safe-area-inset-bottom));max-width:620px;margin:0 auto}
+body{min-height:100dvh;padding:max(16px,env(safe-area-inset-top)) 12px calc(26px + env(safe-area-inset-bottom));max-width:620px;margin:0 auto}
 button{font:inherit}
-header{display:flex;align-items:end;justify-content:space-between;margin:3px 3px 15px}
-.brand h1{font-size:41px;line-height:.9;margin:0;font-weight:950;letter-spacing:-1.5px}
+header{display:flex;align-items:end;justify-content:space-between;margin:2px 2px 10px}
+.brand h1{font-size:39px;line-height:.9;margin:0;font-weight:950;letter-spacing:-1.5px}
 .brand h1 span{color:var(--green)}
-.brand p{font-size:9px;color:var(--muted);letter-spacing:1.9px;margin:7px 0 0;font-weight:800}
+.brand p{font-size:9px;color:var(--muted);letter-spacing:1.7px;margin:6px 0 0;font-weight:800}
 .version{font-size:9px;color:var(--dim);letter-spacing:.7px;margin-bottom:1px}
-.focus{border:1px solid #31523d;background:linear-gradient(145deg,#102018,#14151a);border-radius:18px;padding:14px 15px;margin-bottom:15px}
-.eyebrow{font-size:9px;letter-spacing:1.5px;font-weight:900;color:var(--green);margin-bottom:7px}
-.focus strong{display:block;font-size:20px;line-height:1.25;letter-spacing:-.3px}
-.focus p{margin:7px 0 0;color:var(--muted);font-size:11px;line-height:1.55}
-.focus .arabic{font-size:19px;color:var(--text);margin-top:10px;direction:rtl;text-align:left}
-.phrase{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;align-items:center;margin-top:10px;border-top:1px solid #284334;padding-top:10px}
-.phrase .roman{font-size:12px;font-weight:850}.phrase .jp{font-size:10px;color:var(--muted)}
+.focus{border:1px solid #31523d;background:linear-gradient(145deg,#102018,#14151a);border-radius:15px;padding:11px 12px;margin-bottom:9px}
+.eyebrow{font-size:9px;letter-spacing:1.4px;font-weight:900;color:var(--green);margin-bottom:5px}
+.focus strong{display:block;font-size:19px;line-height:1.22;letter-spacing:-.3px}
+.focus p{margin:6px 0 0;color:#e5e3e8;font-size:11px;line-height:1.5}
+.focus .arabic{font-size:18px;color:var(--text);margin-top:8px;direction:rtl;text-align:left}
+.phrase{display:grid;grid-template-columns:auto 1fr;gap:7px 9px;align-items:center;margin-top:8px;border-top:1px solid #284334;padding-top:8px}
+.phrase .roman{font-size:11.5px;font-weight:850}.phrase .jp{font-size:10px;color:var(--muted)}
 .pill{font-size:8px;font-weight:900;letter-spacing:1px;border:1px solid #31523d;color:var(--green);padding:4px 7px;border-radius:999px}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:17px 3px 8px}
-.section-head b{font-size:10px;letter-spacing:1.5px;color:var(--muted)}
+.decision{border:1px solid #3b3324;background:#14120f;border-radius:15px;padding:9px 11px;margin-bottom:9px}
+.decision-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px}
+.decision-head b{font-size:9px;letter-spacing:1.2px;color:var(--amber)}.decision-head span{font-size:8px;color:var(--dim)}
+.decision-row{display:grid;grid-template-columns:52px 1fr;gap:8px;padding:5px 0;border-top:1px solid #302a20;font-size:10px;line-height:1.35}
+.decision-row b{color:var(--text)}.decision-row span{color:#e6e4e8}
+.decision-note{font-size:9px;line-height:1.4;color:var(--muted);border-top:1px solid #302a20;padding-top:6px;margin-top:2px}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:13px 2px 6px}
+.section-head b{font-size:10px;letter-spacing:1.4px;color:var(--muted)}
 .section-head span{font-size:9.5px;color:var(--dim)}
-.map-center{border:1px solid #44351f;background:#15120e;border-radius:17px;padding:13px 14px;text-align:center;margin-bottom:9px}
-.map-center small{display:block;font-size:8px;letter-spacing:1.8px;color:var(--amber);font-weight:900}
-.map-center strong{font-size:21px;display:block;margin-top:4px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.topic{--accent:var(--green);position:relative;min-height:112px;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 12px 11px;overflow:hidden}
+.map-center{border:1px solid #44351f;background:#15120e;border-radius:14px;padding:9px 12px;text-align:center;margin-bottom:7px}
+.map-center small{display:block;font-size:8px;letter-spacing:1.7px;color:var(--amber);font-weight:900}
+.map-center strong{font-size:20px;display:block;margin-top:3px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.topic{--accent:var(--green);position:relative;min-height:96px;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 10px 9px;overflow:hidden}
 .topic:active{transform:scale(.978);background:var(--panel2)}
 .topic:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
 .topic.amber{--accent:var(--amber)}.topic.cyan{--accent:var(--cyan)}.topic.orange{--accent:var(--orange)}
 .topic .top{display:flex;justify-content:space-between;gap:8px;align-items:start}
-.topic .ico{font-size:20px}.topic .state{font-size:8px;color:var(--dim);border:1px solid #383842;border-radius:999px;padding:3px 6px;white-space:nowrap}
+.topic .ico{font-size:18px}.topic .state{font-size:8px;color:#c5c3ca;border:1px solid #464650;border-radius:999px;padding:3px 6px;white-space:nowrap}
 .topic.done .state{color:var(--green);border-color:#31523d}
-.topic h3{font-size:17px;margin:7px 0 0;line-height:1}.topic .read{font-size:9px;color:var(--dim);margin-top:4px}
-.topic p{font-size:10px;line-height:1.4;color:var(--muted);margin:8px 0 0}
-.salah{border:1px solid var(--line);background:#111116;border-radius:17px;padding:12px}
-.prayers{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-.prayer{min-width:0;background:var(--panel);border:1px solid #30303a;border-radius:12px;padding:9px 3px;text-align:center}
-.prayer strong{font-size:10px;display:block;white-space:nowrap}.prayer span{display:block;font-size:8px;color:var(--muted);margin-top:4px}.prayer b{display:block;font-size:15px;color:var(--green);margin-top:5px}
-.salah-note{font-size:9px;color:var(--dim);margin:9px 2px 0;line-height:1.4}
-.glossary{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
-.term{font-size:9px;background:#111116;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:6px 8px}
-footer{text-align:center;color:#4f4f59;font-size:9px;margin-top:18px;letter-spacing:.8px}
+.topic h3{font-size:16px;margin:5px 0 0;line-height:1}.topic .read{font-size:9px;color:var(--muted);margin-top:3px}
+.topic p{font-size:10px;line-height:1.35;color:#e1dfe4;margin:6px 0 0}
+.salah{border:1px solid var(--line);background:#111116;border-radius:14px;padding:10px}
+.prayers{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.prayer{min-width:0;background:var(--panel);border:1px solid #383842;border-radius:11px;padding:8px 3px;text-align:center}
+.prayer strong{font-size:10px;display:block;white-space:nowrap}.prayer span{display:block;font-size:8px;color:var(--muted);margin-top:3px}.prayer b{display:block;font-size:14px;color:var(--green);margin-top:4px}
+.salah-note{font-size:9px;color:var(--muted);margin:7px 2px 0;line-height:1.4}
+.glossary{margin-top:8px;display:flex;gap:5px;flex-wrap:wrap}
+.term{font-size:9px;background:#111116;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:5px 7px}
+footer{text-align:center;color:#8a8891;font-size:9px;margin-top:15px;letter-spacing:.8px}
 .sheet-wrap{position:fixed;inset:0;z-index:20;display:none}
 .sheet-wrap.open{display:block}
 .backdrop{position:absolute;inset:0;background:rgba(0,0,0,.66);backdrop-filter:blur(4px)}
-.sheet{position:absolute;left:0;right:0;bottom:0;max-height:82dvh;overflow:auto;background:#111116;border-top:1px solid #34343e;border-radius:22px 22px 0 0;padding:12px 16px calc(22px + env(safe-area-inset-bottom));max-width:620px;margin:0 auto}
-.grab{width:38px;height:4px;border-radius:99px;background:#464650;margin:0 auto 13px}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:82dvh;overflow:auto;background:#111116;border-top:1px solid #40404a;border-radius:22px 22px 0 0;padding:12px 16px calc(22px + env(safe-area-inset-bottom));max-width:620px;margin:0 auto}
+.grab{width:38px;height:4px;border-radius:99px;background:#555560;margin:0 auto 13px}
 .sheet-head{display:flex;justify-content:space-between;gap:10px;align-items:start}
 .sheet h2{font-size:25px;line-height:1;margin:0}.sheet .sub{font-size:10px;color:var(--muted);margin-top:5px}
-.close{border:1px solid #34343e;background:#1a1a20;color:var(--text);width:34px;height:34px;border-radius:50%;font-size:18px}
-.block{margin-top:13px;border:1px solid var(--line);border-radius:14px;padding:12px;background:#15151b}
+.close{border:1px solid #41414b;background:#1a1a20;color:var(--text);width:34px;height:34px;border-radius:50%;font-size:18px}
+.block{margin-top:11px;border:1px solid var(--line);border-radius:13px;padding:11px;background:#15151b}
 .block b{font-size:9px;letter-spacing:1.2px;color:var(--green)}.block.amber b{color:var(--amber)}.block.orange b{color:var(--orange)}.block.cyan b{color:var(--cyan)}
-.block p{font-size:12px;line-height:1.6;margin:7px 0 0;color:#dedce0}
-.ref{font-size:9px;color:var(--dim);margin-top:7px}
-.mark{width:100%;margin-top:13px;min-height:46px;border-radius:13px;border:1px solid #31523d;background:#102018;color:var(--green);font-weight:900}
+.block p{font-size:12px;line-height:1.58;margin:6px 0 0;color:#f0eef2}
+.ref{font-size:9px;color:var(--muted);margin-top:6px}
+.mark{width:100%;margin-top:11px;min-height:44px;border-radius:12px;border:1px solid #31523d;background:#102018;color:var(--green);font-weight:900}
 .mark.done{background:#162019;color:#a8efbf}
 @media(max-width:360px){.grid{grid-template-columns:1fr}.prayers{grid-template-columns:repeat(3,1fr)}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -79,18 +85,27 @@ footer{text-align:center;color:#4f4f59;font-size:9px;margin-top:18px;letter-spac
 <body>
 <header>
   <div class="brand"><h1>Islam<span>z</span></h1><p>UNDERSTAND · QUESTION · CONNECT</p></div>
-  <div class="version">v0.1.0 · 2026.08.17</div>
+  <div class="version">v0.2.0 · 2026.08.17</div>
 </header>
 
 <section class="focus">
   <div class="eyebrow">🎯 NOW · ALLAH</div>
-  <strong>「アッラーって誰なん？」から始める</strong>
-  <p>信じる前に、まず存在・性質・根拠を分けて検証する。役に立つ考え方と「本当に真実か」は混ぜない。</p>
+  <strong>Allahを信じ始める。理解と検証は続ける</strong>
+  <p>助け・健康・守護・運命を願う相手はAllah。日本文化や先祖への敬意とは分けて考える。</p>
   <div class="arabic">اللّٰهُ أَكْبَرُ</div>
   <div class="phrase">
     <span class="pill">ṢALĀH</span>
     <div><div class="roman">Allāhu Akbar · アッラーフ・アクバル</div><div class="jp">「アッラーは最も偉大」→ 悩み・金・評価を究極の基準にしない</div></div>
   </div>
+</section>
+
+<section class="decision">
+  <div class="decision-head"><b>🇯🇵 JAPAN × TAWḤĪD</b><span>kedyの現在地</span></div>
+  <div class="decision-row"><b>願い</b><span>助け・健康・守護・運命 → Allah</span></div>
+  <div class="decision-row"><b>神仏</b><span>日本文化として敬う。願いを叶える相手とは分ける</span></div>
+  <div class="decision-row"><b>先祖</b><span>「俺を忘れないでね。安らかに眠ってね」／敬意と記憶として話す</span></div>
+  <div class="decision-row"><b>神社</b><span>二礼二拍手一礼は日本文化として続ける</span></div>
+  <div class="decision-note">※ 二礼二拍手一礼などは伝統的イスラム解釈と衝突し得る。現時点では日本人としての感覚との折衷として記録。</div>
 </section>
 
 <div class="section-head"><b>🧭 ISLAM MAP</b><span id="progress">0 / 7 整理</span></div>
@@ -141,8 +156,8 @@ footer{text-align:center;color:#4f4f59;font-size:9px;margin-top:18px;letter-spac
       answer:'イスラムでは、アッラーは唯一の創造主。被造物の一つではなく、何ものにも依存せず、何ものにも似ない神とされる。',
       ref:'Qur’an 112:1–4 / 2:255',
       check:'「宇宙に創造主が必要」という議論は成立するか。創造主がいるとして、その存在をイスラムのアッラーまで特定できるかを分けて考える。',
-      connect:'自分・仕事・金・他人の評価を「究極のもの」にしない基準になる。ただし、役に立つことと真実であることは別に検証する。',
-      nextq:'そもそも「何もない」ではなく宇宙が存在するのは、神の根拠になる？'
+      connect:'助け・健康・守護・運命を願う相手をAllahに置く。一方、日本の神仏・先祖への敬意や記憶は自分の文化として残し、崇拝・超自然的な助けを求めることとは分けて考える。',
+      nextq:'Allahだけを神として頼ることと、日本人としての文化はどこまで両立できる？'
     },
     {
       id:'life',icon:'🌱',color:'cyan',name:'Life',read:'人生',hint:'なんで生きる？',
@@ -185,12 +200,12 @@ footer{text-align:center;color:#4f4f59;font-size:9px;margin-top:18px;letter-spac
       nextq:'サラーフで唱える一文一文は、自分の考え方をどう変える？'
     },
     {
-      id:'daily',icon:'🍽️',color:'orange',name:'Daily Life',read:'日常',hint:'どう生きる？',
-      answer:'イスラムは食事・金・家族・性・商売・慈善・礼儀まで、信仰と日常を分離せずに考える。',
-      ref:'Qur’an 2:177 / 5:88',
-      check:'Halal / Haramの各ルールについて、根拠・目的・現代生活との整合性を個別に見る。一括で「宗教だから」で飲み込まない。',
-      connect:'欲望や効率だけで決めず、「これは自分や他人にとって善い行動か」という判断軸を増やせる。',
-      nextq:'自分の生活で、まずイスラムの考え方を試す価値がある領域はどこ？'
+      id:'daily',icon:'🍽️',color:'orange',name:'Daily Life',read:'日常',hint:'日本でどう生きる？',
+      answer:'イスラムは食事・金・家族・性・商売・慈善・礼儀まで、信仰と日常を分離せずに考える。日本文化との折り合いも、行為の意味と誰に崇拝を向けるかを分けて考える。',
+      ref:'Qur’an 1:5 / 2:177 / 5:88',
+      check:'Halal / Haramや日本の宗教文化について、根拠・意図・実際の行為を個別に見る。一括で「宗教だから」「文化だから」で飲み込まない。',
+      connect:'現時点では、二礼二拍手一礼は日本文化として続ける。神仏・先祖は敬意と記憶として大切にし、健康・守護などの願いはAllahへ向ける。伝統的イスラム解釈との衝突は残るため、今後も検証する。',
+      nextq:'自分が大切にしたい日本文化と、Tawḥīdの境界はどこに置く？'
     }
   ];
 
