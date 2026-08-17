@@ -1,0 +1,22 @@
+{
+  "name": "Islamz",
+  "short_name": "Islamz",
+  "description": "イスラムを理解・検証し、自分の人生と結び付ける学習マップ",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b0b0e",
+  "theme_color": "#0b0b0e",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
