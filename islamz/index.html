@@ -7,255 +7,205 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Islamz">
-<link rel="manifest" href="./manifest.json?v=20260817-2">
-<link rel="apple-touch-icon" href="./icon-180.png?v=20260817-2">
-<link rel="icon" href="./icon-192.png?v=20260817-2">
+<link rel="manifest" href="./manifest.json?v=20260818-3">
+<link rel="apple-touch-icon" href="./icon-180.png?v=20260818-3">
+<link rel="icon" href="./icon-192.png?v=20260818-3">
 <title>Islamz</title>
 <style>
-:root{
-  --bg:#0b0b0e;--panel:#15151b;--panel2:#1c1c23;--line:#34343f;
-  --text:#f8f7f3;--muted:#d2d0d6;--dim:#a8a6ae;
-  --green:#4ade80;--amber:#ff9e2c;--cyan:#22d3ee;--orange:#ff6b35;
-}
+:root{--bg:#0b0b0e;--panel:#15151b;--panel2:#1c1c23;--line:#383843;--text:#faf9f5;--muted:#d8d6dc;--dim:#aaa8b1;--green:#4ade80;--amber:#ff9e2c;--cyan:#22d3ee;--orange:#ff6b35}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif}
-body{min-height:100dvh;padding:max(16px,env(safe-area-inset-top)) 12px calc(26px + env(safe-area-inset-bottom));max-width:620px;margin:0 auto}
-button{font:inherit}
-header{display:flex;align-items:end;justify-content:space-between;margin:2px 2px 10px}
-.brand h1{font-size:39px;line-height:.9;margin:0;font-weight:950;letter-spacing:-1.5px}
-.brand h1 span{color:var(--green)}
-.brand p{font-size:9px;color:var(--muted);letter-spacing:1.7px;margin:6px 0 0;font-weight:800}
-.version{font-size:9px;color:var(--dim);letter-spacing:.7px;margin-bottom:1px}
-.focus{border:1px solid #31523d;background:linear-gradient(145deg,#102018,#14151a);border-radius:15px;padding:11px 12px;margin-bottom:9px}
-.eyebrow{font-size:9px;letter-spacing:1.4px;font-weight:900;color:var(--green);margin-bottom:5px}
-.focus strong{display:block;font-size:19px;line-height:1.22;letter-spacing:-.3px}
-.focus p{margin:6px 0 0;color:#e5e3e8;font-size:11px;line-height:1.5}
-.focus .arabic{font-size:18px;color:var(--text);margin-top:8px;direction:rtl;text-align:left}
-.phrase{display:grid;grid-template-columns:auto 1fr;gap:7px 9px;align-items:center;margin-top:8px;border-top:1px solid #284334;padding-top:8px}
-.phrase .roman{font-size:11.5px;font-weight:850}.phrase .jp{font-size:10px;color:var(--muted)}
-.pill{font-size:8px;font-weight:900;letter-spacing:1px;border:1px solid #31523d;color:var(--green);padding:4px 7px;border-radius:999px}
-.decision{border:1px solid #3b3324;background:#14120f;border-radius:15px;padding:9px 11px;margin-bottom:9px}
-.decision-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px}
-.decision-head b{font-size:9px;letter-spacing:1.2px;color:var(--amber)}.decision-head span{font-size:8px;color:var(--dim)}
-.decision-row{display:grid;grid-template-columns:52px 1fr;gap:8px;padding:5px 0;border-top:1px solid #302a20;font-size:10px;line-height:1.35}
-.decision-row b{color:var(--text)}.decision-row span{color:#e6e4e8}
-.decision-note{font-size:9px;line-height:1.4;color:var(--muted);border-top:1px solid #302a20;padding-top:6px;margin-top:2px}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:13px 2px 6px}
-.section-head b{font-size:10px;letter-spacing:1.4px;color:var(--muted)}
-.section-head span{font-size:9.5px;color:var(--dim)}
-.map-center{border:1px solid #44351f;background:#15120e;border-radius:14px;padding:9px 12px;text-align:center;margin-bottom:7px}
-.map-center small{display:block;font-size:8px;letter-spacing:1.7px;color:var(--amber);font-weight:900}
-.map-center strong{font-size:20px;display:block;margin-top:3px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.topic{--accent:var(--green);position:relative;min-height:96px;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 10px 9px;overflow:hidden}
-.topic:active{transform:scale(.978);background:var(--panel2)}
-.topic:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
-.topic.amber{--accent:var(--amber)}.topic.cyan{--accent:var(--cyan)}.topic.orange{--accent:var(--orange)}
-.topic .top{display:flex;justify-content:space-between;gap:8px;align-items:start}
-.topic .ico{font-size:18px}.topic .state{font-size:8px;color:#c5c3ca;border:1px solid #464650;border-radius:999px;padding:3px 6px;white-space:nowrap}
-.topic.done .state{color:var(--green);border-color:#31523d}
-.topic h3{font-size:16px;margin:5px 0 0;line-height:1}.topic .read{font-size:9px;color:var(--muted);margin-top:3px}
-.topic p{font-size:10px;line-height:1.35;color:#e1dfe4;margin:6px 0 0}
-.salah{border:1px solid var(--line);background:#111116;border-radius:14px;padding:10px}
-.prayers{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
-.prayer{min-width:0;background:var(--panel);border:1px solid #383842;border-radius:11px;padding:8px 3px;text-align:center}
-.prayer strong{font-size:10px;display:block;white-space:nowrap}.prayer span{display:block;font-size:8px;color:var(--muted);margin-top:3px}.prayer b{display:block;font-size:14px;color:var(--green);margin-top:4px}
-.salah-note{font-size:9px;color:var(--muted);margin:7px 2px 0;line-height:1.4}
-.glossary{margin-top:8px;display:flex;gap:5px;flex-wrap:wrap}
-.term{font-size:9px;background:#111116;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:5px 7px}
-footer{text-align:center;color:#8a8891;font-size:9px;margin-top:15px;letter-spacing:.8px}
-.sheet-wrap{position:fixed;inset:0;z-index:20;display:none}
-.sheet-wrap.open{display:block}
-.backdrop{position:absolute;inset:0;background:rgba(0,0,0,.66);backdrop-filter:blur(4px)}
-.sheet{position:absolute;left:0;right:0;bottom:0;max-height:82dvh;overflow:auto;background:#111116;border-top:1px solid #40404a;border-radius:22px 22px 0 0;padding:12px 16px calc(22px + env(safe-area-inset-bottom));max-width:620px;margin:0 auto}
-.grab{width:38px;height:4px;border-radius:99px;background:#555560;margin:0 auto 13px}
-.sheet-head{display:flex;justify-content:space-between;gap:10px;align-items:start}
-.sheet h2{font-size:25px;line-height:1;margin:0}.sheet .sub{font-size:10px;color:var(--muted);margin-top:5px}
-.close{border:1px solid #41414b;background:#1a1a20;color:var(--text);width:34px;height:34px;border-radius:50%;font-size:18px}
-.block{margin-top:11px;border:1px solid var(--line);border-radius:13px;padding:11px;background:#15151b}
-.block b{font-size:9px;letter-spacing:1.2px;color:var(--green)}.block.amber b{color:var(--amber)}.block.orange b{color:var(--orange)}.block.cyan b{color:var(--cyan)}
-.block p{font-size:12px;line-height:1.58;margin:6px 0 0;color:#f0eef2}
-.ref{font-size:9px;color:var(--muted);margin-top:6px}
-.mark{width:100%;margin-top:11px;min-height:44px;border-radius:12px;border:1px solid #31523d;background:#102018;color:var(--green);font-weight:900}
-.mark.done{background:#162019;color:#a8efbf}
-@media(max-width:360px){.grid{grid-template-columns:1fr}.prayers{grid-template-columns:repeat(3,1fr)}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+body{min-height:100dvh;padding:max(15px,env(safe-area-inset-top)) 11px calc(28px + env(safe-area-inset-bottom));max-width:620px;margin:0 auto}
+button{font:inherit} header{display:flex;align-items:end;justify-content:space-between;margin:2px 2px 10px}
+.brand h1{font-size:38px;line-height:.9;margin:0;font-weight:950;letter-spacing:-1.3px}.brand h1 span{color:var(--green)}
+.brand p{font-size:8px;color:var(--muted);letter-spacing:1.6px;margin:6px 0 0;font-weight:800}.version{font-size:8.5px;color:var(--dim)}
+.focus,.decision,.world,.salah,.guide{border:1px solid var(--line);background:#111116;border-radius:14px;padding:10px;margin-bottom:8px}
+.focus{border-color:#31523d;background:linear-gradient(145deg,#102018,#14151a)}
+.eyebrow,.section-head b{font-size:9px;letter-spacing:1.25px;font-weight:900;color:var(--green)}
+.focus strong{display:block;font-size:18px;margin-top:4px}.focus p,.note{font-size:10.5px;line-height:1.5;color:#e7e5ea;margin:5px 0 0}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:12px 2px 6px}.section-head span{font-size:9px;color:var(--dim)}
+.decision{border-color:#443722;background:#15120e}.decision .section-head{margin:0 0 4px}.decision .section-head b{color:var(--amber)}
+.row{display:grid;grid-template-columns:52px 1fr;gap:7px;padding:5px 0;border-top:1px solid #332b20;font-size:10px;line-height:1.35}.row span{color:#e7e5e9}
+.world{padding:10px}.world-top{text-align:center;border:1px solid #31523d;border-radius:13px;background:#102018;padding:9px}
+.world-top b{font-size:18px;color:var(--green)}.world-top small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.arrow-down{text-align:center;color:var(--dim);font-size:17px;line-height:1.1;margin:2px}
+.world-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.node{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:8px;text-align:center;min-width:0}
+.node b{display:block;font-size:12px}.node small{display:block;font-size:8.5px;line-height:1.35;color:var(--muted);margin-top:3px}.node.cyan{border-color:#28525b}.node.orange{border-color:#5b3829}.node.amber{border-color:#574422}
+.subnodes{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px}.subnode{border:1px solid #30303a;border-radius:9px;padding:6px;font-size:8.5px;line-height:1.3;color:var(--muted);background:#0f0f14}
+.shaytan{margin-top:6px;border:1px solid #603526;background:#1b100d;border-radius:11px;padding:8px;font-size:10px;line-height:1.45}.shaytan b{color:var(--orange)}
+.prayers{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.prayer{min-width:0;background:var(--panel);border:1px solid #3a3a45;border-radius:10px;padding:7px 2px;text-align:center}
+.prayer strong{font-size:9px;display:block;white-space:nowrap}.prayer span{font-size:7.5px;color:var(--muted);display:block;margin-top:2px}.prayer b{font-size:14px;color:var(--green);display:block;margin-top:3px}
+.flow5{margin-top:7px;display:grid;gap:5px}.flowrow{display:grid;grid-template-columns:66px 1fr;gap:6px;align-items:start;border-top:1px solid #292933;padding-top:5px;font-size:9.5px;line-height:1.4}.flowrow b{color:var(--cyan)}.flowrow span{color:var(--muted)}
+details{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-top:6px;overflow:hidden}summary{list-style:none;cursor:pointer;padding:9px 10px;font-size:11px;font-weight:850;display:flex;justify-content:space-between;gap:8px}summary::-webkit-details-marker{display:none}summary:after{content:"＋";color:var(--green)}details[open] summary:after{content:"−"}details[open] summary{border-bottom:1px solid var(--line)}
+.inside{padding:8px 10px 10px}.phrase-row{padding:7px 0;border-top:1px solid #292933}.phrase-row:first-child{border-top:0;padding-top:0}
+.arabic{font-size:15px;direction:rtl;text-align:left;color:#fff}.roman{font-size:10px;font-weight:800;margin-top:3px}.jp{font-size:10px;line-height:1.45;color:var(--muted);margin-top:2px}
+.fatiha .phrase-row{padding:5px 0}.source{font-size:8.5px;color:var(--dim);line-height:1.45;margin-top:7px}
+.guide-title{font-size:11px;font-weight:900;color:var(--amber);margin-bottom:4px}.guide .note{margin-top:0}
+.glossary{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.term{font-size:8.5px;border:1px solid var(--line);border-radius:999px;padding:5px 7px;color:var(--muted);background:#0f0f14}
+.map-center{border:1px solid #44351f;background:#15120e;border-radius:13px;padding:8px;text-align:center;margin-bottom:6px}.map-center small{font-size:7.5px;letter-spacing:1.5px;color:var(--amber);font-weight:900}.map-center strong{font-size:18px;display:block;margin-top:2px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.topic{--accent:var(--green);position:relative;min-height:88px;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:9px;overflow:hidden}.topic:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}.topic.cyan{--accent:var(--cyan)}.topic.amber{--accent:var(--amber)}.topic.orange{--accent:var(--orange)}
+.topic h3{font-size:14px;margin:0}.topic .read{font-size:8px;color:var(--muted);margin-top:3px}.topic p{font-size:9px;line-height:1.35;color:#e2e0e5;margin:5px 0 0}
+.sheet-wrap{position:fixed;inset:0;z-index:20;display:none}.sheet-wrap.open{display:block}.backdrop{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px)}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:84dvh;overflow:auto;background:#111116;border-top:1px solid #40404a;border-radius:20px 20px 0 0;padding:12px 14px calc(22px + env(safe-area-inset-bottom));max-width:620px;margin:0 auto}
+.sheet-head{display:flex;justify-content:space-between}.sheet h2{font-size:23px;margin:0}.sheet .sub{font-size:9px;color:var(--muted);margin-top:4px}.close{border:1px solid #41414b;background:#1a1a20;color:var(--text);width:32px;height:32px;border-radius:50%;font-size:17px}
+.block{margin-top:9px;border:1px solid var(--line);border-radius:12px;padding:9px;background:#15151b}.block b{font-size:8.5px;letter-spacing:1px;color:var(--green)}.block p{font-size:11px;line-height:1.55;margin:5px 0 0;color:#f0eef2}.block.cyan b{color:var(--cyan)}.block.amber b{color:var(--amber)}.block.orange b{color:var(--orange)}
+footer{text-align:center;color:#8a8891;font-size:8.5px;margin-top:14px}
+@media(max-width:370px){.world-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.prayers{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
-<header>
-  <div class="brand"><h1>Islam<span>z</span></h1><p>UNDERSTAND · QUESTION · CONNECT</p></div>
-  <div class="version">v0.2.0 · 2026.08.17</div>
-</header>
+<header><div class="brand"><h1>Islam<span>z</span></h1><p>UNDERSTAND · QUESTION · CONNECT</p></div><div class="version">v0.3.0 · 2026.08.18</div></header>
 
 <section class="focus">
-  <div class="eyebrow">🎯 NOW · ALLAH</div>
-  <strong>Allahを信じ始める。理解と検証は続ける</strong>
-  <p>助け・健康・守護・運命を願う相手はAllah。日本文化や先祖への敬意とは分けて考える。</p>
-  <div class="arabic">اللّٰهُ أَكْبَرُ</div>
-  <div class="phrase">
-    <span class="pill">ṢALĀH</span>
-    <div><div class="roman">Allāhu Akbar · アッラーフ・アクバル</div><div class="jp">「アッラーは最も偉大」→ 悩み・金・評価を究極の基準にしない</div></div>
-  </div>
+<div class="eyebrow">🎯 NOW · 一本化</div>
+<strong>助け・健康・導きを願う相手は Allah</strong>
+<p>神仏・先祖への敬意や記憶は残す。宗教用語は読み方＋意味をセットで覚える。</p>
 </section>
 
 <section class="decision">
-  <div class="decision-head"><b>🇯🇵 JAPAN × TAWḤĪD</b><span>kedyの現在地</span></div>
-  <div class="decision-row"><b>願い</b><span>助け・健康・守護・運命 → Allah</span></div>
-  <div class="decision-row"><b>神仏</b><span>日本文化として敬う。願いを叶える相手とは分ける</span></div>
-  <div class="decision-row"><b>先祖</b><span>「俺を忘れないでね。安らかに眠ってね」／敬意と記憶として話す</span></div>
-  <div class="decision-row"><b>神社</b><span>二礼二拍手一礼は日本文化として続ける</span></div>
-  <div class="decision-note">※ 二礼二拍手一礼などは伝統的イスラム解釈と衝突し得る。現時点では日本人としての感覚との折衷として記録。</div>
+<div class="section-head"><b>🇯🇵 JAPAN × TAWḤĪD</b><span>現在地</span></div>
+<div class="row"><b>願い</b><span>助け・健康・守護・運命 → Allah</span></div>
+<div class="row"><b>神仏</b><span>日本文化として敬う。願いを叶える相手とは分ける</span></div>
+<div class="row"><b>先祖</b><span>「俺を忘れないでね。安らかに眠ってね」／敬意と記憶として話す</span></div>
+<div class="row"><b>神社</b><span>二礼二拍手一礼は文化として続ける。伝統的イスラム解釈との衝突は認識しておく</span></div>
 </section>
 
-<div class="section-head"><b>🧭 ISLAM MAP</b><span id="progress">0 / 7 整理</span></div>
+<div class="section-head"><b>🧩 WORLD MAP</b><span>誰が何者？</span></div>
+<section class="world">
+<div class="world-top"><b>Allah（アッラー）</b><small>唯一の創造主。下の存在すべてを創ったとイスラムでは考える</small></div>
+<div class="arrow-down">↓ 創造・命令</div>
+<div class="world-grid">
+<div class="node cyan"><b>👼 Angels（天使）</b><small>Allahに従う存在</small><div class="subnodes"><div class="subnode">Jibrīl（ジブリール）<br>啓示を伝える</div><div class="subnode">記録の天使<br>言動を記録</div></div></div>
+<div class="node"><b>🧑 Humans（人間）</b><small>善悪を選び、行いに責任を持つ</small></div>
+<div class="node amber"><b>🔥 Jinn（ジン）</b><small>人間とは別の被造物。善悪を選べる</small><div class="subnodes"><div class="subnode">善いジン<br>信じる者もいる</div><div class="subnode">Iblīs（イブリース）<br>反抗したジン</div></div></div>
+</div>
+<div class="shaytan"><b>👿 Shayṭān（シャイターン＝悪魔・誘惑する者）</b><br>Iblīs（イブリース）は代表的なシャイターン。人間を強制操作する神ではなく、悪い方向へ「囁き・誘惑する」存在として描かれる。Allahと対等ではない。</div>
+<div class="source">根拠メモ：Qur’an 18:50（Iblīsはジン）／50:17–18（記録する者）／114:4–6（心に囁く者）</div>
+</section>
+
+<div class="section-head"><b>🕌 5 ṢALĀH</b><span>義務礼拝 17 rakʿah / day</span></div>
+<section class="salah">
+<div class="prayers">
+<div class="prayer"><strong>Fajr</strong><span>ファジュル</span><b>2</b></div>
+<div class="prayer"><strong>Ẓuhr</strong><span>ズフル</span><b>4</b></div>
+<div class="prayer"><strong>ʿAṣr</strong><span>アスル</span><b>4</b></div>
+<div class="prayer"><strong>Maghrib</strong><span>マグリブ</span><b>3</b></div>
+<div class="prayer"><strong>ʿIshāʾ</strong><span>イシャー</span><b>4</b></div>
+</div>
+<div class="flow5">
+<div class="flowrow"><b>Fajr 2</b><span>1：Fātiḥah＋短い章 → 2：Fātiḥah＋短い章 → 最終座り</span></div>
+<div class="flowrow"><b>Ẓuhr 4</b><span>1・2：Fātiḥah＋短い章 → 2で座る → 3・4：基本Fātiḥah → 最終座り</span></div>
+<div class="flowrow"><b>ʿAṣr 4</b><span>構造はẒuhrと同じ</span></div>
+<div class="flowrow"><b>Maghrib 3</b><span>1・2：Fātiḥah＋短い章 → 2で座る → 3：基本Fātiḥah → 最終座り</span></div>
+<div class="flowrow"><b>ʿIshāʾ 4</b><span>構造はẒuhr・ʿAṣrと同じ</span></div>
+</div>
+<p class="note">5つで「別々の文章」を読むわけではない。下の共通フレーズをラカア数に合わせて繰り返す。</p>
+</section>
+
+<section class="guide">
+<div class="guide-title">📖 サラーフ全文和訳ガイド</div>
+<p class="note">Sunniの基本形を理解するためのガイド。細部・任意のドゥアー・発音には学派差や複数の伝承がある。</p>
+
+<details open><summary>1｜開始・立位（Qiyām＝立つ）</summary><div class="inside">
+<div class="phrase-row"><div class="arabic">اللّٰهُ أَكْبَرُ</div><div class="roman">Allāhu Akbar · アッラーフ・アクバル</div><div class="jp">Allahは最も偉大。</div></div>
+<div class="phrase-row"><div class="roman">Aʿūdhu billāhi min ash-shayṭānir-rajīm · アウーズ・ビッラーヒ・ミナッシャイターニッラジーム</div><div class="jp">呪われたシャイターン（悪魔・誘惑する者）から、Allahに守りを求めます。</div></div>
+<div class="phrase-row"><div class="roman">Bismillāhir-raḥmānir-raḥīm · ビスミッラーヒル・ラフマーニル・ラヒーム</div><div class="jp">慈悲あまねく慈愛深いAllahの御名によって。</div></div>
+</div></details>
+
+<details open><summary>2｜Al-Fātiḥah（アル・ファーティハ）全文</summary><div class="inside fatiha">
+<div class="phrase-row"><div class="roman">Al-ḥamdu lillāhi rabbil-ʿālamīn</div><div class="jp">すべての称賛は、全世界の主Allahにある。</div></div>
+<div class="phrase-row"><div class="roman">Ar-raḥmānir-raḥīm</div><div class="jp">慈悲あまねく、慈愛深い方。</div></div>
+<div class="phrase-row"><div class="roman">Māliki yawmid-dīn</div><div class="jp">審判の日の主。</div></div>
+<div class="phrase-row"><div class="roman">Iyyāka naʿbudu wa iyyāka nastaʿīn</div><div class="jp">あなただけを崇拝し、あなただけに助けを求めます。</div></div>
+<div class="phrase-row"><div class="roman">Ihdinaṣ-ṣirāṭal-mustaqīm</div><div class="jp">私たちをまっすぐな道へ導いてください。</div></div>
+<div class="phrase-row"><div class="roman">Ṣirāṭallaḏīna anʿamta ʿalayhim</div><div class="jp">あなたが恵みを与えた人々の道へ。</div></div>
+<div class="phrase-row"><div class="roman">Ghayril-maghḍūbi ʿalayhim wa laḍ-ḍāllīn</div><div class="jp">怒りを受けた者たちの道でも、迷った者たちの道でもなく。</div></div>
+<div class="phrase-row"><div class="roman">Āmīn · アーミーン</div><div class="jp">どうかその通りになりますように。※クルアーン本文の節ではない。</div></div>
+<div class="source">Qur’an 1:1–7。Bismillāhの節番号の数え方には伝統上の違いがある。</div>
+</div></details>
+
+<details><summary>3｜短い章を追加（第1・2ラカア）</summary><div class="inside">
+<div class="jp">Fātiḥahの後に、クルアーンから別の章・節を読む。読む章は固定ではない。例：Al-Ikhlāṣ（アル・イクラース／第112章）。</div>
+<div class="phrase-row"><div class="roman">Qul huwa Allāhu aḥad</div><div class="jp">言え、「Allahは唯一である」。</div></div>
+<div class="phrase-row"><div class="roman">Allāhuṣ-ṣamad</div><div class="jp">Allahは、すべてが頼る御方。</div></div>
+<div class="phrase-row"><div class="roman">Lam yalid wa lam yūlad</div><div class="jp">生むこともなく、生まれたこともない。</div></div>
+<div class="phrase-row"><div class="roman">Wa lam yakun lahu kufuwan aḥad</div><div class="jp">そしてAllahに並ぶものは何一つない。</div></div>
+</div></details>
+
+<details><summary>4｜Rukūʿ（ルクー＝お辞儀）</summary><div class="inside">
+<div class="phrase-row"><div class="roman">Allāhu Akbar</div><div class="jp">Allahは最も偉大。</div></div>
+<div class="phrase-row"><div class="roman">Subḥāna rabbiyal-ʿaẓīm · スブハーナ・ラッビヤル・アズィーム</div><div class="jp">偉大なる私の主に栄光あれ。（一般に3回）</div></div>
+</div></details>
+
+<details><summary>5｜Rukūʿから起きる</summary><div class="inside">
+<div class="phrase-row"><div class="roman">Samiʿallāhu liman ḥamidah</div><div class="jp">Allahは、Allahを称賛する者の言葉を聞かれる。</div></div>
+<div class="phrase-row"><div class="roman">Rabbanā wa lakal-ḥamd</div><div class="jp">私たちの主よ、すべての称賛はあなたにあります。</div></div>
+</div></details>
+
+<details><summary>6｜Sujūd（スジュード＝額をつける礼）×2</summary><div class="inside">
+<div class="phrase-row"><div class="roman">Allāhu Akbar</div><div class="jp">Allahは最も偉大。</div></div>
+<div class="phrase-row"><div class="roman">Subḥāna rabbiyal-aʿlā · スブハーナ・ラッビヤル・アアラー</div><div class="jp">最も高き私の主に栄光あれ。（一般に3回）</div></div>
+<div class="phrase-row"><div class="roman">Allahummaghfir lī warḥamnī wahdinī wa ʿāfinī warzuqnī</div><div class="jp">Allahよ、私を赦し、慈しみ、導き、健やかにし、糧を与えてください。※2回のSujūdの間に唱える伝承の一つ。</div></div>
+</div></details>
+
+<details><summary>7｜Tashahhud（タシャッフド＝座って信仰告白）</summary><div class="inside">
+<div class="phrase-row"><div class="roman">At-taḥiyyātu lillāhi waṣ-ṣalawātu waṭ-ṭayyibāt</div><div class="jp">すべての敬意、祈り、善きものはAllahのためにあります。</div></div>
+<div class="phrase-row"><div class="roman">As-salāmu ʿalayka ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh</div><div class="jp">預言者よ、あなたに平安とAllahの慈悲と祝福がありますように。</div></div>
+<div class="phrase-row"><div class="roman">As-salāmu ʿalaynā wa ʿalā ʿibādillāhiṣ-ṣāliḥīn</div><div class="jp">私たちと、Allahの正しい僕たちに平安がありますように。</div></div>
+<div class="phrase-row"><div class="roman">Ashhadu an lā ilāha illallāh</div><div class="jp">Allah以外に崇拝すべき神はいないと証言します。</div></div>
+<div class="phrase-row"><div class="roman">Wa ashhadu anna Muḥammadan ʿabduhu wa rasūluh</div><div class="jp">そしてMuhammadはAllahの僕であり使徒であると証言します。</div></div>
+<div class="source">Sahih al-Bukhari 831。</div>
+</div></details>
+
+<details><summary>8｜最終座り：Ṣalawāt（ムハンマドへの祝福祈願）</summary><div class="inside">
+<div class="phrase-row"><div class="roman">Allāhumma ṣalli ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā ṣallayta ʿalā āli Ibrāhīm, innaka ḥamīdun majīd.</div><div class="jp">Allahよ、イブラーヒームの一族に恵みを与えられたように、Muhammadとその一族にも恵みを与えてください。あなたこそ称賛される栄光ある御方です。</div></div>
+<div class="phrase-row"><div class="roman">Allāhumma bārik ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā bārakta ʿalā āli Ibrāhīm, innaka ḥamīdun majīd.</div><div class="jp">Allahよ、イブラーヒームの一族を祝福されたように、Muhammadとその一族も祝福してください。あなたこそ称賛される栄光ある御方です。</div></div>
+<div class="source">Sahih al-Bukhari 6357。伝承により語句の異なる正当な形もある。</div>
+</div></details>
+
+<details><summary>9｜終わり：Taslim（タスリーム）</summary><div class="inside">
+<div class="phrase-row"><div class="roman">As-salāmu ʿalaykum wa raḥmatullāh</div><div class="jp">あなたがたに平安とAllahの慈悲がありますように。</div></div>
+<div class="jp">右を向いて唱え、続いて左にも唱えて礼拝を終える。</div>
+</div></details>
+
+<div class="source">動作・語句の主な参照：Qur’an 1／112、Sahih al-Bukhari 789・831・6357、Sunan Abi Dawud 850、Sunan an-Nasa’i 1145。これは意味を掴む学習用の日本語要約で、礼拝の細部は学派・立場で差がある。</div>
+</section>
+
+<div class="section-head"><b>🧭 ISLAM MAP</b><span>7 themes</span></div>
 <div class="map-center"><small>CENTER QUESTION</small><strong>なぜ生きる？</strong></div>
 <div class="grid" id="topicGrid"></div>
 
-<div class="section-head"><b>🕌 ṢALĀH · サラーフ</b><span>義務礼拝 17 rakʿah / day</span></div>
-<section class="salah">
-  <div class="prayers">
-    <div class="prayer"><strong>Fajr</strong><span>ファジュル</span><b>2</b></div>
-    <div class="prayer"><strong>Ẓuhr</strong><span>ズフル</span><b>4</b></div>
-    <div class="prayer"><strong>ʿAṣr</strong><span>アスル</span><b>4</b></div>
-    <div class="prayer"><strong>Maghrib</strong><span>マグリブ</span><b>3</b></div>
-    <div class="prayer"><strong>ʿIshāʾ</strong><span>イシャー</span><b>4</b></div>
-  </div>
-  <div class="salah-note">数字はFard（義務）のラカア数。Sunnah / Naflなど追加の礼拝は別。</div>
-  <div class="glossary">
-    <span class="term">Wudūʾ · ウドゥー = 清め</span>
-    <span class="term">Duʿāʾ · ドゥアー = 願い・祈願</span>
-    <span class="term">Dhikr · ズィクル = アッラーの想起</span>
-    <span class="term">Tawḥīd · タウヒード = 神の唯一性</span>
-  </div>
-</section>
+<div class="glossary">
+<span class="term">Tawḥīd（タウヒード）＝神の唯一性</span>
+<span class="term">Shayṭān（シャイターン）＝悪魔・誘惑する者</span>
+<span class="term">Iblīs（イブリース）＝反抗したジン</span>
+<span class="term">Jinn（ジン）＝人間とは別の被造物</span>
+<span class="term">Duʿāʾ（ドゥアー）＝願い・祈願</span>
+<span class="term">Wudūʾ（ウドゥー）＝礼拝前の清め</span>
+</div>
 
 <footer>Islamz · 学ぶ → 疑う → 結び付ける</footer>
 
-<div class="sheet-wrap" id="sheetWrap" aria-hidden="true">
-  <div class="backdrop" id="backdrop"></div>
-  <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <div class="grab"></div>
-    <div class="sheet-head">
-      <div><h2 id="sheetTitle"></h2><div class="sub" id="sheetSub"></div></div>
-      <button class="close" id="closeBtn" aria-label="閉じる">×</button>
-    </div>
-    <div class="block"><b>イスラム側の答え</b><p id="answer"></p><div class="ref" id="ref"></div></div>
-    <div class="block cyan"><b>検証すること</b><p id="check"></p></div>
-    <div class="block amber"><b>人生との接続</b><p id="connect"></p></div>
-    <div class="block orange"><b>次の1問</b><p id="nextq"></p></div>
-    <button class="mark" id="markBtn">このテーマを一度整理した</button>
-  </section>
-</div>
+<div class="sheet-wrap" id="sheetWrap" aria-hidden="true"><div class="backdrop" id="backdrop"></div><section class="sheet"><div class="sheet-head"><div><h2 id="sheetTitle"></h2><div class="sub" id="sheetSub"></div></div><button class="close" id="closeBtn">×</button></div><div class="block"><b>イスラム側の答え</b><p id="answer"></p></div><div class="block cyan"><b>検証すること</b><p id="check"></p></div><div class="block amber"><b>人生との接続</b><p id="connect"></p></div><div class="block orange"><b>次の1問</b><p id="nextq"></p></div></section></div>
 
 <script>
 (function(){
-  const topics = [
-    {
-      id:'allah',icon:'☝️',color:'green',name:'Allah',read:'アッラー',hint:'神はいる？ いるなら何者？',
-      answer:'イスラムでは、アッラーは唯一の創造主。被造物の一つではなく、何ものにも依存せず、何ものにも似ない神とされる。',
-      ref:'Qur’an 112:1–4 / 2:255',
-      check:'「宇宙に創造主が必要」という議論は成立するか。創造主がいるとして、その存在をイスラムのアッラーまで特定できるかを分けて考える。',
-      connect:'助け・健康・守護・運命を願う相手をAllahに置く。一方、日本の神仏・先祖への敬意や記憶は自分の文化として残し、崇拝・超自然的な助けを求めることとは分けて考える。',
-      nextq:'Allahだけを神として頼ることと、日本人としての文化はどこまで両立できる？'
-    },
-    {
-      id:'life',icon:'🌱',color:'cyan',name:'Life',read:'人生',hint:'なんで生きる？',
-      answer:'イスラムでは、人間はアッラーを認識し、崇拝し、善く生きるために存在し、この人生は行いが問われる場とされる。',
-      ref:'Qur’an 51:56 / 67:2',
-      check:'「人生は試練」という説明が、現実の自由・責任・幸福と整合するか。人生の目的を神が決める必要はあるか。',
-      connect:'成功・快楽・金だけを人生の最終目的にしない軸を持てる。',
-      nextq:'もし人生に創造主がいるなら、目的は自分で作るもの？ 与えられるもの？'
-    },
-    {
-      id:'suffering',icon:'⚡',color:'orange',name:'Suffering',read:'苦しみ',hint:'なんで理不尽がある？',
-      answer:'イスラムでは、苦しみを試練・人間の自由意志・有限な世界の一部として捉え、完全な正義は来世まで含めて成立すると考える。',
-      ref:'Qur’an 2:155–157 / 4:40 / 67:2',
-      check:'全能で慈悲深い神と、子どもの病気・災害・戦争のような苦しみは本当に両立するか。「来世」が説明の穴埋めになっていないか。',
-      connect:'「なぜ自分だけ」と世界全体を否定する前に、苦しみの中で自分がどう行動するかへ視点を戻せる可能性がある。',
-      nextq:'善い神がいるなら、避けられる苦しみをなぜ止めない？'
-    },
-    {
-      id:'quran',icon:'📖',color:'amber',name:'Qur’an',read:'クルアーン',hint:'本当に神の言葉？',
-      answer:'イスラムでは、クルアーンはアッラーがムハンマドに啓示した言葉そのものとされ、信仰と生活の中心的な啓典になる。',
-      ref:'Qur’an 2:2 / 15:9',
-      check:'成立史・写本・伝承・内容・言語的主張を分けて見る。「保存されている」ことと「神由来」は同じ証明ではない。',
-      connect:'何を善悪の基準にするか、神が何を求めるとされているかを直接確認する資料になる。',
-      nextq:'クルアーンが人間の著作ではない、と考える一番強い根拠は何？'
-    },
-    {
-      id:'muhammad',icon:'🧭',color:'cyan',name:'Muhammad',read:'ムハンマド',hint:'この人は信用できる？',
-      answer:'イスラムではムハンマドを最後の預言者とし、神ではなく、人間として啓示を伝えた使徒と位置づける。',
-      ref:'Qur’an 33:40 / 18:110',
-      check:'史料から人物像・主張・行動を確認し、詐欺・錯覚・政治的動機・本物の預言という複数仮説を比較する。',
-      connect:'イスラムの実践の多くは、ムハンマドの言行（Sunnah）をどう評価するかで理解が変わる。',
-      nextq:'ムハンマドを「本物の預言者」と判断する材料は何？'
-    },
-    {
-      id:'salah',icon:'🕌',color:'green',name:'Ṣalāh',read:'サラーフ',hint:'なんで1日5回？',
-      answer:'サラーフは1日5回の定時礼拝。アッラーを想起し、身体ごと服従を示し、日常の中心を何度も神へ戻す実践とされる。',
-      ref:'Qur’an 20:14 / 29:45',
-      check:'祈りによる心理的・習慣的な効果と、「神が実在して礼拝を命じた」という宗教的主張を分ける。',
-      connect:'不安や仕事に飲まれた時、「これが世界の全部ではない」と区切る強制リセットとして働き得る。',
-      nextq:'サラーフで唱える一文一文は、自分の考え方をどう変える？'
-    },
-    {
-      id:'daily',icon:'🍽️',color:'orange',name:'Daily Life',read:'日常',hint:'日本でどう生きる？',
-      answer:'イスラムは食事・金・家族・性・商売・慈善・礼儀まで、信仰と日常を分離せずに考える。日本文化との折り合いも、行為の意味と誰に崇拝を向けるかを分けて考える。',
-      ref:'Qur’an 1:5 / 2:177 / 5:88',
-      check:'Halal / Haramや日本の宗教文化について、根拠・意図・実際の行為を個別に見る。一括で「宗教だから」「文化だから」で飲み込まない。',
-      connect:'現時点では、二礼二拍手一礼は日本文化として続ける。神仏・先祖は敬意と記憶として大切にし、健康・守護などの願いはAllahへ向ける。伝統的イスラム解釈との衝突は残るため、今後も検証する。',
-      nextq:'自分が大切にしたい日本文化と、Tawḥīdの境界はどこに置く？'
-    }
-  ];
-
-  const KEY='islamz_v01_done';
-  let done={}; try{done=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
-  const grid=document.getElementById('topicGrid'),wrap=document.getElementById('sheetWrap');
-  const els={
-    title:document.getElementById('sheetTitle'),sub:document.getElementById('sheetSub'),
-    answer:document.getElementById('answer'),ref:document.getElementById('ref'),
-    check:document.getElementById('check'),connect:document.getElementById('connect'),
-    nextq:document.getElementById('nextq'),mark:document.getElementById('markBtn'),
-    progress:document.getElementById('progress')
-  };
-  let current=null;
-
-  function render(){
-    grid.innerHTML='';
-    topics.forEach(t=>{
-      const b=document.createElement('button');
-      b.className='topic '+t.color+(done[t.id]?' done':'');
-      b.type='button';
-      b.innerHTML='<div class="top"><span class="ico">'+t.icon+'</span><span class="state">'+(done[t.id]?'整理済み':'未整理')+'</span></div>'+ 
-        '<h3>'+t.name+'</h3><div class="read">'+t.read+'</div><p>'+t.hint+'</p>';
-      b.addEventListener('click',()=>open(t));
-      grid.appendChild(b);
-    });
-    const n=topics.filter(t=>done[t.id]).length;
-    els.progress.textContent=n+' / '+topics.length+' 整理';
-  }
-  function open(t){
-    current=t; els.title.textContent=t.name; els.sub.textContent=t.read+' · '+t.hint;
-    els.answer.textContent=t.answer; els.ref.textContent=t.ref; els.check.textContent=t.check;
-    els.connect.textContent=t.connect; els.nextq.textContent=t.nextq;
-    els.mark.textContent=done[t.id]?'✓ 一度整理済み':'このテーマを一度整理した';
-    els.mark.classList.toggle('done',!!done[t.id]);
-    wrap.classList.add('open'); wrap.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
-  }
-  function close(){wrap.classList.remove('open');wrap.setAttribute('aria-hidden','true');document.body.style.overflow=''}
-  document.getElementById('closeBtn').addEventListener('click',close);
-  document.getElementById('backdrop').addEventListener('click',close);
-  els.mark.addEventListener('click',()=>{
-    if(!current)return;
-    done[current.id]=!done[current.id];
-    try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}
-    els.mark.textContent=done[current.id]?'✓ 一度整理済み':'このテーマを一度整理した';
-    els.mark.classList.toggle('done',!!done[current.id]); render();
-  });
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-  if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-  render();
+const topics=[
+{id:'allah',icon:'☝️',color:'green',name:'Allah',read:'アッラー',hint:'唯一の創造主とは？',answer:'イスラムでは、Allahは唯一の創造主。被造物の一つではなく、何ものにも似ないとされる。',check:'創造主がいるという議論と、それがイスラムのAllahだという判断は分けて検証する。',connect:'助け・健康・守護・運命を願う相手をAllahに一本化する。',nextq:'Allahを信じる根拠をどこまで自分で確認できる？'},
+{id:'life',icon:'🌱',color:'cyan',name:'Life',read:'人生',hint:'なんで生きる？',answer:'人生はAllahを認識し、善く生き、行いを問われる場とされる。',check:'「人生は試練」という考えが現実の自由や幸福と整合するか。',connect:'金・成功・他人の評価だけを最終基準にしない。',nextq:'自分の人生の目的とAllahの目的はどうつながる？'},
+{id:'afterlife',icon:'⚖️',color:'amber',name:'Afterlife',read:'来世',hint:'死後と最後の審判',answer:'死後はBarzakh（バルザフ＝死と復活の間）を経て、復活と審判があるとされる。',check:'来世という主張を何を根拠に信じるか。',connect:'誰も見ていない善悪にも意味がある、という倫理につながる。',nextq:'Allahの慈悲と地獄はどう両立する？'},
+{id:'quran',icon:'📖',color:'amber',name:'Qur’an',read:'クルアーン',hint:'本当に神の言葉？',answer:'イスラムではAllahがMuhammadへ啓示した言葉そのものとされる。',check:'成立史・写本・内容と「神由来」という主張を分けて見る。',connect:'礼拝で唱えている言葉の意味を直接理解する資料。',nextq:'神由来だと考える一番強い根拠は？'},
+{id:'muhammad',icon:'🧭',color:'cyan',name:'Muhammad',read:'ムハンマド',hint:'預言者は信用できる？',answer:'神ではなく、Allahの啓示を伝えた最後の預言者とされる。',check:'人物像・行動・史料から複数の説明を比較する。',connect:'礼拝の具体的な方法はSunnah（スンナ＝預言者の実践）と深く関係する。',nextq:'Muhammadを預言者と判断する材料は？'},
+{id:'unseen',icon:'👼',color:'orange',name:'Unseen',read:'天使・ジン・シャイターン',hint:'見えない存在の整理',answer:'天使はAllahに従う。人間とジンは選択する。Iblīsは反抗したジン。Shayṭānは悪魔・誘惑する者という呼び方。',check:'宗教的主張と、現実の病気・心理・物理現象の説明を混同しない。',connect:'怖い時も天使やジンではなくAllahへ助けを求める。',nextq:'シャイターンの誘惑と自分自身の欲望はどう見分ける？'},
+{id:'daily',icon:'🇯🇵',color:'green',name:'Daily Life',read:'日本での生活',hint:'文化と信仰の折り合い',answer:'食事・金・家族・礼儀まで信仰と日常をつなげて考える。',check:'「宗教だから」「文化だから」で一括せず、一つずつ意味を見る。',connect:'神仏・先祖への敬意は残し、超自然的な助けの願いはAllahへ向ける。',nextq:'自分が残したい日本文化とTawḥīdの境界は？'}
+];
+const grid=document.getElementById('topicGrid'),wrap=document.getElementById('sheetWrap');
+function render(){grid.innerHTML='';topics.forEach(t=>{const b=document.createElement('button');b.className='topic '+t.color;b.innerHTML='<h3>'+t.icon+' '+t.name+'</h3><div class="read">'+t.read+'</div><p>'+t.hint+'</p>';b.onclick=()=>openTopic(t);grid.appendChild(b)})}
+function openTopic(t){document.getElementById('sheetTitle').textContent=t.name;document.getElementById('sheetSub').textContent=t.read+' · '+t.hint;document.getElementById('answer').textContent=t.answer;document.getElementById('check').textContent=t.check;document.getElementById('connect').textContent=t.connect;document.getElementById('nextq').textContent=t.nextq;wrap.classList.add('open');document.body.style.overflow='hidden'}
+function close(){wrap.classList.remove('open');document.body.style.overflow=''}
+document.getElementById('closeBtn').onclick=close;document.getElementById('backdrop').onclick=close;
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+render();
 })();
 </script>
 </body>
