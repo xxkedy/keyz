@@ -32,6 +32,21 @@ jobs:
       - name: Patch Barz v0.5.1
         run: node .github/scripts/patch-barz-v051.mjs
 
+      - name: Validate Barz JavaScript
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const html = fs.readFileSync('barz/index.html', 'utf8');
+          const blocks = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m => m[1]).filter(Boolean);
+          if (!blocks.length) throw new Error('No inline Barz JavaScript found');
+          fs.writeFileSync('/tmp/barz-inline.js', blocks.join('\n'));
+          if (!html.includes('v0.5.1 · 2026.08.26')) throw new Error('Barz version patch missing');
+          if (!html.includes('CACHE_URL=\'./beat-cache.json\'')) throw new Error('Beat cache loader missing');
+          if (!html.includes('⚙️ FALLBACK / 設定')) throw new Error('Fallback UI missing');
+          NODE
+          node --check /tmp/barz-inline.js
+
       - name: Refresh beat cache
         shell: bash
         run: |
