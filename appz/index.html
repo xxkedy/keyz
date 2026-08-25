@@ -63,7 +63,7 @@ footer{text-align:center;color:#3f424b;font-size:8px;margin-top:9px;letter-spaci
     sound:{id:'sound',label:'TED',url:'https://www.ted.com/talks/dallas_taylor_what_silence_can_teach_you_about_sound'},
     confidence:{id:'confidence',label:'TED',url:'https://www.ted.com/talks/david_kelley_how_to_build_your_creative_confidence'}
   };
-  var SOURCE_IDS=['improv','sound','confidence'];
+  var SOURCE_IDS=['sound','improv','confidence'];
   var btn=document.getElementById('gapzBtn'),icon=document.getElementById('gapzIcon'),title=document.getElementById('gapzTitle'),status=document.getElementById('gapzStatus'),time=document.getElementById('gapzTime');
   function read(key,fallback){try{var value=localStorage.getItem(key);return value===null?fallback:value}catch(e){return fallback}}
   function write(key,value){try{if(value===null)localStorage.removeItem(key);else localStorage.setItem(key,String(value))}catch(e){}}
