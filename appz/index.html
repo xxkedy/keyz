@@ -12,50 +12,48 @@
 <link rel="icon" href="./icon-192.png?v=20260729-1">
 <title>Appz</title>
 <style>
-:root{--bg:#0b0b0e;--panel:#15151b;--panel2:#1c1c23;--line:#2b2b35;--text:#f5f3ee;--muted:#9898a4;--dim:#666671;--amber:#ff9e2c;--cyan:#22d3ee;--green:#4ade80;--orange:#ff6b35}
+:root{--bg:#08090c;--panel:#14161c;--line:rgba(255,255,255,.1);--text:#f8f7f2;--muted:#9a9da8;--dim:#686b75;--amber:#ff9d24;--cyan:#2bd9ef;--green:#53e38b;--orange:#ff7043}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif}
-body{min-height:100dvh;padding:max(18px,env(safe-area-inset-top)) 15px calc(28px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
-header{display:flex;align-items:end;justify-content:space-between;margin:2px 3px 14px}.brand h1{font-size:40px;line-height:.9;margin:0;font-weight:950;letter-spacing:-1px}.brand h1 span{color:var(--amber)}.brand p{font-size:9px;color:var(--muted);letter-spacing:2.2px;margin:7px 0 0;font-weight:800}.version{font-size:9px;color:var(--dim);letter-spacing:.7px;margin-bottom:1px}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:16px 3px 8px}.section-head b{font-size:10px;letter-spacing:1.5px;color:var(--muted)}.section-head span{font-size:9.5px;color:var(--dim)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.card{--accent:var(--amber);display:flex;align-items:center;gap:10px;min-width:0;min-height:82px;padding:11px;background:var(--panel);border:1px solid var(--line);border-radius:16px;color:var(--text);text-decoration:none;position:relative;overflow:hidden;transition:.08s}.card:active{transform:scale(.976);background:var(--panel2)}.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}.card.cyan{--accent:var(--cyan)}.card.green{--accent:var(--green)}.card.orange{--accent:var(--orange)}
-.iconbox{width:43px;height:43px;border-radius:12px;background:#09090b;border:1px solid #34343d;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}.copy{min-width:0}.card h3{font-size:16px;line-height:1.1;margin:0}.card p{font-size:10px;line-height:1.35;color:var(--muted);margin:5px 0 0}.arrow{margin-left:auto;color:var(--accent);font-size:17px;font-weight:900;flex:none}
-.quick{--accent:var(--amber);width:100%;min-height:88px;border:1px solid #4a3822;background:linear-gradient(145deg,#20170d,var(--panel));font:inherit;text-align:left;cursor:pointer}.quick.running{--accent:var(--cyan);border-color:#27505a;background:linear-gradient(145deg,#0e2025,var(--panel))}.quick.done{--accent:var(--green);border-color:#294936;background:linear-gradient(145deg,#0e1d14,var(--panel))}.quick-kicker{display:block;margin-bottom:4px;color:var(--accent);font-size:8.5px;font-weight:900;letter-spacing:1.1px}.quick-time{min-width:57px;text-align:right;color:var(--accent);font-size:13px;font-weight:950;font-variant-numeric:tabular-nums;letter-spacing:-.3px}
-.standby{margin-top:16px;border:1px solid var(--line);border-radius:16px;background:#111116;overflow:hidden}.standby summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:13px 14px;cursor:pointer}.standby summary::-webkit-details-marker{display:none}.standby-title{font-size:10px;font-weight:900;letter-spacing:1.5px;color:var(--muted)}.standby-meta{font-size:9.5px;color:var(--dim)}.standby[open] summary{border-bottom:1px solid var(--line)}.standby .inner{padding:9px}.standby .card{min-height:76px;background:#121218;opacity:.86}.standby .card:before{background:#565661}.standby .arrow{color:#777782}.badge{display:inline-flex;margin-top:5px;padding:3px 6px;border:1px solid #34343d;border-radius:999px;color:#777782;font-size:8.5px;font-weight:800}
-footer{text-align:center;color:#4f4f59;font-size:9px;margin-top:18px;letter-spacing:.8px}
-@media(max-width:360px){.grid{grid-template-columns:1fr}.card{min-height:76px}}
+body{min-height:100dvh;padding:max(14px,env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;overflow-x:hidden;background:radial-gradient(circle at 88% -8%,rgba(255,157,36,.12),transparent 30%),var(--bg)}
+header{height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 2px}.brand h1{font-size:31px;line-height:1;margin:0;font-weight:950;letter-spacing:-1.4px}.brand h1 span{color:var(--amber)}.ready{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:9px;font-weight:850;letter-spacing:1.2px}.ready:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(83,227,139,.8)}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:12px 2px 7px}.section-head b{font-size:9px;letter-spacing:1.7px;color:var(--muted)}.section-head span{font-size:9px;color:var(--dim)}
+.quick{--accent:var(--amber);width:100%;min-height:108px;padding:14px;display:grid;grid-template-columns:58px minmax(0,1fr) auto;align-items:center;gap:12px;border:1px solid rgba(255,157,36,.34);border-radius:24px;background:linear-gradient(135deg,rgba(255,157,36,.16),rgba(20,22,28,.92) 52%);color:var(--text);font:inherit;text-align:left;cursor:pointer;box-shadow:0 18px 45px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.06);backdrop-filter:blur(18px);transition:transform .09s,border-color .15s}.quick:active{transform:scale(.982)}.quick.running{--accent:var(--cyan);border-color:rgba(43,217,239,.35);background:linear-gradient(135deg,rgba(43,217,239,.14),rgba(20,22,28,.94) 52%)}.quick.done{--accent:var(--green);border-color:rgba(83,227,139,.35);background:linear-gradient(135deg,rgba(83,227,139,.14),rgba(20,22,28,.94) 52%)}.hero-icon{width:58px;height:58px;border-radius:18px;background:rgba(5,6,9,.72);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:29px;box-shadow:inset 0 1px rgba(255,255,255,.05)}.quick-copy{min-width:0}.quick-kicker{display:block;margin-bottom:4px;color:var(--accent);font-size:8.5px;font-weight:950;letter-spacing:1.4px}.quick h2{font-size:19px;line-height:1.12;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.quick p{font-size:10px;line-height:1.3;color:var(--muted);margin:5px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.quick-time{min-width:58px;padding:9px 8px;border-radius:999px;background:rgba(0,0,0,.25);text-align:center;color:var(--accent);font-size:11px;font-weight:950;font-variant-numeric:tabular-nums;letter-spacing:.1px}
+.tool-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:7px;row-gap:8px}.tool{min-width:0;min-height:78px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-radius:18px;color:var(--text);text-decoration:none;transition:transform .08s,background .12s}.tool:active{transform:scale(.94);background:rgba(255,255,255,.04)}.tool-icon{width:53px;height:53px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.1);border-radius:17px;font-size:27px;background:linear-gradient(145deg,#1d2029,#101218);box-shadow:0 9px 20px rgba(0,0,0,.23),inset 0 1px rgba(255,255,255,.07)}.tool:nth-child(4n+1) .tool-icon{background:linear-gradient(145deg,rgba(43,217,239,.2),#101218 68%)}.tool:nth-child(4n+2) .tool-icon{background:linear-gradient(145deg,rgba(255,112,67,.22),#101218 68%)}.tool:nth-child(4n+3) .tool-icon{background:linear-gradient(145deg,rgba(83,227,139,.2),#101218 68%)}.tool:nth-child(4n+4) .tool-icon{background:linear-gradient(145deg,rgba(255,157,36,.2),#101218 68%)}.tool-name{max-width:100%;font-size:10.5px;line-height:1;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.standby-row{min-height:48px;margin-top:10px;padding:7px 8px 7px 12px;display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:16px;background:rgba(20,22,28,.66)}.standby-caption{font-size:8.5px;font-weight:900;letter-spacing:1.3px;color:var(--dim)}.standby-link{min-width:0;display:flex;align-items:center;gap:7px;padding:4px 7px;color:var(--muted);text-decoration:none;font-size:11px;font-weight:800}.standby-link small{color:var(--dim);font-size:8.5px;font-weight:700}.standby-emoji{font-size:19px}
+footer{text-align:center;color:#3f424b;font-size:8px;margin-top:9px;letter-spacing:.8px}
+@media(max-width:350px){body{padding-left:10px;padding-right:10px}.tool-grid{column-gap:3px}.tool-icon{width:48px;height:48px;border-radius:15px;font-size:24px}.quick{grid-template-columns:52px minmax(0,1fr) auto;padding:12px;gap:9px}.hero-icon{width:52px;height:52px;border-radius:16px}}
+@media(max-height:650px){body{padding-top:max(8px,env(safe-area-inset-top));padding-bottom:8px}header{height:32px}.section-head{margin-top:8px;margin-bottom:5px}.quick{min-height:94px}.tool{min-height:70px}.tool-icon{width:48px;height:48px;border-radius:15px;font-size:24px}.standby-row{min-height:42px;margin-top:6px}footer{margin-top:5px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<header><div class="brand"><h1>App<span>z</span></h1><p>YOUR TOOL DECK</p></div><div class="version">v9 · 2026.08.25</div></header>
+<header><div class="brand"><h1>App<span>z</span></h1></div><div class="ready">READY</div></header>
 
-<div class="section-head"><b>⚡ QUICK</b><span>考えず始める</span></div>
-<button class="card quick" type="button" id="gapzBtn">
-<span class="iconbox" id="gapzIcon">🎧</span>
-<span class="copy"><span class="quick-kicker">GAPZ · TODAY</span><h3 id="gapzTitle">Shadowz</h3><p id="gapzStatus">今日のおすすめを準備中</p></span>
+<div class="section-head"><b>GAPZ</b><span>1タップで開始</span></div>
+<button class="quick" type="button" id="gapzBtn">
+<span class="hero-icon" id="gapzIcon">🎧</span>
+<span class="quick-copy"><span class="quick-kicker">NEXT</span><h2 id="gapzTitle">Shadowz</h2><p id="gapzStatus">今日のおすすめを準備中</p></span>
 <span class="quick-time" id="gapzTime">START</span>
 </button>
 
-<div class="section-head"><b>🚀 ACTIVE</b><span>よく使う</span></div>
-<div class="grid">
-<a class="card cyan" href="https://xxkedy.github.io/flowz/"><span class="iconbox">🗣️</span><span class="copy"><h3>Flowz</h3><p>英語スピーキング</p></span><span class="arrow">›</span></a>
-<a class="card orange" href="https://xxkedy.github.io/keyz/barz/"><span class="iconbox">🎤</span><span class="copy"><h3>Barz</h3><p>フリースタイル・歌詞KEEP</p></span><span class="arrow">›</span></a>
-<a class="card green" href="https://xxkedy.github.io/gainz/"><span class="iconbox">💪</span><span class="copy"><h3>Gainz</h3><p>家トレ・動画・記録</p></span><span class="arrow">›</span></a>
-<a class="card green" href="https://xxkedy.github.io/keyz/islamz/"><span class="iconbox">🕌</span><span class="copy"><h3>Islamz</h3><p>イスラム学習・理解</p></span><span class="arrow">›</span></a>
-<a class="card" href="https://xxkedy.github.io/keyz/"><span class="iconbox">⌨️</span><span class="copy"><h3>Keyz</h3><p>ショートカット早見表</p></span><span class="arrow">›</span></a>
-<a class="card cyan" href="https://xxkedy.github.io/digz/"><span class="iconbox">📖</span><span class="copy"><h3>Digz</h3><p>好きな曲の歌詞をディグ</p></span><span class="arrow">›</span></a>
-<a class="card orange" href="https://xxkedy.github.io/tagz/"><span class="iconbox">🏷️</span><span class="copy"><h3>Tagz</h3><p>ビート名・出品ブロック</p></span><span class="arrow">›</span></a>
+<div class="section-head"><b>APPS</b><span>よく使う7つ</span></div>
+<div class="tool-grid">
+<a class="tool" data-tool href="https://xxkedy.github.io/flowz/" aria-label="Flowz 英語スピーキング"><span class="tool-icon">🗣️</span><span class="tool-name">Flowz</span></a>
+<a class="tool" data-tool href="https://xxkedy.github.io/keyz/barz/" aria-label="Barz フリースタイルと歌詞"><span class="tool-icon">🎤</span><span class="tool-name">Barz</span></a>
+<a class="tool" data-tool href="https://xxkedy.github.io/gainz/" aria-label="Gainz 家トレ"><span class="tool-icon">💪</span><span class="tool-name">Gainz</span></a>
+<a class="tool" data-tool href="https://xxkedy.github.io/keyz/islamz/" aria-label="Islamz イスラム学習"><span class="tool-icon">🕌</span><span class="tool-name">Islamz</span></a>
+<a class="tool" data-tool href="https://xxkedy.github.io/keyz/" aria-label="Keyz ショートカット"><span class="tool-icon">⌨️</span><span class="tool-name">Keyz</span></a>
+<a class="tool" data-tool href="https://xxkedy.github.io/digz/" aria-label="Digz 歌詞ディグ"><span class="tool-icon">📖</span><span class="tool-name">Digz</span></a>
+<a class="tool" data-tool href="https://xxkedy.github.io/tagz/" aria-label="Tagz ビート名"><span class="tool-icon">🏷️</span><span class="tool-name">Tagz</span></a>
 </div>
 
-<details class="standby">
-<summary><span class="standby-title">📦 STANDBY</span><span class="standby-meta">後日改修 1 ›</span></summary>
-<div class="inner">
-<a class="card" href="https://xxkedy.github.io/spotz/"><span class="iconbox">📍</span><span class="copy"><h3>Spotz</h3><p>店選び・食事検索</p><span class="badge">大幅改修待ち</span></span><span class="arrow">›</span></a>
+<div class="standby-row">
+<span class="standby-caption">STANDBY</span>
+<a class="standby-link" data-tool href="https://xxkedy.github.io/spotz/" aria-label="Spotz 改修待ち"><span class="standby-emoji">📍</span><span>Spotz</span><small>改修待ち</small></a>
 </div>
-</details>
 
-<footer>Appz · QUICK / ACTIVE / STANDBY</footer>
+<footer>Appz v9.1 · ONE SCREEN DECK</footer>
 <script>
 (function(){
   var KEYS={shadowEnd:'appz_shadow15_end',shadowDone:'appz_gapz_shadow_done',shadowSource:'appz_gapz_shadow_source',xEnd:'appz_gapz_x_end',xSessions:'appz_gapz_x_sessions',history:'appz_gapz_history'};
@@ -106,7 +104,7 @@ footer{text-align:center;color:#4f4f59;font-size:9px;margin-top:18px;letter-spac
     var tab=window.open(current.url,'_blank');if(tab){try{tab.opener=null}catch(e){}}else{location.href=current.url}if(navigator.vibrate)navigator.vibrate(12);askNotification();document.title='Gapz · Appz';arm()
   }
   btn.addEventListener('click',start);
-  document.querySelectorAll('a.card').forEach(function(card){card.addEventListener('click',function(){if(navigator.vibrate)navigator.vibrate(12)})});
+  document.querySelectorAll('a[data-tool]').forEach(function(card){card.addEventListener('click',function(){if(navigator.vibrate)navigator.vibrate(12)})});
   document.addEventListener('visibilitychange',function(){if(!document.hidden)arm()});
   if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(function(){});
   arm();
@@ -114,3 +112,4 @@ footer{text-align:center;color:#4f4f59;font-size:9px;margin-top:18px;letter-spac
 </script>
 </body>
 </html>
+
