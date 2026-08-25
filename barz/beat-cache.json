@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "generatedAt": null,
+  "year": 2026,
+  "rules": {
+    "minSec": 120,
+    "maxSec": 480,
+    "freshDays": 30,
+    "max": 20
+  },
+  "slots": {}
+}
