@@ -40,7 +40,7 @@ footer{text-align:center;color:#3f424b;font-size:8px;margin-top:9px;letter-spaci
 <div class="section-head"><b>APPS</b><span>よく使う7つ</span></div>
 <div class="tool-grid">
 <a class="tool" data-tool href="https://xxkedy.github.io/flowz/" aria-label="Flowz 英語スピーキング"><span class="tool-icon">🗣️</span><span class="tool-name">Flowz</span></a>
-<a class="tool" data-tool href="https://xxkedy.github.io/keyz/barz/" aria-label="Barz フリースタイルと歌詞"><span class="tool-icon">🎤</span><span class="tool-name">Barz</span></a>
+<a class="tool" data-tool href="https://xxkedy.github.io/keyz/barz/?quick=1" aria-label="Barz すぐラップ開始"><span class="tool-icon">🎤</span><span class="tool-name">Barz</span></a>
 <a class="tool" data-tool href="https://xxkedy.github.io/gainz/" aria-label="Gainz 家トレ"><span class="tool-icon">💪</span><span class="tool-name">Gainz</span></a>
 <a class="tool" data-tool href="https://xxkedy.github.io/keyz/islamz/" aria-label="Islamz イスラム学習"><span class="tool-icon">🕌</span><span class="tool-name">Islamz</span></a>
 <a class="tool" data-tool href="https://xxkedy.github.io/keyz/" aria-label="Keyz ショートカット"><span class="tool-icon">⌨️</span><span class="tool-name">Keyz</span></a>
@@ -53,19 +53,24 @@ footer{text-align:center;color:#3f424b;font-size:8px;margin-top:9px;letter-spaci
 <a class="standby-link" data-tool href="https://xxkedy.github.io/spotz/" aria-label="Spotz 改修待ち"><span class="standby-emoji">📍</span><span>Spotz</span><small>改修待ち</small></a>
 </div>
 
-<footer>Appz v9.1 · ONE SCREEN DECK</footer>
+<footer>Appz v9.2 · ONE SCREEN DECK</footer>
 <script>
 (function(){
   var KEYS={shadowEnd:'appz_shadow15_end',shadowDone:'appz_gapz_shadow_done',shadowSource:'appz_gapz_shadow_source',xEnd:'appz_gapz_x_end',xSessions:'appz_gapz_x_sessions',history:'appz_gapz_history'};
   var SHADOW_MS=15*60*1000,X_MS=3*60*1000,X_URL='https://x.com/i/bookmarks',timer=null,ticker=null,current=null;
-  var SOURCES={netflix:{id:'netflix',label:'Netflix',url:'https://www.netflix.com/browse'},youtube:{id:'youtube',label:'YouTube',url:'https://www.youtube.com/watch?v=gP2HftJJwSE'}};
+  var SOURCES={
+    improv:{id:'improv',label:'TED',url:'https://www.ted.com/talks/charles_limb_your_brain_on_improv'},
+    sound:{id:'sound',label:'TED',url:'https://www.ted.com/talks/dallas_taylor_what_silence_can_teach_you_about_sound'},
+    confidence:{id:'confidence',label:'TED',url:'https://www.ted.com/talks/david_kelley_how_to_build_your_creative_confidence'}
+  };
+  var SOURCE_IDS=['improv','sound','confidence'];
   var btn=document.getElementById('gapzBtn'),icon=document.getElementById('gapzIcon'),title=document.getElementById('gapzTitle'),status=document.getElementById('gapzStatus'),time=document.getElementById('gapzTime');
   function read(key,fallback){try{var value=localStorage.getItem(key);return value===null?fallback:value}catch(e){return fallback}}
   function write(key,value){try{if(value===null)localStorage.removeItem(key);else localStorage.setItem(key,String(value))}catch(e){}}
   function readNumber(key){return Number(read(key,0)||0)}
   function dayKey(value){var d=value instanceof Date?value:new Date(value||Date.now());return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
   function fmt(ms){var s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return m+':'+String(s%60).padStart(2,'0')}
-  function sourceForToday(){var saved=read(KEYS.shadowSource,'');if(saved&&SOURCES[saved])return SOURCES[saved];var stamp=Number(dayKey().replace(/-/g,''));return stamp%2?SOURCES.youtube:SOURCES.netflix}
+  function sourceForToday(){var saved=read(KEYS.shadowSource,'');if(saved&&SOURCES[saved])return SOURCES[saved];var stamp=Number(dayKey().replace(/-/g,''));return SOURCES[SOURCE_IDS[stamp%SOURCE_IDS.length]]}
   function record(kind,source,endedAt){var items=[];try{items=JSON.parse(read(KEYS.history,'[]'));if(!Array.isArray(items))items=[]}catch(e){items=[]}items.push({kind:kind,source:source||'',completedAt:new Date(endedAt).toISOString()});write(KEYS.history,JSON.stringify(items.slice(-30)))}
   function addXSession(endedAt){var day=dayKey(endedAt),data={day:day,count:0};try{var parsed=JSON.parse(read(KEYS.xSessions,'{}'));if(parsed&&parsed.day===day)data=parsed}catch(e){}data.count=Number(data.count||0)+1;write(KEYS.xSessions,JSON.stringify(data))}
   function finishExpired(showNotice){
@@ -85,7 +90,7 @@ footer{text-align:center;color:#3f424b;font-size:8px;margin-top:9px;letter-spaci
   function render(done){
     current=choose();btn.classList.remove('running','done');
     if(done){btn.classList.add('done');time.textContent='DONE'}else if(current.running){btn.classList.add('running');time.textContent=fmt(current.end-Date.now())}else{time.textContent='START'}
-    if(current.kind==='shadow'){icon.textContent='🎧';title.textContent='Shadowz · '+current.source.label;status.textContent=current.running?'15分シャドーイング中':'今日のおすすめ · 15分'}
+    if(current.kind==='shadow'){icon.textContent='🗣️';title.textContent='Shadowz · '+current.source.label;status.textContent=current.running?'英語のまま追いかけ中':'英字幕だけ · 訳さず15分'}
     else{icon.textContent='🔖';title.textContent='Xブクマ · 3件';status.textContent=current.running?'ホームTLを開かず学習中':'短時間のおすすめ · ホームTLなし'}
   }
   function notify(head,body){if('serviceWorker' in navigator&&'Notification' in window&&Notification.permission==='granted'){navigator.serviceWorker.ready.then(function(reg){return reg.showNotification(head,{body:body,tag:'appz-gapz',renotify:true})}).catch(function(){try{new Notification(head,{body:body})}catch(e){}})}document.title='✓ Gapz完了 · Appz'}
