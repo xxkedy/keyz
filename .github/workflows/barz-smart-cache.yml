@@ -1,0 +1,55 @@
+name: Barz smart beat cache
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/barz-smart-cache.yml'
+      - '.github/scripts/patch-barz-v051.mjs'
+      - '.github/scripts/update-barz-beats.mjs'
+  schedule:
+    - cron: '15 0,12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: barz-smart-beat-cache
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch Barz v0.5.1
+        run: node .github/scripts/patch-barz-v051.mjs
+
+      - name: Refresh beat cache
+        shell: bash
+        run: |
+          if [ -z "$YOUTUBE_API_KEY" ]; then
+            echo "YOUTUBE_API_KEY is not configured; keeping the current cache."
+          else
+            node .github/scripts/update-barz-beats.mjs
+          fi
+
+      - name: Commit generated changes
+        shell: bash
+        run: |
+          if git diff --quiet -- barz/index.html barz/beat-cache.json; then
+            echo "No Barz changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add barz/index.html barz/beat-cache.json
+          git commit -m "Update Barz smart beat flow"
+          git push
