@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Barz Phase 1 Check</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0a0b0d;color:#f4f1e9;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:24px;max-width:720px;margin:auto}h1{font-size:28px;margin:0 0 4px}p{color:#969da4;margin:0 0 18px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{background:#14171a;border:1px solid #2b3137;border-radius:16px;padding:14px}.card small{display:block;color:#969da4;font-size:10px;letter-spacing:1px}.card b{display:block;font-size:24px;margin-top:5px}.ok{color:#48d27c}.warn{color:#ffbd59}.bad{color:#ff5d66}.wide{grid-column:1/-1}.stores{font-size:13px;line-height:1.7;word-break:break-word}button,a{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;border-radius:14px;border:1px solid #19515a;background:#0d2529;color:#29d6df;font:inherit;font-weight:800;text-decoration:none;margin-top:10px}pre{white-space:pre-wrap;word-break:break-word;color:#969da4;font-size:11px;margin:0}.foot{font-size:11px;color:#6f777e;margin-top:16px;line-height:1.55}@media(max-width:480px){body{padding:18px 14px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}}
+</style>
+</head>
+<body>
+<h1>Barz Phase 1 Check</h1>
+<p>localhost用。main / 公開Barzのデータは触らない。</p>
+<div class="grid">
+  <div class="card"><small>DB VERSION</small><b id="ver">—</b></div>
+  <div class="card"><small>RESULT</small><b id="result">CHECKING</b></div>
+  <div class="card"><small>LEGACY SESSIONS</small><b id="sessions">—</b></div>
+  <div class="card"><small>V0.6 TAKES</small><b id="takes">—</b></div>
+  <div class="card"><small>RECOVERED TAKES</small><b id="recovered">—</b></div>
+  <div class="card"><small>RECOVERY ROWS</small><b id="recovery">—</b></div>
+  <div class="card"><small>OUTBOX</small><b id="outbox">—</b></div>
+  <div class="card wide"><small>STORES</small><div class="stores" id="stores">—</div></div>
+  <div class="card wide"><small>LATEST TAKE</small><pre id="latest">—</pre></div>
+</div>
+<button id="refresh">REFRESH CHECK</button>
+<a href="./">OPEN BARZ</a>
+<div class="foot">期待値：DB VERSION = 2、stores に sessions / takes / recovery / outbox。録音中reload後は RECOVERED TAKES が1以上になり、復旧完了後の RECOVERY ROWS は0へ戻る。</div>
+<script>
+const DB='barz_db_v1';
+const $=id=>document.getElementById(id);
+function reqP(req){return new Promise((res,rej)=>{req.onsuccess=()=>res(req.result);req.onerror=()=>rej(req.error)})}
+function txDone(tx){return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error);tx.onabort=()=>rej(tx.error||new Error('abort'))})}
+async function readAll(db,store){if(!db.objectStoreNames.contains(store))return[];const tx=db.transaction(store,'readonly'),req=tx.objectStore(store).getAll(),rows=await reqP(req);await txDone(tx);return rows||[]}
+async function check(){
+  $('result').textContent='CHECKING';$('result').className='';
+  try{
+    const db=await new Promise((res,rej)=>{const r=indexedDB.open(DB);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+    const stores=[...db.objectStoreNames];
+    const sessions=await readAll(db,'sessions'),takes=await readAll(db,'takes'),recovery=await readAll(db,'recovery'),outbox=await readAll(db,'outbox');
+    $('ver').textContent=db.version;
+    $('stores').textContent=stores.join(' · ');
+    $('sessions').textContent=sessions.length;
+    $('takes').textContent=takes.length;
+    $('recovered').textContent=takes.filter(x=>x&&x.recovered).length;
+    $('recovery').textContent=recovery.length;
+    $('outbox').textContent=outbox.length;
+    const latest=takes.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0))[0];
+    $('latest').textContent=latest?JSON.stringify({id:latest.id,reviewStatus:latest.reviewStatus,recovered:!!latest.recovered,duration:latest.duration,markers:(latest.markers||[]).length,editedLyrics:latest.editedLyrics||''},null,2):'—';
+    const required=['sessions','takes','recovery','outbox'];
+    const ok=db.version===2&&required.every(x=>stores.includes(x));
+    $('result').textContent=ok?'PASS':'STORE ERROR';$('result').className=ok?'ok':'bad';
+    db.close();
+  }catch(e){$('result').textContent='ERROR';$('result').className='bad';$('latest').textContent=String(e&&e.stack||e)}
+}
+$('refresh').onclick=check;check();
+</script>
+</body>
+</html>
