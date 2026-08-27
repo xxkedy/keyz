@@ -7,6 +7,7 @@ on:
     paths:
       - scripts/patch-barz-v060-phase1.mjs
       - scripts/patch-barz-v060-phase1-racefix.mjs
+      - scripts/test-barz-v060-phase1.mjs
       - .github/workflows/barz-v060-phase1.yml
   workflow_dispatch:
 
@@ -46,6 +47,12 @@ jobs:
           grep -F "recoveryWriteChain=recoveryWriteChain.then(()=>stashRecoveryChunk(e.data))" barz/index.html
           grep -F "await recoveryWriteChain.catch(()=>{});await clearActiveRecovery()" barz/index.html
           ! grep -F "indexedDB.open(DB_NAME,1)" barz/index.html
+
+      - name: Install IndexedDB test shim
+        run: npm install --no-save --no-package-lock fake-indexeddb@6
+
+      - name: Run IndexedDB migration and recovery tests
+        run: node scripts/test-barz-v060-phase1.mjs
 
       - name: Commit generated Barz Phase 1
         shell: bash
