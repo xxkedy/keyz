@@ -1,0 +1,15 @@
+{
+  "name": "Urgez",
+  "short_name": "Urgez",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08090c",
+  "theme_color": "#08090c",
+  "description": "誘惑の瞬間に理由を思い出して、自分で選び直すためのkedy用ストッパー",
+  "icons": [
+    {"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"},
+    {"src":"../appz/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"../appz/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}
+  ]
+}
