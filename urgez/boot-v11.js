@@ -1,1 +1,1 @@
-(function(){var s=document.createElement('script');s.src='./v11.js?v=1.1.0';s.onload=function(){var c=document.getElementById('close'),sh=document.getElementById('sheet');if(c&&sh)c.onclick=function(){sh.classList.remove('show')};};document.head.appendChild(s)})();
+(function(){var s=document.createElement('script');s.src='./v11.js?v=1.2.0';s.onload=function(){var c=document.getElementById('close'),sh=document.getElementById('sheet');if(c&&sh)c.onclick=function(){sh.classList.remove('show')};};document.head.appendChild(s)})();
