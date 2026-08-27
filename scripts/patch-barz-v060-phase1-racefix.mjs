@@ -12,6 +12,10 @@ function mustReplace(label,from,to){
   console.log('fixed:',label);
 }
 
+/* Earlier revisions could prepend recoveryWriteChain= again when this patch was rerun.
+   Normalize that first so repeated CI runs are deterministic. */
+src=src.replace(/(?:recoveryWriteChain=){2,}beginRecoveryDraft\(/g,'recoveryWriteChain=beginRecoveryDraft(');
+
 mustReplace(
   'recovery write chain state',
   "let activeRecoveryId='',recoverySeq=0;",
@@ -30,11 +34,10 @@ mustReplace(
   "mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size){chunks.push(e.data);recoveryWriteChain=recoveryWriteChain.then(()=>stashRecoveryChunk(e.data)).catch(()=>{if(storageState)storageState.textContent='SAVE RISK'})}};mediaRecorder.onstop=finalizeSession;"
 );
 
-mustReplace(
-  'serialize recovery meta before first chunk',
-  "beginRecoveryDraft({mimeType:mime||mediaRecorder.mimeType,beatUrl:beatUrl.value.trim(),title:titleEl.value.trim()||autoTitle()}).catch(()=>{if(storageState)storageState.textContent='SAVE RISK'});mediaRecorder.start(1000);",
-  "recoveryWriteChain=beginRecoveryDraft({mimeType:mime||mediaRecorder.mimeType,beatUrl:beatUrl.value.trim(),title:titleEl.value.trim()||autoTitle()}).catch(()=>{if(storageState)storageState.textContent='SAVE RISK'});mediaRecorder.start(1000);"
-);
+const bareMeta="beginRecoveryDraft({mimeType:mime||mediaRecorder.mimeType,beatUrl:beatUrl.value.trim(),title:titleEl.value.trim()||autoTitle()}).catch(()=>{if(storageState)storageState.textContent='SAVE RISK'});mediaRecorder.start(1000);";
+const chainedMeta="recoveryWriteChain="+bareMeta;
+if(src.includes(chainedMeta))console.log('already fixed: serialize recovery meta before first chunk');
+else mustReplace('serialize recovery meta before first chunk','\n'+bareMeta,'\n'+chainedMeta);
 
 mustReplace(
   'wait for final chunk before recovery cleanup',
@@ -45,9 +48,11 @@ mustReplace(
 const required=[
   'recoveryWriteChain=Promise.resolve()',
   'recoveryWriteChain=recoveryWriteChain.then(()=>stashRecoveryChunk(e.data))',
+  'recoveryWriteChain=beginRecoveryDraft(',
   'await recoveryWriteChain.catch(()=>{});await clearActiveRecovery()'
 ];
 for(const token of required)if(!src.includes(token))throw new Error('Race-fix verification failed: '+token);
+if(src.includes('recoveryWriteChain=recoveryWriteChain=beginRecoveryDraft('))throw new Error('Duplicate recoveryWriteChain assignment remains');
 
 const inlineScripts=[...src.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m=>m[1]).filter(x=>x.trim());
 for(const js of inlineScripts)new Function(js);
