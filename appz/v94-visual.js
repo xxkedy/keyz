@@ -21,13 +21,41 @@ header{height:40px!important}
 .tool[data-kind='tool'] .tool-icon{background:linear-gradient(145deg,rgba(160,165,180,.2),#101218 70%)!important;border-color:rgba(180,185,200,.14)!important}
 .quick{min-height:104px!important}
 .standby-row{margin-top:9px!important}
+.standby-links{display:flex;align-items:center;justify-content:flex-end;gap:4px;min-width:0}
 footer{font-size:0!important;margin-top:7px!important}
 footer:after{content:'ONE SCREEN DECK';font-size:7.5px;color:#3f424b;letter-spacing:.8px}
-@media(max-width:350px){.tool-icon{width:52px!important;height:52px!important;font-size:26px!important}.tool-name{font-size:11.5px!important}.tool{min-height:76px!important}}
+@media(max-width:350px){.tool-icon{width:52px!important;height:52px!important;font-size:26px!important}.tool-name{font-size:11.5px!important}.tool{min-height:76px!important}.standby-link small{display:none}}
 @media(max-height:650px){.tool-icon{width:51px!important;height:51px!important;font-size:25px!important}.tool-name{font-size:11.5px!important}.tool{min-height:72px!important}}
 `;
 document.head.appendChild(style);
-var map={Flowz:'learn',Digz:'learn',Barz:'create',Tagz:'create',Gainz:'life',Urgez:'life',Islamz:'faith',Keyz:'tool'};
+var map={Flowz:'learn',Barz:'create',Tagz:'create',Gainz:'life',Urgez:'life',Islamz:'faith',Keyz:'tool'};
 document.querySelectorAll('.tool').forEach(function(el){var name=el.querySelector('.tool-name');if(name&&map[name.textContent.trim()])el.dataset.kind=map[name.textContent.trim()]});
 var ready=document.querySelector('.ready');if(ready)ready.setAttribute('aria-label','Appz v9.4 · 2026.08.27');
+
+// Legacy v9.3 HTML compatibility: keep Digz out of ACTIVE even while an old
+// service worker is still controlling the current page.
+var grid=document.querySelector('.tool-grid');
+var digz=grid&&Array.from(grid.querySelectorAll('.tool')).find(function(el){var n=el.querySelector('.tool-name');return n&&n.textContent.trim()==='Digz'});
+var standby=document.querySelector('.standby-row');
+if(digz&&standby){
+  digz.remove();
+  var head=document.querySelector('.section-head:nth-of-type(2) span');
+  if(head)head.textContent='よく使う7つ';
+  var links=standby.querySelector('.standby-links');
+  if(!links){
+    links=document.createElement('div');
+    links.className='standby-links';
+    var existing=standby.querySelector('.standby-link');
+    if(existing){standby.removeChild(existing);links.appendChild(existing)}
+    standby.appendChild(links);
+  }
+  var a=document.createElement('a');
+  a.className='standby-link';
+  a.setAttribute('data-tool','');
+  a.href='https://xxkedy.github.io/digz/';
+  a.setAttribute('aria-label','Digz 未運用');
+  a.innerHTML='<span class="standby-emoji">📖</span><span>Digz</span><small>未運用</small>';
+  links.insertBefore(a,links.firstChild);
+  a.addEventListener('click',function(){if(navigator.vibrate)navigator.vibrate(12)});
+}
 })();
