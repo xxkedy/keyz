@@ -73,9 +73,9 @@ function openSheet(){
   setTimeout(function(){if(ta)ta.focus()},80);
 }
 function closeSheet(){
-  var id=infer(),ta=document.getElementById('urgezFreeNote'),sh=document.getElementById('urgezNoteSheet');if(id&&ta)setNote(id,ta.value);
-  if(sh){sh.classList.remove('show');sh.setAttribute('aria-hidden','true')}
-  document.body.classList.remove('urgez-note-open');syncFloat();
+  var sh=document.getElementById('urgezNoteSheet');if(!sh||!sh.classList.contains('show'))return;
+  var id=infer(),ta=document.getElementById('urgezFreeNote');if(id&&ta)setNote(id,ta.value);
+  sh.classList.remove('show');sh.setAttribute('aria-hidden','true');document.body.classList.remove('urgez-note-open');syncFloat();
   requestAnimationFrame(function(){window.scrollTo(0,savedScrollY)});
 }
 function buildPrompt(id,note){return[
