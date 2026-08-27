@@ -1,0 +1,55 @@
+name: Barz v0.6 Phase 1 Storage
+
+on:
+  push:
+    branches:
+      - barz-v0.6-phase1-storage
+    paths:
+      - scripts/patch-barz-v060-phase1.mjs
+      - .github/workflows/barz-v060-phase1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout phase branch
+        uses: actions/checkout@v4
+        with:
+          ref: barz-v0.6-phase1-storage
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Apply Phase 1 storage patch
+        run: node scripts/patch-barz-v060-phase1.mjs
+
+      - name: Verify Phase 1 markers
+        shell: bash
+        run: |
+          grep -F "indexedDB.open(DB_NAME,DB_VERSION)" barz/index.html
+          grep -F "TAKE_STORE='takes'" barz/index.html
+          grep -F "RECOVERY_STORE='recovery'" barz/index.html
+          grep -F "OUTBOX_STORE='outbox'" barz/index.html
+          grep -F "recoverPendingTakes()" barz/index.html
+          ! grep -F "indexedDB.open(DB_NAME,1)" barz/index.html
+
+      - name: Commit generated Barz Phase 1
+        shell: bash
+        run: |
+          if git diff --quiet -- barz/index.html; then
+            echo "No generated change"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add barz/index.html
+          git commit -m "feat(barz): implement v0.6 phase1 storage foundation"
+          git push origin HEAD:barz-v0.6-phase1-storage
