@@ -2,13 +2,14 @@
 'use strict';
 function setItems(el,items,cls){if(!el)return;el.innerHTML='';items.forEach(function(t){var d=document.createElement('div');d.className=cls;d.textContent=t;el.appendChild(d)})}
 function patchHome(){
-  var v=document.querySelector('.version');if(v)v.textContent='v1.6 · 2026.08.27';
+  var v=document.querySelector('.version');if(v)v.textContent='v1.7 · 2026.08.27';
   var grid=document.getElementById('urgeGrid');
   var food=document.querySelector('[data-id="sweets"]');
   if(food){var em=food.querySelector('.emoji'),b=food.querySelector('b'),s=food.querySelector('small');if(em)em.textContent='🍽️';if(b)b.textContent='食事';if(s)s.textContent='HALAL・お菓子・外食'}
   var anger=document.querySelector('[data-id="pork"]');
   if(anger){var ae=anger.querySelector('.emoji'),ab=anger.querySelector('b'),as=anger.querySelector('small');if(ae)ae.textContent='😤';if(ab)ab.textContent='怒り';if(as)as.textContent='言う前に止まる'}
   if(grid){grid.setAttribute('data-count','8');grid.querySelectorAll('.urge').forEach(function(card){card.classList.remove('faith')})}
+  var rw=document.querySelector('.recent-win');if(rw){var empty=rw.textContent.includes('まだログなし')||rw.textContent.includes('最初の1回');rw.style.display=empty?'none':''}
 }
 function patchFoodDetail(){
   var t=document.getElementById('title');if(!t||(!t.textContent.includes('お菓子')&&!t.textContent.includes('ジャンク食')&&!t.textContent.includes('食事')))return;
