@@ -34,7 +34,9 @@ jobs:
         run: node scripts/patch-barz-v060-phase1.mjs
 
       - name: Apply recovery race fix
-        run: node scripts/patch-barz-v060-phase1-racefix.mjs
+        run: |
+          node scripts/patch-barz-v060-phase1-racefix.mjs
+          node scripts/patch-barz-v060-phase1-racefix.mjs
 
       - name: Verify Phase 1 markers
         shell: bash
@@ -45,7 +47,9 @@ jobs:
           grep -F "OUTBOX_STORE='outbox'" barz/index.html
           grep -F "recoverPendingTakes()" barz/index.html
           grep -F "recoveryWriteChain=recoveryWriteChain.then(()=>stashRecoveryChunk(e.data))" barz/index.html
+          grep -F "recoveryWriteChain=beginRecoveryDraft(" barz/index.html
           grep -F "await recoveryWriteChain.catch(()=>{});await clearActiveRecovery()" barz/index.html
+          ! grep -F "recoveryWriteChain=recoveryWriteChain=beginRecoveryDraft(" barz/index.html
           ! grep -F "indexedDB.open(DB_NAME,1)" barz/index.html
 
       - name: Install IndexedDB test shim
@@ -64,5 +68,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add barz/index.html
-          git commit -m "fix(barz): serialize v0.6 phase1 recovery writes"
+          git commit -m "fix(barz): normalize v0.6 phase1 recovery chain"
           git push origin HEAD:barz-v0.6-phase1-storage
