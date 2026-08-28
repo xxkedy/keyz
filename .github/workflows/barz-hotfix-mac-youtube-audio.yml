@@ -1,0 +1,62 @@
+name: Barz hotfix Mac YouTube audio
+
+on:
+  push:
+    branches: [barz-hotfix-mac-youtube-audio-final]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch Barz
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('barz/index.html')
+          s = p.read_text(encoding='utf-8')
+
+          replacements = [
+              ('<small class="ver">v0.5.1 · 2026.08.26</small>', '<small class="ver">v0.5.2 · 2026.08.29</small>'),
+              ('<a class="find" id="findBeat" target="_blank" rel="noopener">🔎 YouTubeでBeatを探す</a>', '<a class="find" id="findBeat" target="_self">🔎 YouTubeでBeatを探す</a>'),
+              ("function openBeatSearch(){markBeatSearch();const w=window.open(findBeat.href,'_blank','noopener');if(!w)location.href=findBeat.href}", "function openBeatSearch(){markBeatSearch();location.href=findBeat.href}"),
+              ("if(!t.title)fetchMeta(t);try{player.playVideo()}catch(e){}t.plays=(Number(t.plays)||0)+1;", "if(!t.title)fetchMeta(t);claimBeatAudio();try{player.playVideo()}catch(e){}t.plays=(Number(t.plays)||0)+1;"),
+          ]
+          for old, new in replacements:
+              if old not in s:
+                  raise SystemExit('missing expected source: ' + old[:90])
+              s = s.replace(old, new, 1)
+
+          anchor = "function radioStop(keepBeat){radio.live=false;if(!keepBeat){try{if(player&&player.pauseVideo)player.pauseVideo()}catch(e){}}renderRadio()}"
+          audio_lock = """function radioStop(keepBeat){radio.live=false;if(!keepBeat){try{if(player&&player.pauseVideo)player.pauseVideo()}catch(e){}}renderRadio()}
+/* 同一originのBarzが複数タブで開いても、Beat音声は最後に再生した1タブだけにする。 */
+const AUDIO_OWNER_KEY='barz_audio_owner_v1',AUDIO_TAB_ID=(crypto&&crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random());
+function claimBeatAudio(){try{localStorage.setItem(AUDIO_OWNER_KEY,AUDIO_TAB_ID+':'+Date.now())}catch(e){}}
+window.addEventListener('storage',e=>{if(e.key!==AUDIO_OWNER_KEY||!e.newValue||e.newValue.indexOf(AUDIO_TAB_ID+':')===0)return;radio.live=false;try{if(player&&player.pauseVideo)player.pauseVideo()}catch(err){}renderRadio()});"""
+          if anchor not in s:
+              raise SystemExit('missing radioStop anchor')
+          s = s.replace(anchor, audio_lock, 1)
+
+          assert 'target="_blank" rel="noopener">🔎 YouTubeでBeatを探す' not in s
+          assert "window.open(findBeat.href,'_blank'" not in s
+          assert "claimBeatAudio();try{player.playVideo()}" in s
+          assert "AUDIO_OWNER_KEY='barz_audio_owner_v1'" in s
+          assert 'v0.5.2 · 2026.08.29' in s
+          p.write_text(s, encoding='utf-8')
+
+          wf = Path('.github/workflows/barz-hotfix-mac-youtube-audio.yml')
+          if wf.exists():
+              wf.unlink()
+      - name: Commit patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "fix(barz): prevent duplicate YouTube audio on Mac"
+          git push origin HEAD:barz-hotfix-mac-youtube-audio-final
