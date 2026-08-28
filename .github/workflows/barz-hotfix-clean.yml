@@ -1,0 +1,47 @@
+name: Barz clean YouTube audio hotfix
+
+on:
+  push:
+    branches: [barz-hotfix-youtube-audio-clean]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply byte-preserving patch
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('barz/index.html')
+          b = p.read_bytes()
+          sep = b'\r\n' if b'\r\n' in b else b'\n'
+          def rep(old, new):
+              global b
+              oldb = old.encode('utf-8')
+              newb = new.encode('utf-8')
+              if b.count(oldb) != 1:
+                  raise SystemExit(f'expected exactly one match: {old[:80]!r}, got {b.count(oldb)}')
+              b = b.replace(oldb, newb, 1)
+          rep('<small class="ver">v0.5.1 · 2026.08.26</small>', '<small class="ver">v0.5.2 · 2026.08.29</small>')
+          rep('<a class="find" id="findBeat" target="_blank" rel="noopener">🔎 YouTubeでBeatを探す</a>', '<a class="find" id="findBeat" target="_self">🔎 YouTubeでBeatを探す</a>')
+          rep("function openBeatSearch(){markBeatSearch();const w=window.open(findBeat.href,'_blank','noopener');if(!w)location.href=findBeat.href}", "function openBeatSearch(){markBeatSearch();location.href=findBeat.href}")
+          anchor = "function radioStop(keepBeat){radio.live=false;if(!keepBeat){try{if(player&&player.pauseVideo)player.pauseVideo()}catch(e){}}renderRadio()}"
+          extra = "\n/* 同一originのBarzが複数タブで開いても、Beat音声は最後に再生した1タブだけにする。 */\nconst AUDIO_OWNER_KEY='barz_audio_owner_v1',AUDIO_TAB_ID=(globalThis.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();\nfunction claimBeatAudio(){try{localStorage.setItem(AUDIO_OWNER_KEY,AUDIO_TAB_ID+':'+Date.now())}catch(e){}}\nwindow.addEventListener('storage',e=>{if(e.key!==AUDIO_OWNER_KEY||!e.newValue||e.newValue.indexOf(AUDIO_TAB_ID+':')===0)return;radio.live=false;try{if(player&&player.pauseVideo)player.pauseVideo()}catch(err){}renderRadio()});"
+          rep(anchor, anchor + extra.replace('\n', sep.decode()))
+          rep("function onYtState(e){if(recording){", "function onYtState(e){if(e.data===1)claimBeatAudio();if(recording){")
+          if (b'\r\n' in p.read_bytes()) != (b'\r\n' in b):
+              raise SystemExit('newline style changed')
+          p.write_bytes(b)
+          Path('.github/workflows/barz-hotfix-clean.yml').unlink()
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "fix(barz): prevent duplicate YouTube audio"
+          git push origin HEAD:barz-hotfix-youtube-audio-clean
