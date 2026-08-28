@@ -20,12 +20,13 @@ jobs:
           from pathlib import Path
           p = Path('barz/index.html')
           data = p.read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n')
+          assert b'\r\n' in data
+          assert b'\n' not in data.replace(b'\r\n', b'')
           p.write_bytes(data)
           Path('.github/workflows/barz-hotfix-restore-crlf.yml').unlink()
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git diff --cached --check
           git commit -m "chore(barz): preserve CRLF in hotfix"
           git push origin HEAD:barz-hotfix-mac-youtube-audio-final
