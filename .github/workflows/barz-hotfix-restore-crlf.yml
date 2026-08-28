@@ -1,0 +1,31 @@
+name: Barz hotfix restore CRLF
+
+on:
+  push:
+    branches: [barz-hotfix-mac-youtube-audio-final]
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore CRLF and self-delete
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('barz/index.html')
+          data = p.read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n')
+          p.write_bytes(data)
+          Path('.github/workflows/barz-hotfix-restore-crlf.yml').unlink()
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "chore(barz): preserve CRLF in hotfix"
+          git push origin HEAD:barz-hotfix-mac-youtube-audio-final
