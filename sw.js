@@ -1,4 +1,4 @@
-const C = 'keyz-v10';
+const C = 'keyz-v11';
 const ASSETS = ['./', './index.html', './manifest.json?v=20260718-3', './icon-192.png?v=20260718-3', './icon-512.png?v=20260718-3'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(C).then(c => c.addAll(ASSETS)));

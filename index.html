@@ -123,7 +123,7 @@
   <nav id="tabs"></nav>
 </header>
 <main id="view"></main>
-<footer>2026-08-06 ・ v2.7 ・ Keyz — ショートカット早見表</footer>
+<footer>2026-08-29 ・ v2.8 ・ Keyz — ショートカット早見表</footer>
 
 <script>
 const CAP={esc:'esc',prt:'PrtScn',minus:'-',hat:'^',yen:'¥',bs:'⌫',tab:'Tab',at:'@',lbr:'[',
@@ -188,7 +188,8 @@ const TABS=[
    ex:[{k:'1〜9',a:'その日数だけ表示'},{k:'?',a:'全ショートカット一覧'}]},
   {n:'⌘',map:{k:'ｺﾏﾝﾄﾞﾒﾆｭｰ'},ex:[{k:'⌘⇧ + . / , / 0',a:'拡大 / 縮小 / リセット'}]}
  ]},
- {id:'cubase',l:'🔴 Cubase',cat:'daw',os:'mac',note:'Mac基準。Winは ⌘→Ctrl・⌥→Alt に読み替え。',layers:[
+ {id:'cubase',l:'🔴 Cubase',cat:'daw',os:'mac',note:'Mac Cubase 12基準。REC操作は実機確認済み（2026-08-29）。Winは ⌘→Ctrl・⌥→Alt に読み替え。',layers:[
+  {n:'🎙 Mac REC操作',nokb:true,ex:[{k:'⌘R',a:'録音開始'},{k:'⌃Z',a:'Undo（既存⌘Zも維持）'},{k:'C',a:'メトロノーム'},{k:';',a:'1小節戻る'},{k:':',a:'1小節進む'},{k:'Space',a:'再生 / 停止'}]},
   {n:'素押し',plain:true,map:{space:'再生/停止',r:'録音待機','1':'選択','2':'範囲','3':'分割','6':'ズーム',q:'ｸｵﾝﾀｲｽﾞ',j:'スナップ',g:'横ズーム−',h:'横ズーム＋',p:'ロケーター',l:'選択範囲へ',f5:'MediaBay'},ex:[]},
   {n:'⌘',map:{k:'リピート複製',e:'エディター',z:'取消',s:'保存'},ex:[{k:'⌘⇧ + Z',a:'やり直し'}]},
   {n:'⇧/⌥/テンキー',nokb:true,ex:[{k:'⇧G / ⇧H',a:'縦ズーム − / ＋'},{k:'⌥X',a:'カーソル位置で分割'},{k:'テンキー *',a:'録音'},{k:'テンキー .',a:'頭に戻る'}]}
