@@ -1,5 +1,5 @@
-const CACHE='urgez-v2.3.0';
-const LOCAL=['./','./index.html','./manifest.json?v=1.0.0','./icon.svg','./v11.js?v=1.2.0','./v14-patch.js?v=2.3.0','./v20-details.js?v=2.3.0','./v21-nav.js?v=2.3.0','./v23-notes.js?v=2.3.0','./boot-v11.js?v=2.3.0'];
+const CACHE='urgez-v2.4.0';
+const LOCAL=['./','./index.html','./manifest.json?v=1.0.0','./icon.svg','./v11.js?v=1.2.0','./v14-patch.js?v=2.4.0','./v20-details.js?v=2.4.0','./v21-nav.js?v=2.3.0','./v23-notes.js?v=2.3.0','./boot-v11.js?v=2.3.0'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(LOCAL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('urgez-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 async function patched(response){if(!response)return response;const text=await response.text();const body=text.includes('boot-v11.js?v=2.3.0')?text:text.replace('</body>','<script src="./boot-v11.js?v=2.3.0"></script></body>');const headers=new Headers(response.headers);headers.set('content-type','text/html; charset=utf-8');return new Response(body,{status:response.status,statusText:response.statusText,headers});}
