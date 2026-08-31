@@ -2,7 +2,7 @@
 'use strict';
 function setText(el,text){if(el&&el.textContent!==text)el.textContent=text}
 function patchHome(){
-  setText(document.querySelector('.version'),'v2.3 · 2026.08.27');
+  setText(document.querySelector('.version'),'v2.4 · 2026.08.31');
   var grid=document.getElementById('urgeGrid');
   var food=document.querySelector('[data-id="sweets"]');
   if(food){setText(food.querySelector('.emoji'),'🍽️');setText(food.querySelector('b'),'食事');setText(food.querySelector('small'),'HALAL・お菓子・外食')}
