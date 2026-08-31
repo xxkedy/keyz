@@ -10,11 +10,11 @@ var D={
     ideal:['🕌 ハラルを自然に選べる','🍔 ジャンクは本当に食べたい1食だけ','📏 量と回数を自分で決めて終われる'],note:'HALAL＝健康食ではない。宗教上OKでも、爆食い・ジャンクの重ね食いはBODY側で止める。',stop:'🛡 今は別の物を選ぶ',allow:'✅ 2軸とも条件内｜食べてOK',did:'条件外で食べた'
   },
   tobacco:{
-    title:'🚬 タバコ',impact:'1本より、依存が日常に戻る方が嫌。',desc:'友達との特別な1日と、1人・買い置き・連日を分ける。目的は「一生1本も」より、常習へ戻さないこと。',faith:'Qur’an 7:200 · 欲望に自動で従わず、一度止まる',
-    groups:[{title:'👥 SPECIAL DAY',tone:'green',rows:[['👥','友達と一緒にいる特別な日だけ']]},{title:'🚫 DEPENDENCY LINE',tone:'red',rows:[['🧍','1人の時は吸わない'],['📦','自分用に買い置きしない'],['📅','翌日・連日へ持ち越さない']]}],ok:'✅ 今日だけで閉じられるなら個人ルール内',
-    why:[['🧠','また「吸いたい」に予定を決められたくない'],['🏠','1人で吸う習慣を作りたくない'],['👃','服・部屋・息に臭いを残したくない'],['🗣️','喉を荒らしたくない'],['💸','金を払って次の欲求を作りたくない']],
-    loss:['🚬 久々に吸う','🤢 「くそまずかった」','🔁 それでも次の欲求を作る'],lossNote:'Diaryに実際に残っている反省。嫌なのは味より、そこから普段の欲求へ戻ること。',
-    ideal:['👥 友達との特別な日だけ','🏠 普段・1人ではいらない','🧠 タバコに予定を決められない'],note:'条件内でも喫煙が健康上安全になるわけではない。これは常習化を防ぐ個人ルール。',stop:'🛡 今日は吸わない',allow:'✅ 友達と今日だけならOK',did:'条件外で吸った'
+    title:'🚬 タバコ',impact:'もう判断しない。VAPEも紙タバコも吸わない。',desc:'友達の日も含めて例外なし。2026-08-31から紙タバコも終了。吸いたくなった時だけここを開いてSTOPして終わる。',faith:'Qur’an 7:200 · 欲望に自動で従わず、一度止まる',
+    groups:[{title:'🚭 NICOTINE ZERO',tone:'red',rows:[['🚭','VAPEも紙タバコも吸わない'],['👥','友達と一緒でも例外なし']]},{title:'🚫 NO CARRY',tone:'red',rows:[['🛒','自分用に買わない'],['🤝','もらわない'],['📦','余りを持ち帰らない'],['✋','もし1本吸っても続けず、その場で止める']]}],
+    why:[['🧠','タバコのことを考える時間をなくしたい'],['🗣️','喉を荒らしたくない'],['👃','服・部屋・息に臭いを残したくない'],['💸','ニコチンに金を使いたくない'],['🔓','吸う予定に生活を決められたくない']],
+    loss:['👥 「友達の日だけOK」','📦 余りを持ち帰る','🚬 翌日1人でも吸う'],lossNote:'2026-08-31、1本吸った後に残り約10本を処分。友達の日だけOKという旧ルールを終了。',
+    ideal:['🧠 タバコのことを考えない生活','👥 友達の日も普通に吸わない','🚭 VAPEを買い直さない'],note:'VAPE卒業ライン：2026-08-15開始／ニコチン0ライン：2026-08-31開始／2026-10-02の誕生日を吸わない状態で迎える。',stop:'🚭 吸わないで終わり',did:'吸った → その場で止めて残りを処分'
   },
   sns:{
     title:'📱 SNS',impact:'目的なしで開いたら、時間だけ消える。',desc:'必要な投稿を見るSNSと、指が勝手に開くSNSは別。何を見るか言える時だけ使う。',faith:'Qur’an 7:200 · 注意を奪う誘惑にも一回止まる',
@@ -73,20 +73,20 @@ function render(){
   var id=infer(),d=id&&D[id];if(!d)return;
   var view=document.getElementById('detailView');if(!view||!view.classList.contains('active'))return;
   view.classList.add('v20-visual');
-  setText(document.querySelector('.version'),'v2.0 · 2026.08.27');
+  setText(document.querySelector('.version'),'v2.4 · 2026.08.31');
   setText(document.getElementById('title'),d.title);
   setText(view.querySelector('.impact-kicker'),'🚨 いま止める理由');
   setText(document.getElementById('impact'),d.impact);
   setText(document.getElementById('desc'),d.desc);
   setText(document.getElementById('faith'),d.faith);
-  var rules=document.getElementById('rules'),whys=document.getElementById('whys'),loss=document.getElementById('loss'),ideal=document.getElementById('ideal'),note=document.getElementById('note');
+  var rules=document.getElementById('rules'),whys=document.getElementById('whys'),loss=document.getElementById('loss'),ideal=document.getElementById('ideal'),note=document.getElementById('note'),allow=document.getElementById('allow');
   setHead(rules,'🧭 MY RULE｜先に決めた条件');setHTML(rules,renderGroups(d));
   setHead(whys,'🎯 WHY｜なんでやめたい？');setHTML(whys,renderWhy(d));
   setHead(loss,'🚨 REAL LOSS｜またこうなる？');setHTML(loss,renderLoss(d));
   setHead(ideal,'🌱 IDEAL｜こうなりたい');setHTML(ideal,renderIdeal(d));
   if(note){if(d.note){note.hidden=false;setText(note,d.note)}else note.hidden=true}
   setText(document.getElementById('stop'),d.stop);
-  if(d.allow)setText(document.getElementById('allow'),d.allow);
+  if(allow){if(d.allow){allow.hidden=false;setText(allow,d.allow)}else{allow.hidden=true}}
   setText(document.getElementById('did'),d.did);
 }
 function inject(){if(document.getElementById('v20-style'))return;var s=document.createElement('style');s.id='v20-style';s.textContent=`
