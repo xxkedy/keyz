@@ -1,9 +1,10 @@
 {
   "name": "Keyz",
   "short_name": "Keyz",
+  "id": "/keyz/",
   "description": "全ショートカット早見表（Mac / Win / 自作レイヤー / Notion / DAW / Razer）",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/keyz/",
+  "scope": "/keyz/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#0e1114",
