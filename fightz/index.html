@@ -21,7 +21,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 .gates{display:grid;gap:7px;margin-top:10px}.gate{display:flex;align-items:flex-start;gap:9px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);cursor:pointer}.gate input{margin-top:2px;accent-color:var(--green)}.gate span{font-size:11px;line-height:1.45}.levelup{width:100%;min-height:48px;margin-top:10px;border:1px solid rgba(95,227,161,.24);border-radius:13px;background:rgba(95,227,161,.09);color:var(--green);font-weight:950;cursor:pointer}.levelup:disabled{opacity:.34;cursor:not-allowed}
 .roadmap{display:grid;gap:6px}.road{display:flex;align-items:center;gap:9px;padding:8px 9px;border:1px solid var(--line);border-radius:11px;background:var(--panel2)}.road.done{opacity:.55}.road.now{border-color:rgba(255,93,93,.32);background:rgba(255,93,93,.07)}.road .num{width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#1d232c;font-size:9px;font-weight:900}.road b{font-size:10.5px}.road small{display:block;color:var(--dim);font-size:8px;margin-top:2px}
 .note{color:var(--dim);font-size:9px;line-height:1.55;margin:8px 2px 0}
-.overlay{position:fixed;inset:0;z-index:100;display:none;background:rgba(5,7,10,.94);backdrop-filter:blur(12px);padding:max(14px,env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom))}.overlay.open{display:flex}.session{width:min(680px,100%);margin:auto;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#0e1217;padding:18px}.session-top{display:flex;justify-content:space-between;gap:10px}.session-kicker{font-size:9px;color:var(--red);font-weight:900;letter-spacing:.1em}.session h2{margin:5px 0 0;font-size:23px}.close{width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:#171c23;color:var(--text);font-size:19px}.timer{font-size:72px;font-weight:950;letter-spacing:-4px;text-align:center;margin:24px 0 10px}.phase{text-align:center;font-size:18px;font-weight:900}.cue{text-align:center;color:var(--muted);font-size:11px;line-height:1.65;min-height:36px;margin-top:7px;white-space:pre-line}.session-progress{height:7px;background:#20262f;border-radius:999px;overflow:hidden;margin:18px 0}.session-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--amber))}.session-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}.session-buttons button{min-height:48px;border:1px solid var(--line);border-radius:13px;background:#171c23;color:var(--text);font-weight:900}.session-buttons .primary{border-color:rgba(255,93,93,.3);background:rgba(255,93,93,.1);color:#fff}.camera{display:none}
+.overlay{position:fixed;inset:0;z-index:100;display:none;background:rgba(5,7,10,.94);backdrop-filter:blur(12px);padding:max(14px,env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom))}.overlay.open{display:flex}.session{width:min(680px,100%);margin:auto;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#0e1217;padding:18px}.session-top{display:flex;justify-content:space-between;gap:10px}.session-kicker{font-size:9px;color:var(--red);font-weight:900;letter-spacing:.1em}.session h2{margin:5px 0 0;font-size:23px}.close{width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:#171c23;color:var(--text);font-size:19px}.lesson-box{margin-top:14px;padding:13px;border:1px solid rgba(82,217,255,.18);border-radius:15px;background:rgba(82,217,255,.055)}.lesson-box[hidden]{display:none}.lesson-kicker{font-size:8.5px;color:var(--cyan);font-weight:900;letter-spacing:.1em}.lesson-title{margin-top:4px;font-size:16px;font-weight:900}.lesson-steps{display:grid;gap:7px;margin-top:10px}.lesson-step{display:flex;gap:8px;color:var(--text);font-size:11px;line-height:1.5}.lesson-step b{flex:0 0 20px;color:var(--amber)}.lesson-video{display:flex;align-items:center;justify-content:center;min-height:42px;margin-top:11px;border:1px solid rgba(255,255,255,.12);border-radius:11px;background:#171c23;color:var(--text);font-size:10.5px;font-weight:900;text-decoration:none}.lesson-video[hidden]{display:none}.timer{font-size:58px;font-weight:950;letter-spacing:-3px;text-align:center;margin:18px 0 8px}.phase{text-align:center;font-size:17px;font-weight:900}.cue{text-align:center;color:var(--muted);font-size:10.5px;line-height:1.6;min-height:30px;margin-top:6px;white-space:pre-line}.session-progress{height:7px;background:#20262f;border-radius:999px;overflow:hidden;margin:18px 0}.session-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--amber))}.session-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}.session-buttons button{min-height:48px;border:1px solid var(--line);border-radius:13px;background:#171c23;color:var(--text);font-weight:900}.session-buttons .primary{border-color:rgba(255,93,93,.3);background:rgba(255,93,93,.1);color:#fff}.camera{display:none}
 .toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));z-index:150;transform:translateX(-50%) translateY(20px);opacity:0;padding:10px 13px;border:1px solid var(--line);border-radius:999px;background:#161c24;color:var(--text);font-size:10px;font-weight:850;transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(min-width:700px){body{padding:22px}.actions{grid-template-columns:repeat(4,1fr)}.action{min-height:105px}.video-grid{grid-template-columns:repeat(3,1fr)}.card{padding:18px}.hero h1{font-size:29px}}
 @media(max-width:360px){.timer{font-size:61px}.hero h1{font-size:21px}.action{min-height:78px;padding:10px}}
@@ -29,7 +29,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 </head>
 <body>
 <div class="top">
-  <div><div class="brand">Fight<span>z</span></div><div class="ver">v0.1.0 · 2026.09.06</div></div>
+  <div><div class="brand">Fight<span>z</span></div><div class="ver">v0.1.1 · 2026.09.06</div></div>
   <a class="gainz-link" href="https://xxkedy.github.io/gainz/">💪 Gainz</a>
 </div>
 
@@ -46,7 +46,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 
 <div class="section-head"><b>⚡ TODAY</b><span>技術 → 筋トレ → 余裕あればFlow</span></div>
 <div class="actions">
-  <button class="action quiet" id="quietBtn"><strong>🏠 Quiet 7m</strong><small>Gainz前。鏡＋マットで技術を覚える</small></button>
+  <button class="action quiet" id="quietBtn"><strong>🏠 Learn + Shadow</strong><small>初心者用。まず見て覚える → 1動作ずつ練習</small></button>
   <button class="action bag" id="bagBtn"><strong>🥊 Bag 30m</strong><small>週末1回。別府で当てる感覚を確認</small></button>
   <button class="action know" id="knowBtn"><strong>🧠 Know 5m</strong><small>身体・歴史・文化・Fight IQ</small></button>
   <button class="action review" id="reviewBtn"><strong>🎥 Review 30s</strong><small>全身を固定撮影して1点だけ直す</small></button>
@@ -82,6 +82,12 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 <div class="overlay" id="overlay" aria-hidden="true">
   <div class="session">
     <div class="session-top"><div><div class="session-kicker" id="sessionMode">SESSION</div><h2 id="sessionTitle">Fightz</h2></div><button class="close" id="closeBtn">×</button></div>
+    <div class="lesson-box" id="lessonBox">
+      <div class="lesson-kicker">BEGINNER GUIDE</div>
+      <div class="lesson-title" id="lessonTitle">まず型を確認</div>
+      <div class="lesson-steps" id="lessonSteps"></div>
+      <a class="lesson-video" id="lessonVideo" target="_blank" rel="noopener">▶ 解説動画を見る</a>
+    </div>
     <div class="timer" id="timer">2:00</div>
     <div class="phase" id="phase">準備</div>
     <div class="cue" id="cue"></div>
@@ -139,18 +145,27 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
     Array.prototype.forEach.call(document.querySelectorAll("[data-gate]"),function(cb){cb.addEventListener("change",function(){rec().checks[Number(cb.dataset.gate)]=cb.checked;save();render()})});
   }
 
-  var overlay=document.getElementById("overlay"),timerEl=document.getElementById("timer"),phaseEl=document.getElementById("phase"),cueEl=document.getElementById("cue"),barEl=document.getElementById("sessionBar"),pauseBtn=document.getElementById("pauseBtn"),nextBtn=document.getElementById("nextBtn");
+  var overlay=document.getElementById("overlay"),timerEl=document.getElementById("timer"),phaseEl=document.getElementById("phase"),cueEl=document.getElementById("cue"),barEl=document.getElementById("sessionBar"),pauseBtn=document.getElementById("pauseBtn"),nextBtn=document.getElementById("nextBtn"),lessonBox=document.getElementById("lessonBox"),lessonTitle=document.getElementById("lessonTitle"),lessonSteps=document.getElementById("lessonSteps"),lessonVideo=document.getElementById("lessonVideo");
   var state=null,iv=null;
   function speak(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang="ja-JP";u.rate=1.05;speechSynthesis.speak(u)}catch(e){}}
   function fmt(sec){sec=Math.max(0,Math.ceil(sec));return Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0")}
   function quietPlan(){
     var l=current();
+    if(data.level===1){
+      return [
+        {name:"R1｜構え・ガード",sec:120,cue:"最初はパンチしなくてOK。鏡で姿勢だけ反復。",title:"① まず立ち方を作る",steps:["右利き：左足を前、右足を後ろ。両足を一直線にせず少し左右へ開く","左手は頬〜目の高さ、右手は顎の横。肘は体の近く","顎を軽く引く。前へは左足→右足、後ろへは右足→左足。足を交差させない"],video:"https://www.youtube.com/watch?v=PLU3-tlD3y4"},
+        {name:"REST",sec:30,cue:"肩を脱力。水分。次はパンチを1個ずつ。"},
+        {name:"R2｜ジャブ・ストレート",sec:120,cue:"30秒ジャブだけ → 30秒ストレートだけ → 残りは交互。全力禁止。",title:"② パンチを1個ずつ覚える",steps:["ジャブ：左手をまっすぐ出して、すぐ同じ道で顔へ戻す。右手は顎の横に残す","ストレート：右手をまっすぐ。右腰と後ろ足が自然に少し回る。左手は顔を守る","どちらも『打つ』より『戻す』までを1回として練習"],video:"https://www.youtube.com/watch?v=nfpMcHt3viA"},
+        {name:"REST",sec:30,cue:"速くしなくていい。形が分からなくなったら動画へ戻る。"},
+        {name:"R3｜1-2＋小さい移動",sec:120,cue:"ゆっくり1-2 → 構えへ戻る → 小さく1歩。これだけ。",title:"③ 1-2をつないで終わる",steps:["ジャブ→ストレートをゆっくり。パンチの間に肩へ力を入れっぱなしにしない","2発終わったら両手を顔へ戻してから、小さく前か後ろへ1歩","今日は速さ・派手さ不要。鏡で『毎回同じ構えに戻る』ことだけ確認"],video:"https://www.youtube.com/watch?v=nfpMcHt3viA"}
+      ];
+    }
     return [
-      {name:"R1｜構え・ガード",sec:120,cue:"静かに動く。足幅・顎・手の位置を鏡で確認。"},
-      {name:"REST",sec:30,cue:"肩を脱力。次はジャブ／今のSkill。"},
-      {name:"R2｜"+l.name,sec:120,cue:l.focus[0]+"。速さより毎回同じ形。"},
+      {name:"R1｜構え・ガード",sec:120,cue:"既習の構えを静かに確認。",title:"構えをリセット",steps:["足幅とガードを揃える","小さく前後左右へ動く","今のSkillを入れる前に姿勢を安定"],video:l.videos[0]&&l.videos[0][2]},
+      {name:"REST",sec:30,cue:"肩を脱力。"},
+      {name:"R2｜"+l.name,sec:120,cue:l.focus[0]+"。速さより毎回同じ形。",title:"今日のSkill",steps:l.focus,video:l.videos[0]&&l.videos[0][2]},
       {name:"REST",sec:30,cue:"呼吸を整える。"},
-      {name:"R3｜FLOW",sec:120,cue:data.level===1?"ジャブ→ストレート→1-2＋小さい前後移動。":"今のSkillを既習技につないで、最後20秒だけ少し速く。"}
+      {name:"R3｜FLOW",sec:120,cue:"今のSkillを既習技につないで、最後20秒だけ少し速く。",title:"最後につなぐ",steps:["既習技→今日のSkill","攻撃後はガードか移動へ戻る","崩れたらすぐ速度を落とす"],video:l.videos[0]&&l.videos[0][2]}
     ];
   }
   function bagPlan(){
@@ -168,23 +183,52 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
   }
   function knowPlan(){var k=current().know;return [{name:"KNOW｜"+k[0],sec:300,cue:"① "+k[1]+"\n② "+k[2]+"\n③ "+k[3]}]}
   function reviewPlan(){return [{name:"30s REVIEW",sec:30,cue:"全身が入る位置。正面か斜め前。今のSkillを自然に動く。"}]}
+  function isRest(p){return p&&p.name==="REST"}
+  function preparePhase(autoStart){
+    if(!state)return;
+    var p=state.plan[state.i];
+    state.left=p.sec;
+    state.started=!!autoStart;
+    state.running=!!autoStart;
+    if(autoStart)speak(p.name);
+    updateSession();
+  }
   function openSession(mode,plan){
-    clearInterval(iv);state={mode:mode,plan:plan,i:0,left:plan[0].sec,running:true,total:plan.reduce(function(a,p){return a+p.sec},0),done:0};
+    clearInterval(iv);state={mode:mode,plan:plan,i:0,left:plan[0].sec,running:false,started:false,total:plan.reduce(function(a,p){return a+p.sec},0),done:0};
     document.getElementById("sessionMode").textContent=mode.toUpperCase();
     document.getElementById("sessionTitle").textContent=current().name;
-    overlay.classList.add("open");overlay.setAttribute("aria-hidden","false");pauseBtn.textContent="一時停止";updateSession();speak(plan[0].name);
+    overlay.classList.add("open");overlay.setAttribute("aria-hidden","false");
+    preparePhase(false);
     iv=setInterval(tick,250);
   }
   function updateSession(){
-    if(!state)return;var p=state.plan[state.i];timerEl.textContent=fmt(state.left);phaseEl.textContent=p.name;cueEl.textContent=p.cue;
+    if(!state)return;var p=state.plan[state.i];
+    timerEl.textContent=fmt(state.left);phaseEl.textContent=p.name;cueEl.textContent=p.cue;
+    var hasGuide=Array.isArray(p.steps)&&p.steps.length;
+    lessonBox.hidden=!hasGuide;
+    if(hasGuide){
+      lessonTitle.textContent=p.title||"このRoundでやること";
+      lessonSteps.innerHTML=p.steps.map(function(x,i){return '<div class="lesson-step"><b>'+(i+1)+'</b><span>'+esc(x)+'</span></div>'}).join("");
+      if(p.video){lessonVideo.hidden=false;lessonVideo.href=p.video}else{lessonVideo.hidden=true;lessonVideo.removeAttribute("href")}
+    }
     var elapsed=state.done+(p.sec-state.left);barEl.style.width=Math.min(100,elapsed/state.total*100)+"%";
-    nextBtn.textContent=state.i===state.plan.length-1?"完了":"次へ";
+    pauseBtn.disabled=!state.started;
+    pauseBtn.textContent=state.started?(state.running?"一時停止":"再開"):"まだ開始してない";
+    if(!state.started)nextBtn.textContent="▶ このRoundを開始";
+    else nextBtn.textContent=state.i===state.plan.length-1?"完了":"次へ";
   }
-  function tick(){if(!state||!state.running)return;state.left-=.25;if(state.left<=0){advance()}else updateSession()}
-  function advance(){
-    if(!state)return;var p=state.plan[state.i];state.done+=p.sec;
+  function tick(){if(!state||!state.running)return;state.left-=.25;if(state.left<=0){advance(true)}else updateSession()}
+  function advance(fromTimer){
+    if(!state)return;
+    var p=state.plan[state.i];
+    if(!state.started){
+      state.started=true;state.running=true;speak(p.name);updateSession();return;
+    }
+    state.done+=p.sec;
     if(state.i>=state.plan.length-1){finishSession();return}
-    state.i++;state.left=state.plan[state.i].sec;updateSession();speak(state.plan[state.i].name);
+    state.i++;
+    var next=state.plan[state.i];
+    preparePhase(isRest(next));
   }
   function finishSession(){
     clearInterval(iv);var mode=state.mode,r=rec();if(mode==="quiet"){r.quiet++;localStorage.setItem(LAST,dayKey())}else if(mode==="bag"){r.bag++}else if(mode==="know"){r.know++}data.total=(data.total||0)+1;save();
@@ -198,8 +242,8 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
   document.getElementById("reviewBtn").addEventListener("click",function(){document.getElementById("cameraInput").click();setTimeout(function(){openSession("review",reviewPlan())},250)});
   document.getElementById("cameraInput").addEventListener("change",function(){if(this.files&&this.files[0])toast("動画選択済み｜端末側で保存して比較")});
   document.getElementById("closeBtn").addEventListener("click",closeSession);
-  pauseBtn.addEventListener("click",function(){if(!state)return;state.running=!state.running;pauseBtn.textContent=state.running?"一時停止":"再開";if(state.running)speak("再開")});
-  nextBtn.addEventListener("click",advance);
+  pauseBtn.addEventListener("click",function(){if(!state||!state.started)return;state.running=!state.running;pauseBtn.textContent=state.running?"一時停止":"再開";if(state.running)speak("再開")});
+  nextBtn.addEventListener("click",function(){advance(false)});
   document.getElementById("levelUp").addEventListener("click",function(){if(this.disabled)return;if(data.level<12){data.level++;save();render();window.scrollTo({top:0,behavior:"smooth"});toast("LV "+data.level+" UNLOCKED")}});
   document.addEventListener("visibilitychange",function(){if(document.hidden&&state&&state.running){state.running=false;pauseBtn.textContent="再開"}});
   render();
