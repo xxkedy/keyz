@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d10">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fightz">
+<title>Fightz</title>
+<style>
+:root{--bg:#0b0d10;--panel:#12161c;--panel2:#0e1217;--line:rgba(255,255,255,.10);--text:#f5f7fb;--muted:#a8b0bd;--dim:#737d8d;--red:#ff5d5d;--amber:#ffb84a;--cyan:#52d9ff;--green:#5fe3a1}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif}body{max-width:760px;margin:auto;padding:max(12px,env(safe-area-inset-top)) 12px calc(18px + env(safe-area-inset-bottom));background:radial-gradient(circle at 85% 0,rgba(255,93,93,.10),transparent 28%),radial-gradient(circle at 8% 0,rgba(82,217,255,.07),transparent 24%),var(--bg)}
+button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.brand{font-size:31px;font-weight:950;letter-spacing:-1.4px}.brand span{color:var(--red)}.ver{font-size:8px;color:var(--dim);font-weight:850}.gainz-link{min-height:42px;padding:0 12px;border:1px solid rgba(95,227,161,.25);border-radius:999px;background:rgba(95,227,161,.08);color:var(--green);font-size:10px;font-weight:900;text-decoration:none;display:flex;align-items:center}
+.card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(14,18,23,.96));padding:14px;margin-top:10px}.hero{border-color:rgba(255,93,93,.25);background:linear-gradient(135deg,rgba(255,93,93,.12),rgba(18,22,28,.97) 62%)}.kicker{font-size:9px;color:var(--red);font-weight:900;letter-spacing:.12em}.hero-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-top:5px}.hero h1{margin:0;font-size:23px;line-height:1.15}.lv{flex:none;padding:6px 9px;border:1px solid rgba(255,184,74,.24);border-radius:999px;background:rgba(255,184,74,.08);color:var(--amber);font-size:10px;font-weight:900}.sub{margin-top:7px;color:var(--muted);font-size:11px;line-height:1.55}.bar{height:7px;border-radius:999px;background:#20262f;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;width:8.33%;background:linear-gradient(90deg,var(--red),var(--amber));border-radius:999px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}.stat{padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);text-align:center}.stat b{display:block;font-size:15px}.stat span{display:block;margin-top:2px;color:var(--dim);font-size:8px}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin:14px 2px 6px}.section-head b{font-size:10px;letter-spacing:.08em}.section-head span{font-size:8px;color:var(--dim)}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.action{min-height:84px;border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--text);text-align:left;padding:12px;cursor:pointer}.action strong{display:block;font-size:14px}.action small{display:block;margin-top:4px;color:var(--muted);font-size:9px;line-height:1.4}.action.quiet{border-color:rgba(82,217,255,.22)}.action.bag{border-color:rgba(255,93,93,.25)}.action.know{border-color:rgba(255,184,74,.24)}.action.review{border-color:rgba(95,227,161,.22)}
+.focus-list{display:grid;gap:6px;margin-top:10px}.focus{padding:9px 10px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);font-size:11px}.focus b{color:var(--amber)}
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.video{display:flex;flex-direction:column;justify-content:space-between;min-height:98px;padding:11px;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);text-decoration:none}.video .tag{font-size:8px;color:var(--cyan);font-weight:900;letter-spacing:.08em}.video b{margin-top:4px;font-size:11px;line-height:1.35}.video small{margin-top:8px;color:var(--dim);font-size:8.5px}.video.short{border-color:rgba(82,217,255,.18)}
+.know-title{font-size:17px;font-weight:900}.know-list{margin:9px 0 0;padding-left:18px;color:var(--muted);font-size:11px;line-height:1.65}
+.gates{display:grid;gap:7px;margin-top:10px}.gate{display:flex;align-items:flex-start;gap:9px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);cursor:pointer}.gate input{margin-top:2px;accent-color:var(--green)}.gate span{font-size:11px;line-height:1.45}.levelup{width:100%;min-height:48px;margin-top:10px;border:1px solid rgba(95,227,161,.24);border-radius:13px;background:rgba(95,227,161,.09);color:var(--green);font-weight:950;cursor:pointer}.levelup:disabled{opacity:.34;cursor:not-allowed}
+.roadmap{display:grid;gap:6px}.road{display:flex;align-items:center;gap:9px;padding:8px 9px;border:1px solid var(--line);border-radius:11px;background:var(--panel2)}.road.done{opacity:.55}.road.now{border-color:rgba(255,93,93,.32);background:rgba(255,93,93,.07)}.road .num{width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#1d232c;font-size:9px;font-weight:900}.road b{font-size:10.5px}.road small{display:block;color:var(--dim);font-size:8px;margin-top:2px}
+.note{color:var(--dim);font-size:9px;line-height:1.55;margin:8px 2px 0}
+.overlay{position:fixed;inset:0;z-index:100;display:none;background:rgba(5,7,10,.94);backdrop-filter:blur(12px);padding:max(14px,env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom))}.overlay.open{display:flex}.session{width:min(680px,100%);margin:auto;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#0e1217;padding:18px}.session-top{display:flex;justify-content:space-between;gap:10px}.session-kicker{font-size:9px;color:var(--red);font-weight:900;letter-spacing:.1em}.session h2{margin:5px 0 0;font-size:23px}.close{width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:#171c23;color:var(--text);font-size:19px}.timer{font-size:72px;font-weight:950;letter-spacing:-4px;text-align:center;margin:24px 0 10px}.phase{text-align:center;font-size:18px;font-weight:900}.cue{text-align:center;color:var(--muted);font-size:11px;line-height:1.55;min-height:36px;margin-top:7px}.session-progress{height:7px;background:#20262f;border-radius:999px;overflow:hidden;margin:18px 0}.session-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--amber))}.session-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}.session-buttons button{min-height:48px;border:1px solid var(--line);border-radius:13px;background:#171c23;color:var(--text);font-weight:900}.session-buttons .primary{border-color:rgba(255,93,93,.3);background:rgba(255,93,93,.1);color:#fff}.camera{display:none}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));z-index:150;transform:translateX(-50%) translateY(20px);opacity:0;padding:10px 13px;border:1px solid var(--line);border-radius:999px;background:#161c24;color:var(--text);font-size:10px;font-weight:850;transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:700px){body{padding:22px}.actions{grid-template-columns:repeat(4,1fr)}.action{min-height:105px}.video-grid{grid-template-columns:repeat(3,1fr)}.card{padding:18px}.hero h1{font-size:29px}}
+@media(max-width:360px){.timer{font-size:61px}.hero h1{font-size:21px}.action{min-height:78px;padding:10px}}
+</style>
+</head>
+<body>
+<div class="top">
+  <div><div class="brand">Fight<span>z</span></div><div class="ver">v0.1.0 · 2026.09.06</div></div>
+  <a class="gainz-link" href="https://xxkedy.github.io/gainz/">💪 Gainz</a>
+</div>
+
+<section class="card hero">
+  <div class="kicker">90 DAY SKILL ROADMAP</div>
+  <div class="hero-row"><div><h1 id="skillTitle">読み込み中…</h1><div class="sub" id="skillSub"></div></div><div class="lv" id="lvBadge">LV 1/12</div></div>
+  <div class="bar"><i id="levelBar"></i></div>
+  <div class="stats">
+    <div class="stat"><b id="shadowCount">0</b><span>QUIET / LV</span></div>
+    <div class="stat"><b id="bagCount">0</b><span>BAG / LV</span></div>
+    <div class="stat"><b id="totalCount">0</b><span>TOTAL SESSIONS</span></div>
+  </div>
+</section>
+
+<div class="section-head"><b>⚡ TODAY</b><span>技術 → 筋トレ → 余裕あればFlow</span></div>
+<div class="actions">
+  <button class="action quiet" id="quietBtn"><strong>🏠 Quiet 7m</strong><small>Gainz前。鏡＋マットで技術を覚える</small></button>
+  <button class="action bag" id="bagBtn"><strong>🥊 Bag 30m</strong><small>週末1回。別府で当てる感覚を確認</small></button>
+  <button class="action know" id="knowBtn"><strong>🧠 Know 5m</strong><small>身体・歴史・文化・Fight IQ</small></button>
+  <button class="action review" id="reviewBtn"><strong>🎥 Review 30s</strong><small>全身を固定撮影して1点だけ直す</small></button>
+</div>
+
+<section class="card">
+  <div class="kicker">CURRENT FOCUS</div>
+  <div class="focus-list" id="focusList"></div>
+</section>
+
+<div class="section-head"><b>🎬 FORM</b><span>本編で理解 → 短尺で再確認</span></div>
+<div class="video-grid" id="videoGrid"></div>
+
+<section class="card" id="knowCard">
+  <div class="kicker">🧠 KNOW THIS LEVEL</div>
+  <div class="know-title" id="knowTitle"></div>
+  <ul class="know-list" id="knowList"></ul>
+</section>
+
+<section class="card">
+  <div class="kicker">✅ LEVEL GATE</div>
+  <div class="sub">Quiet 2回＋Bag 1回＋下の3項目を満たしたら次へ。休んだ週はそのまま継続。</div>
+  <div class="gates" id="gateList"></div>
+  <button class="levelup" id="levelUp" disabled>条件を満たすと LV UP</button>
+</section>
+
+<div class="section-head"><b>🗺️ ROADMAP</b><span>12 Levels</span></div>
+<section class="card roadmap" id="roadmap"></section>
+<div class="note">※対人をしない設計。フォーム・スピード・体力・打撃感覚を積む。実際の相手への距離・タイミング・被弾反応は別スキルなので、街中の喧嘩を想定した危険な技術は扱わない。</div>
+
+<input class="camera" id="cameraInput" type="file" accept="video/*" capture="environment">
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="session">
+    <div class="session-top"><div><div class="session-kicker" id="sessionMode">SESSION</div><h2 id="sessionTitle">Fightz</h2></div><button class="close" id="closeBtn">×</button></div>
+    <div class="timer" id="timer">2:00</div>
+    <div class="phase" id="phase">準備</div>
+    <div class="cue" id="cue"></div>
+    <div class="session-progress"><i id="sessionBar"></i></div>
+    <div class="session-buttons"><button id="pauseBtn">一時停止</button><button class="primary" id="nextBtn">次へ</button></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var LEVELS=[
+    {name:"FOUNDATION",sub:"構え・ガード・前後ステップ・ジャブ・ストレート・1-2",focus:["構えを崩さない","打った手を顔へ戻す","足を交差させず小さく動く"],gates:["1分動いても足が交差しない","ジャブ／ストレート後に手が顔へ戻る","顎が上がり続けない"],know:["近代ボクシングの土台","19世紀後半にルールが整理され、グローブ・ラウンド制などが近代競技の形を作った。","構えは攻撃の形ではなく、攻撃と防御へすぐ移れる『戻る場所』。","最初は速さより再現性。毎回同じ位置へ戻れる方が後で速くなる。"],videos:[["🥇 SHADOW","京口紘人｜シャドーボクシング","https://www.youtube.com/watch?v=cRl38Who8Q0"],["🥇 JAB","京口紘人｜ジャブ","https://www.youtube.com/watch?v=HGPQw5CxUsQ"],["🥇 1-2","Tony Jeffries 日本語｜ワンツー","https://www.youtube.com/watch?v=nfpMcHt3viA"]],shortq:"ボクシング 初心者 ジャブ ストレート ワンツー shorts"},
+    {name:"FRONT KICK",sub:"土台を保ったまま前蹴りを追加",focus:["膝を先に上げる","蹴ったら同じ軌道で戻す","上体を倒しすぎない"],gates:["左右10回ずつバランスを崩さない","蹴った足を元の構えへ戻せる","パンチのガードが下がり続けない"],know:["力は床から伝わる","打撃は腕や脚だけでなく、床→脚→骨盤→体幹へ力を伝える連鎖で考える。","前蹴りは大きく振るより、膝を上げて直線的に出す。","体幹は固め続けるのでなく、必要な瞬間に安定させる。"],videos:[["🥊 BASIC","初心者｜前蹴りを検索","https://www.youtube.com/results?search_query=%E3%82%AD%E3%83%83%E3%82%AF%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E5%89%8D%E8%B9%B4%E3%82%8A+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"キックボクシング 前蹴り 初心者 shorts"},
+    {name:"HOOK",sub:"左右フック＋腰と足の回転",focus:["腕だけで振らない","肩・腰・足を一緒に回す","反対の手は顔を守る"],gates:["左右フックで軸が流れない","打った後に構えへ戻れる","大振りせず近い軌道で出せる"],know:["ボクシングのスタイル","アウトボクサー、プレッシャー型、カウンター型など、得意な距離と戦い方でスタイルが分かれる。","フックは直線パンチと違う角度を作れる。","自分の型を決める前に、基本を広く触る。"],videos:[["🥊 HOOK","初心者｜フックを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%95%E3%83%83%E3%82%AF+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング フック 初心者 shorts"},
+    {name:"DEFENSE",sub:"ガード・パリー・スリップ・距離を外す",focus:["攻撃後に顔を守る","小さく避ける","避けた後に位置を変える"],gates:["1-2後にガードが戻る","スリップで頭だけ大きく振らない","防御後に一歩動ける"],know:["防御は『避ける技』だけではない","距離、角度、ガード、足運びを合わせて相手の攻撃を受けにくい場所へ移る。","大きく避けるほど次の動作が遅れやすい。","攻撃後の位置まで考えるのがFight IQの入口。"],videos:[["🛡 DEFENSE","初心者｜ディフェンスを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%87%E3%82%A3%E3%83%95%E3%82%A7%E3%83%B3%E3%82%B9+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング ディフェンス スリップ パリー shorts"},
+    {name:"MIDDLE KICK",sub:"軸足ピボット＋腰を回してミドル",focus:["軸足を回す","腰から回転する","蹴ったら構えへ戻す"],gates:["左右10回で軸足が回る","上体だけ先に倒れない","蹴った後にバランスが残る"],know:["キックボクシングとムエタイ","似た技を使っても、競技ルール・採点・距離感・構えには違いがある。","ミドルは脚だけを振るより、軸足と骨盤の回転が重要。","ルールが違えば『良い動き』も変わる。"],videos:[["🥇 MIDDLE","魔裟斗｜ミドルキック100本","https://www.youtube.com/watch?v=s4kvXmp1-S0"],["🥇 BASIC","レグルス池袋｜超初心者ミドル","https://www.youtube.com/watch?v=6yr88Wojwd8"]],shortq:"ミドルキック 魔裟斗 shorts"},
+    {name:"STEP OUT",sub:"1-2→離れる／横へずれる",focus:["打った場所に残らない","前後だけでなく横も使う","足幅を保つ"],gates:["1-2後に毎回一歩動ける","横移動で足が交差しない","動いた後もガードが残る"],know:["距離は技より先にある","同じパンチでも届く距離・届かない距離がある。","足運びは攻撃を当てるためと、攻撃を受けないための両方に使う。","リングを見る時は拳より先に足を見ると理解が深まる。"],videos:[["👟 FOOTWORK","初心者｜フットワークを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%95%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング フットワーク 初心者 shorts"},
+    {name:"PUNCH → KICK",sub:"パンチから蹴りへ自然につなぐ",focus:["パンチ後の姿勢を残す","蹴るための足幅を保つ","急いで力まない"],gates:["1-2→前蹴りを止まらず出せる","1-2→ミドルで軸が流れない","最後までガードを意識できる"],know:["コンビネーションの意味","連打は数を増やすだけでなく、相手の反応を作って次を通す考え方。","リズムが全部同じだと読まれやすい。","シャドーでは相手の反応を想像してつなぐ。"],videos:[["🥊 COMBO","パンチ→キック基礎を検索","https://www.youtube.com/results?search_query=%E3%82%AD%E3%83%83%E3%82%AF%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%91%E3%83%B3%E3%83%81+%E3%82%AD%E3%83%83%E3%82%AF+%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"]],shortq:"キックボクシング コンビネーション shorts"},
+    {name:"ANGLE",sub:"ピボット／角度変更",focus:["正面に居続けない","小さく回る","回った後すぐ構える"],gates:["左右ピボットで足が揃わない","1-2→角度変更が止まらずできる","角度変更後も相手を正面に想定できる"],know:["リングの幾何学","前後だけでなく角度を変えると、攻撃と防御のラインが変わる。","ピボットは大きく回るより、小さく位置を変える練習から。","名選手を見る時は『打った後どこへ移動したか』を見る。"],videos:[["📐 ANGLE","ボクシング ピボットを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%94%E3%83%9C%E3%83%83%E3%83%88+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング ピボット 角度 shorts"},
+    {name:"HEAD MOVEMENT",sub:"小さい頭の移動＋反撃への復帰",focus:["腰から少し動く","目線を残す","避けた後に構えへ戻る"],gates:["左右スリップを小さくできる","目線が下へ落ちない","スリップ→1-2が自然につながる"],know:["フェイントと情報","フェイントは派手な動きではなく、相手の反応を見るための情報収集にもなる。","目線・肩・足の小さな変化もリズムを変える。","対人なしでは反応の読み合いは限定的なので、Shadowでは概念理解まで。"],videos:[["🧠 MOVEMENT","ヘッドムーブメントを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%98%E3%83%83%E3%83%89%E3%83%A0%E3%83%BC%E3%83%96%E3%83%A1%E3%83%B3%E3%83%88+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング スリップ ヘッドムーブメント shorts"},
+    {name:"COMBINATION",sub:"3〜4発＋防御＋移動",focus:["全部を全力で打たない","最後に防御か移動","呼吸を止めない"],gates:["3〜4発を力まず出せる","コンボ後に防御か移動を入れられる","2分間フォームが大崩れしない"],know:["採点と試合の見方","競技では有効打、攻勢、技術、防御など複数の要素からラウンドが評価される。","派手な連打だけが上手さではない。","試合を見る時は命中、位置、主導権の変化を見る。"],videos:[["⚡ COMBO","ボクシング コンビネーションを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング コンビネーション shorts"},
+    {name:"SPEED & RHYTHM",sub:"脱力→瞬間加速→すぐ戻す",focus:["肩を力ませない","速さより戻しを速く","リズムを変える"],gates:["30秒Speedでガードが崩れない","腕だけの連打にならない","呼吸しながら速度を上げられる"],know:["速い選手はずっと力んでいない","最大速度は、必要な瞬間だけ加速して再び脱力する能力と関係する。","疲労した状態で新しいフォームを覚えない。","筋力と技術速度は別物なので、GainzとFightzを分けて鍛える。"],videos:[["⚡ SPEED","シャドーボクシング スピードを検索","https://www.youtube.com/results?search_query=%E3%82%B7%E3%83%A3%E3%83%89%E3%83%BC%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89+%E8%84%B1%E5%8A%9B"]],shortq:"シャドーボクシング スピード 脱力 shorts"},
+    {name:"FLOW",sub:"3分×3Rを自分で組み立てる",focus:["攻撃→防御→移動","パンチと蹴りを選ぶ","最後30秒だけSpeed"],gates:["3分×3Rをフォーム維持","攻撃後に毎回止まらない","最後30秒Speedでも足・腰・ガードが残る"],know:["90日後の見方","上達は『速くなった』だけでなく、同じ動作を疲れても再現できるかで見る。","最初の30秒動画と比較して、構え・戻し・足・速度・流れを見る。","対人スキルは別領域。必要になった時だけ安全な指導環境で追加する。"],videos:[["🥇 SHADOW","京口紘人｜シャドーボクシング","https://www.youtube.com/watch?v=cRl38Who8Q0"]],shortq:"シャドーボクシング 上級 スピード shorts"}
+  ];
+
+  var KEY="fightz.v01.progress", LAST="fightz.v01.lastQuietDate";
+  function dayKey(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+  function load(){try{var x=JSON.parse(localStorage.getItem(KEY)||"{}");return x&&typeof x==="object"?x:{}}catch(e){return {}}}
+  var data=load();if(!data.level)data.level=1;if(!data.levels)data.levels={};if(!data.total)data.total=0;
+  function rec(){var k=String(data.level);if(!data.levels[k])data.levels[k]={quiet:0,bag:0,know:0,checks:[false,false,false]};return data.levels[k]}
+  function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+  function toast(t){var e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(function(){e.classList.remove("show")},1800)}
+  function current(){return LEVELS[Math.min(LEVELS.length,Math.max(1,data.level))-1]}
+  function render(){
+    var l=current(),r=rec(),idx=data.level;
+    document.getElementById("skillTitle").textContent=l.name;
+    document.getElementById("skillSub").textContent=l.sub;
+    document.getElementById("lvBadge").textContent="LV "+idx+"/12";
+    document.getElementById("levelBar").style.width=(idx/12*100)+"%";
+    document.getElementById("shadowCount").textContent=r.quiet;
+    document.getElementById("bagCount").textContent=r.bag;
+    document.getElementById("totalCount").textContent=data.total||0;
+    document.getElementById("focusList").innerHTML=l.focus.map(function(x,i){return '<div class="focus"><b>'+String(i+1).padStart(2,"0")+'</b> · '+esc(x)+'</div>'}).join("");
+    var vids=l.videos.slice();
+    vids.push(["⚡ SHORT FORM","YouTube Shorts｜このSkill","https://www.youtube.com/results?search_query="+encodeURIComponent(l.shortq)]);
+    document.getElementById("videoGrid").innerHTML=vids.map(function(v){return '<a class="video'+(v[0].indexOf("SHORT")>=0?' short':'')+'" href="'+v[2]+'" target="_blank" rel="noopener"><span class="tag">'+esc(v[0])+'</span><b>'+esc(v[1])+'</b><small>開いてフォーム確認 ↗</small></a>'}).join("");
+    document.getElementById("knowTitle").textContent=l.know[0];
+    document.getElementById("knowList").innerHTML=l.know.slice(1).map(function(x){return "<li>"+esc(x)+"</li>"}).join("");
+    document.getElementById("gateList").innerHTML=l.gates.map(function(x,i){return '<label class="gate"><input type="checkbox" data-gate="'+i+'" '+(r.checks[i]?'checked':'')+'><span>'+esc(x)+'</span></label>'}).join("");
+    var ready=r.quiet>=2&&r.bag>=1&&r.checks.every(Boolean);
+    var up=document.getElementById("levelUp");up.disabled=!ready||data.level>=12;up.textContent=data.level>=12?"LV 12 完了条件を維持":ready?"LV "+(data.level+1)+" へ進む":"Quiet 2回 + Bag 1回 + Gate 3つ";
+    document.getElementById("roadmap").innerHTML=LEVELS.map(function(x,i){var n=i+1,cls=n<data.level?"done":n===data.level?"now":"";return '<div class="road '+cls+'"><div class="num">'+(n<data.level?'✓':n)+'</div><div><b>'+esc(x.name)+'</b><small>'+esc(x.sub)+'</small></div></div>'}).join("");
+    Array.prototype.forEach.call(document.querySelectorAll("[data-gate]"),function(cb){cb.addEventListener("change",function(){rec().checks[Number(cb.dataset.gate)]=cb.checked;save();render()})});
+  }
+
+  var overlay=document.getElementById("overlay"),timerEl=document.getElementById("timer"),phaseEl=document.getElementById("phase"),cueEl=document.getElementById("cue"),barEl=document.getElementById("sessionBar"),pauseBtn=document.getElementById("pauseBtn"),nextBtn=document.getElementById("nextBtn");
+  var state=null,iv=null;
+  function speak(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang="ja-JP";u.rate=1.05;speechSynthesis.speak(u)}catch(e){}}
+  function fmt(sec){sec=Math.max(0,Math.ceil(sec));return Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0")}
+  function quietPlan(){
+    var l=current();
+    return [
+      {name:"R1｜構え・ガード",sec:120,cue:"静かに動く。足幅・顎・手の位置を鏡で確認。"},
+      {name:"REST",sec:30,cue:"肩を脱力。次はジャブ／今のSkill。"},
+      {name:"R2｜"+l.name,sec:120,cue:l.focus[0]+"。速さより毎回同じ形。"},
+      {name:"REST",sec:30,cue:"呼吸を整える。"},
+      {name:"R3｜FLOW",sec:120,cue:data.level===1?"ジャブ→ストレート→1-2＋小さい前後移動。":"今のSkillを既習技につないで、最後20秒だけ少し速く。"}
+    ];
+  }
+  function bagPlan(){
+    var l=current(),basic=data.level===1?"ジャブ／ストレート／1-2だけ。蹴りなし。":"今のSkill："+l.name+"。強打よりフォーム。";
+    return [
+      {name:"WARM UP",sec:240,cue:"軽いShadow＋足運び。バンテージ・グローブを確認。"},
+      {name:"R1｜TECHNIQUE",sec:180,cue:basic},{name:"REST",sec:60,cue:"力を抜く。"},
+      {name:"R2｜TECHNIQUE",sec:180,cue:l.focus[0]},{name:"REST",sec:60,cue:"距離を取り直す。"},
+      {name:"R3｜MOVE",sec:180,cue:"打った後に一歩動く。止まらない。"},{name:"REST",sec:60,cue:"呼吸。"},
+      {name:"R4｜BASIC FLOW",sec:180,cue:"既習技だけ。50〜60%パワー。"},{name:"REST",sec:60,cue:"フォーム優先。"},
+      {name:"R5｜CONTROL",sec:180,cue:"当てる位置・戻し・バランスを揃える。"},{name:"REST",sec:60,cue:"最後のRound。"},
+      {name:"R6｜FLOW",sec:180,cue:"最後30秒だけSpeed。力み始めたら落とす。"},
+      {name:"REVIEW / COOL",sec:180,cue:"30秒撮影→今日直す1点だけ決める。"}
+    ];
+  }
+  function knowPlan(){return [{name:"KNOW｜"+current().know[0],sec:300,cue:"下のKNOWカードを読みながら5分。要点は3つだけ。"}]}
+  function reviewPlan(){return [{name:"30s REVIEW",sec:30,cue:"全身が入る位置。正面か斜め前。今のSkillを自然に動く。"}]}
+  function openSession(mode,plan){
+    clearInterval(iv);state={mode:mode,plan:plan,i:0,left:plan[0].sec,running:true,total:plan.reduce(function(a,p){return a+p.sec},0),done:0};
+    document.getElementById("sessionMode").textContent=mode.toUpperCase();
+    document.getElementById("sessionTitle").textContent=current().name;
+    overlay.classList.add("open");overlay.setAttribute("aria-hidden","false");pauseBtn.textContent="一時停止";updateSession();speak(plan[0].name);
+    iv=setInterval(tick,250);
+  }
+  function updateSession(){
+    if(!state)return;var p=state.plan[state.i];timerEl.textContent=fmt(state.left);phaseEl.textContent=p.name;cueEl.textContent=p.cue;
+    var elapsed=state.done+(p.sec-state.left);barEl.style.width=Math.min(100,elapsed/state.total*100)+"%";
+    nextBtn.textContent=state.i===state.plan.length-1?"完了":"次へ";
+  }
+  function tick(){if(!state||!state.running)return;state.left-=.25;if(state.left<=0){advance()}else updateSession()}
+  function advance(){
+    if(!state)return;var p=state.plan[state.i];state.done+=p.sec;
+    if(state.i>=state.plan.length-1){finishSession();return}
+    state.i++;state.left=state.plan[state.i].sec;updateSession();speak(state.plan[state.i].name);
+  }
+  function finishSession(){
+    clearInterval(iv);var mode=state.mode,r=rec();if(mode==="quiet"){r.quiet++;localStorage.setItem(LAST,dayKey())}else if(mode==="bag"){r.bag++}else if(mode==="know"){r.know++}data.total=(data.total||0)+1;save();
+    state=null;overlay.classList.remove("open");overlay.setAttribute("aria-hidden","true");render();
+    if(mode==="quiet"){toast("Quiet完了 ✓　このあとGainzへ");if(new URLSearchParams(location.search).get("from")==="gainz"){setTimeout(function(){location.href="https://xxkedy.github.io/gainz/"},900)}}else if(mode==="review"){toast("Review完了。直す点は1つだけ")}else toast("Session完了 ✓");
+  }
+  function closeSession(){clearInterval(iv);state=null;overlay.classList.remove("open");overlay.setAttribute("aria-hidden","true")}
+  document.getElementById("quietBtn").addEventListener("click",function(){openSession("quiet",quietPlan())});
+  document.getElementById("bagBtn").addEventListener("click",function(){openSession("bag",bagPlan())});
+  document.getElementById("knowBtn").addEventListener("click",function(){document.getElementById("knowCard").scrollIntoView({behavior:"smooth",block:"center"});setTimeout(function(){openSession("know",knowPlan())},350)});
+  document.getElementById("reviewBtn").addEventListener("click",function(){document.getElementById("cameraInput").click();setTimeout(function(){openSession("review",reviewPlan())},250)});
+  document.getElementById("cameraInput").addEventListener("change",function(){if(this.files&&this.files[0])toast("動画選択済み｜端末側で保存して比較")});
+  document.getElementById("closeBtn").addEventListener("click",closeSession);
+  pauseBtn.addEventListener("click",function(){if(!state)return;state.running=!state.running;pauseBtn.textContent=state.running?"一時停止":"再開";if(state.running)speak("再開")});
+  nextBtn.addEventListener("click",advance);
+  document.getElementById("levelUp").addEventListener("click",function(){if(this.disabled)return;if(data.level<12){data.level++;save();render();window.scrollTo({top:0,behavior:"smooth"});toast("LV "+data.level+" UNLOCKED")}});
+  document.addEventListener("visibilitychange",function(){if(document.hidden&&state&&state.running){state.running=false;pauseBtn.textContent="再開"}});
+  render();
+})();
+</script>
+</body>
+</html>
