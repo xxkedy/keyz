@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#0b0d10">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Fightz">
-<title>Fightz</title>
+<meta name="apple-mobile-web-app-title" content="Strikez">
+<title>Strikez</title>
 <style>
 :root{--bg:#0b0d10;--panel:#12161c;--panel2:#0e1217;--line:rgba(255,255,255,.10);--text:#f5f7fb;--muted:#a8b0bd;--dim:#737d8d;--red:#ff5d5d;--amber:#ffb84a;--cyan:#52d9ff;--green:#5fe3a1}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif}body{max-width:760px;margin:auto;padding:max(12px,env(safe-area-inset-top)) 12px calc(18px + env(safe-area-inset-bottom));background:radial-gradient(circle at 85% 0,rgba(255,93,93,.10),transparent 28%),radial-gradient(circle at 8% 0,rgba(82,217,255,.07),transparent 24%),var(--bg)}
@@ -81,7 +81,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 
 <div class="overlay" id="overlay" aria-hidden="true">
   <div class="session">
-    <div class="session-top"><div><div class="session-kicker" id="sessionMode">SESSION</div><h2 id="sessionTitle">Fightz</h2></div><button class="close" id="closeBtn">×</button></div>
+    <div class="session-top"><div><div class="session-kicker" id="sessionMode">SESSION</div><h2 id="sessionTitle">Strikez</h2></div><button class="close" id="closeBtn">×</button></div>
     <div class="lesson-box" id="lessonBox">
       <div class="lesson-kicker">BEGINNER GUIDE</div>
       <div class="lesson-title" id="lessonTitle">まず型を確認</div>
@@ -110,7 +110,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
     {name:"ANGLE",sub:"ピボット／角度変更",focus:["正面に居続けない","小さく回る","回った後すぐ構える"],gates:["左右ピボットで足が揃わない","1-2→角度変更が止まらずできる","角度変更後も相手を正面に想定できる"],know:["リングの幾何学","前後だけでなく角度を変えると、攻撃と防御のラインが変わる。","ピボットは大きく回るより、小さく位置を変える練習から。","名選手を見る時は『打った後どこへ移動したか』を見る。"],videos:[["📐 ANGLE","ボクシング ピボットを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%94%E3%83%9C%E3%83%83%E3%83%88+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング ピボット 角度 shorts"},
     {name:"HEAD MOVEMENT",sub:"小さい頭の移動＋反撃への復帰",focus:["腰から少し動く","目線を残す","避けた後に構えへ戻る"],gates:["左右スリップを小さくできる","目線が下へ落ちない","スリップ→1-2が自然につながる"],know:["フェイントと情報","フェイントは派手な動きではなく、相手の反応を見るための情報収集にもなる。","目線・肩・足の小さな変化もリズムを変える。","対人なしでは反応の読み合いは限定的なので、Shadowでは概念理解まで。"],videos:[["🧠 MOVEMENT","ヘッドムーブメントを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%98%E3%83%83%E3%83%89%E3%83%A0%E3%83%BC%E3%83%96%E3%83%A1%E3%83%B3%E3%83%88+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング スリップ ヘッドムーブメント shorts"},
     {name:"COMBINATION",sub:"3〜4発＋防御＋移動",focus:["全部を全力で打たない","最後に防御か移動","呼吸を止めない"],gates:["3〜4発を力まず出せる","コンボ後に防御か移動を入れられる","2分間フォームが大崩れしない"],know:["採点と試合の見方","競技では有効打、攻勢、技術、防御など複数の要素からラウンドが評価される。","派手な連打だけが上手さではない。","試合を見る時は命中、位置、主導権の変化を見る。"],videos:[["⚡ COMBO","ボクシング コンビネーションを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング コンビネーション shorts"},
-    {name:"SPEED & RHYTHM",sub:"脱力→瞬間加速→すぐ戻す",focus:["肩を力ませない","速さより戻しを速く","リズムを変える"],gates:["30秒Speedでガードが崩れない","腕だけの連打にならない","呼吸しながら速度を上げられる"],know:["速い選手はずっと力んでいない","最大速度は、必要な瞬間だけ加速して再び脱力する能力と関係する。","疲労した状態で新しいフォームを覚えない。","筋力と技術速度は別物なので、GainzとFightzを分けて鍛える。"],videos:[["⚡ SPEED","シャドーボクシング スピードを検索","https://www.youtube.com/results?search_query=%E3%82%B7%E3%83%A3%E3%83%89%E3%83%BC%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89+%E8%84%B1%E5%8A%9B"]],shortq:"シャドーボクシング スピード 脱力 shorts"},
+    {name:"SPEED & RHYTHM",sub:"脱力→瞬間加速→すぐ戻す",focus:["肩を力ませない","速さより戻しを速く","リズムを変える"],gates:["30秒Speedでガードが崩れない","腕だけの連打にならない","呼吸しながら速度を上げられる"],know:["速い選手はずっと力んでいない","最大速度は、必要な瞬間だけ加速して再び脱力する能力と関係する。","疲労した状態で新しいフォームを覚えない。","筋力と技術速度は別物なので、GainzとStrikezを分けて鍛える。"],videos:[["⚡ SPEED","シャドーボクシング スピードを検索","https://www.youtube.com/results?search_query=%E3%82%B7%E3%83%A3%E3%83%89%E3%83%BC%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89+%E8%84%B1%E5%8A%9B"]],shortq:"シャドーボクシング スピード 脱力 shorts"},
     {name:"FLOW",sub:"3分×3Rを自分で組み立てる",focus:["攻撃→防御→移動","パンチと蹴りを選ぶ","最後30秒だけSpeed"],gates:["3分×3Rをフォーム維持","攻撃後に毎回止まらない","最後30秒Speedでも足・腰・ガードが残る"],know:["90日後の見方","上達は『速くなった』だけでなく、同じ動作を疲れても再現できるかで見る。","最初の30秒動画と比較して、構え・戻し・足・速度・流れを見る。","対人スキルは別領域。必要になった時だけ安全な指導環境で追加する。"],videos:[["🥇 SHADOW","京口紘人｜シャドーボクシング","https://www.youtube.com/watch?v=cRl38Who8Q0"]],shortq:"シャドーボクシング 上級 スピード shorts"}
   ];
 
