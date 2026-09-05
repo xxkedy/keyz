@@ -29,7 +29,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 </head>
 <body>
 <div class="top">
-  <div><div class="brand">Fight<span>z</span></div><div class="ver">v0.1.1 · 2026.09.06</div></div>
+  <div><div class="brand">Fight<span>z</span></div><div class="ver">v0.1.2 · 2026.09.06</div></div>
   <a class="gainz-link" href="https://xxkedy.github.io/gainz/">💪 Gainz</a>
 </div>
 
@@ -46,7 +46,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 
 <div class="section-head"><b>⚡ TODAY</b><span>技術 → 筋トレ → 余裕あればFlow</span></div>
 <div class="actions">
-  <button class="action quiet" id="quietBtn"><strong>🏠 Learn + Shadow</strong><small>初心者用。まず見て覚える → 1動作ずつ練習</small></button>
+  <button class="action quiet" id="quietBtn"><strong>🏠 Learn + Shadow 5m</strong><small>初心者用。見て真似る → 3×90秒。Gainz前の標準</small></button>
   <button class="action bag" id="bagBtn"><strong>🥊 Bag 30m</strong><small>週末1回。別府で当てる感覚を確認</small></button>
   <button class="action know" id="knowBtn"><strong>🧠 Know 5m</strong><small>身体・歴史・文化・Fight IQ</small></button>
   <button class="action review" id="reviewBtn"><strong>🎥 Review 30s</strong><small>全身を固定撮影して1点だけ直す</small></button>
@@ -147,25 +147,24 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 
   var overlay=document.getElementById("overlay"),timerEl=document.getElementById("timer"),phaseEl=document.getElementById("phase"),cueEl=document.getElementById("cue"),barEl=document.getElementById("sessionBar"),pauseBtn=document.getElementById("pauseBtn"),nextBtn=document.getElementById("nextBtn"),lessonBox=document.getElementById("lessonBox"),lessonTitle=document.getElementById("lessonTitle"),lessonSteps=document.getElementById("lessonSteps"),lessonVideo=document.getElementById("lessonVideo");
   var state=null,iv=null;
-  function speak(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang="ja-JP";u.rate=1.05;speechSynthesis.speak(u)}catch(e){}}
   function fmt(sec){sec=Math.max(0,Math.ceil(sec));return Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0")}
   function quietPlan(){
     var l=current();
     if(data.level===1){
       return [
-        {name:"R1｜構え・ガード",sec:120,cue:"最初はパンチしなくてOK。鏡で姿勢だけ反復。",title:"① まず立ち方を作る",steps:["右利き：左足を前、右足を後ろ。両足を一直線にせず少し左右へ開く","左手は頬〜目の高さ、右手は顎の横。肘は体の近く","顎を軽く引く。前へは左足→右足、後ろへは右足→左足。足を交差させない"],video:"https://www.youtube.com/watch?v=PLU3-tlD3y4"},
-        {name:"REST",sec:30,cue:"肩を脱力。水分。次はパンチを1個ずつ。"},
-        {name:"R2｜ジャブ・ストレート",sec:120,cue:"30秒ジャブだけ → 30秒ストレートだけ → 残りは交互。全力禁止。",title:"② パンチを1個ずつ覚える",steps:["ジャブ：左手をまっすぐ出して、すぐ同じ道で顔へ戻す。右手は顎の横に残す","ストレート：右手をまっすぐ。右腰と後ろ足が自然に少し回る。左手は顔を守る","どちらも『打つ』より『戻す』までを1回として練習"],video:"https://www.youtube.com/watch?v=nfpMcHt3viA"},
-        {name:"REST",sec:30,cue:"速くしなくていい。形が分からなくなったら動画へ戻る。"},
-        {name:"R3｜1-2＋小さい移動",sec:120,cue:"ゆっくり1-2 → 構えへ戻る → 小さく1歩。これだけ。",title:"③ 1-2をつないで終わる",steps:["ジャブ→ストレートをゆっくり。パンチの間に肩へ力を入れっぱなしにしない","2発終わったら両手を顔へ戻してから、小さく前か後ろへ1歩","今日は速さ・派手さ不要。鏡で『毎回同じ構えに戻る』ことだけ確認"],video:"https://www.youtube.com/watch?v=nfpMcHt3viA"}
+        {name:"R1｜構え・ガード",sec:90,cue:"最初はパンチしなくてOK。鏡で姿勢だけ反復。",title:"① まず立ち方を作る",steps:["右利き：左足を前、右足を後ろ。両足を一直線にせず少し左右へ開く","左手は頬〜目の高さ、右手は顎の横。肘は体の近く","顎を軽く引く。前へは左足→右足、後ろへは右足→左足。足を交差させない"],video:"https://www.youtube.com/watch?v=PLU3-tlD3y4"},
+        {name:"REST",sec:15,cue:"肩を脱力。次はパンチを1個ずつ。"},
+        {name:"R2｜ジャブ・ストレート",sec:90,cue:"30秒ジャブだけ → 30秒ストレートだけ → 残りは交互。全力禁止。",title:"② パンチを1個ずつ覚える",steps:["ジャブ：左手をまっすぐ出して、すぐ同じ道で顔へ戻す。右手は顎の横に残す","ストレート：右手をまっすぐ。右腰と後ろ足が自然に少し回る。左手は顔を守る","どちらも『打つ』より『戻す』までを1回として練習"],video:"https://www.youtube.com/watch?v=nfpMcHt3viA"},
+        {name:"REST",sec:15,cue:"速くしなくていい。形が分からなくなったら動画へ戻る。"},
+        {name:"R3｜1-2＋小さい移動",sec:90,cue:"ゆっくり1-2 → 構えへ戻る → 小さく1歩。これだけ。",title:"③ 1-2をつないで終わる",steps:["ジャブ→ストレートをゆっくり。パンチの間に肩へ力を入れっぱなしにしない","2発終わったら両手を顔へ戻してから、小さく前か後ろへ1歩","今日は速さ・派手さ不要。鏡で『毎回同じ構えに戻る』ことだけ確認"],video:"https://www.youtube.com/watch?v=nfpMcHt3viA"}
       ];
     }
     return [
-      {name:"R1｜構え・ガード",sec:120,cue:"既習の構えを静かに確認。",title:"構えをリセット",steps:["足幅とガードを揃える","小さく前後左右へ動く","今のSkillを入れる前に姿勢を安定"],video:l.videos[0]&&l.videos[0][2]},
-      {name:"REST",sec:30,cue:"肩を脱力。"},
-      {name:"R2｜"+l.name,sec:120,cue:l.focus[0]+"。速さより毎回同じ形。",title:"今日のSkill",steps:l.focus,video:l.videos[0]&&l.videos[0][2]},
-      {name:"REST",sec:30,cue:"呼吸を整える。"},
-      {name:"R3｜FLOW",sec:120,cue:"今のSkillを既習技につないで、最後20秒だけ少し速く。",title:"最後につなぐ",steps:["既習技→今日のSkill","攻撃後はガードか移動へ戻る","崩れたらすぐ速度を落とす"],video:l.videos[0]&&l.videos[0][2]}
+      {name:"R1｜構え・ガード",sec:90,cue:"既習の構えを静かに確認。",title:"構えをリセット",steps:["足幅とガードを揃える","小さく前後左右へ動く","今のSkillを入れる前に姿勢を安定"],video:l.videos[0]&&l.videos[0][2]},
+      {name:"REST",sec:15,cue:"肩を脱力。"},
+      {name:"R2｜"+l.name,sec:90,cue:l.focus[0]+"。速さより毎回同じ形。",title:"今日のSkill",steps:l.focus,video:l.videos[0]&&l.videos[0][2]},
+      {name:"REST",sec:15,cue:"呼吸を整える。"},
+      {name:"R3｜FLOW",sec:90,cue:"今のSkillを既習技につないで、最後20秒だけ少し速く。",title:"最後につなぐ",steps:["既習技→今日のSkill","攻撃後はガードか移動へ戻る","崩れたらすぐ速度を落とす"],video:l.videos[0]&&l.videos[0][2]}
     ];
   }
   function bagPlan(){
@@ -190,7 +189,6 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
     state.left=p.sec;
     state.started=!!autoStart;
     state.running=!!autoStart;
-    if(autoStart)speak(p.name);
     updateSession();
   }
   function openSession(mode,plan){
@@ -222,7 +220,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
     if(!state)return;
     var p=state.plan[state.i];
     if(!state.started){
-      state.started=true;state.running=true;speak(p.name);updateSession();return;
+      state.started=true;state.running=true;updateSession();return;
     }
     state.done+=p.sec;
     if(state.i>=state.plan.length-1){finishSession();return}
@@ -242,7 +240,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
   document.getElementById("reviewBtn").addEventListener("click",function(){document.getElementById("cameraInput").click();setTimeout(function(){openSession("review",reviewPlan())},250)});
   document.getElementById("cameraInput").addEventListener("change",function(){if(this.files&&this.files[0])toast("動画選択済み｜端末側で保存して比較")});
   document.getElementById("closeBtn").addEventListener("click",closeSession);
-  pauseBtn.addEventListener("click",function(){if(!state||!state.started)return;state.running=!state.running;pauseBtn.textContent=state.running?"一時停止":"再開";if(state.running)speak("再開")});
+  pauseBtn.addEventListener("click",function(){if(!state||!state.started)return;state.running=!state.running;pauseBtn.textContent=state.running?"一時停止":"再開"});
   nextBtn.addEventListener("click",function(){advance(false)});
   document.getElementById("levelUp").addEventListener("click",function(){if(this.disabled)return;if(data.level<12){data.level++;save();render();window.scrollTo({top:0,behavior:"smooth"});toast("LV "+data.level+" UNLOCKED")}});
   document.addEventListener("visibilitychange",function(){if(document.hidden&&state&&state.running){state.running=false;pauseBtn.textContent="再開"}});
