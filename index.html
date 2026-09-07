@@ -123,7 +123,7 @@
   <nav id="tabs"></nav>
 </header>
 <main id="view"></main>
-<footer>2026-08-29 ・ v2.8 ・ Keyz — ショートカット早見表</footer>
+<footer>2026-09-07 ・ v2.9 ・ Keyz — ショートカット早見表</footer>
 
 <script>
 const CAP={esc:'esc',prt:'PrtScn',minus:'-',hat:'^',yen:'¥',bs:'⌫',tab:'Tab',at:'@',lbr:'[',
@@ -233,7 +233,8 @@ TABS.forEach(t=>{
 
 const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},
           set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
-let active=ls.get('keyz_tab')||'mac';
+const requestedTab=new URLSearchParams(location.search).get('tab');
+let active=TABS.some(t=>t.id===requestedTab)?requestedTab:(ls.get('keyz_tab')||'mac');
 if(!TABS.some(t=>t.id===active))active='mac';
 let layerIdx=0,query='';
 
