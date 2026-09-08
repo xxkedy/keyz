@@ -107,7 +107,8 @@ if ($DryRun) {
 
 try {
     # No arguments are passed on purpose: open the app only, never a project file.
-    Start-Process -FilePath $exe -WorkingDirectory (Split-Path -LiteralPath $exe -Parent) | Out-Null
+    $workingDirectory = [System.IO.Path]::GetDirectoryName($exe)
+    Start-Process -FilePath $exe -WorkingDirectory $workingDirectory | Out-Null
     Write-Log ("launched {0}" -f $exe)
     exit 0
 } catch {
