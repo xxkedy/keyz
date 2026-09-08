@@ -29,7 +29,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 </head>
 <body>
 <div class="top">
-  <div><div class="brand">Fight<span>z</span></div><div class="ver">v0.1.2 · 2026.09.06</div></div>
+  <div><div class="brand">Fight<span>z</span></div><div class="ver">v0.1.3 · 2026.09.08</div></div>
   <a class="gainz-link" href="https://xxkedy.github.io/gainz/">💪 Gainz</a>
 </div>
 
@@ -57,7 +57,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
   <div class="focus-list" id="focusList"></div>
 </section>
 
-<div class="section-head"><b>🎬 FORM</b><span>本編で理解 → 短尺で再確認</span></div>
+<div class="section-head"><b>🎬 FORM</b><span>日本語・実績・再生数を優先</span></div>
 <div class="video-grid" id="videoGrid"></div>
 
 <section class="card" id="knowCard">
@@ -86,7 +86,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
       <div class="lesson-kicker">BEGINNER GUIDE</div>
       <div class="lesson-title" id="lessonTitle">まず型を確認</div>
       <div class="lesson-steps" id="lessonSteps"></div>
-      <a class="lesson-video" id="lessonVideo" target="_blank" rel="noopener">▶ 解説動画を見る</a>
+      <a class="lesson-video" id="lessonVideo" target="_blank" rel="noopener">▶ 日本語の解説動画を見る</a>
     </div>
     <div class="timer" id="timer">2:00</div>
     <div class="phase" id="phase">準備</div>
@@ -100,7 +100,7 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
 <script>
 (function(){
   var LEVELS=[
-    {name:"FOUNDATION",sub:"構え・ガード・前後ステップ・ジャブ・ストレート・1-2",focus:["構えを崩さない","打った手を顔へ戻す","足を交差させず小さく動く"],gates:["1分動いても足が交差しない","ジャブ／ストレート後に手が顔へ戻る","顎が上がり続けない"],know:["近代ボクシングの土台","19世紀後半にルールが整理され、グローブ・ラウンド制などが近代競技の形を作った。","構えは攻撃の形ではなく、攻撃と防御へすぐ移れる『戻る場所』。","最初は速さより再現性。毎回同じ位置へ戻れる方が後で速くなる。"],videos:[["🥇 SHADOW","京口紘人｜シャドーボクシング","https://www.youtube.com/watch?v=cRl38Who8Q0"],["🥇 JAB","京口紘人｜ジャブ","https://www.youtube.com/watch?v=HGPQw5CxUsQ"],["🥇 1-2","Tony Jeffries 日本語｜ワンツー","https://www.youtube.com/watch?v=nfpMcHt3viA"]],shortq:"ボクシング 初心者 ジャブ ストレート ワンツー shorts"},
+    {name:"FOUNDATION",sub:"構え・ガード・前後ステップ・ジャブ・ストレート・1-2",focus:["構えを崩さない","打った手を顔へ戻す","足を交差させず小さく動く"],gates:["1分動いても足が交差しない","ジャブ／ストレート後に手が顔へ戻る","顎が上がり続けない"],know:["近代ボクシングの土台","19世紀後半にルールが整理され、グローブ・ラウンド制などが近代競技の形を作った。","構えは攻撃の形ではなく、攻撃と防御へすぐ移れる『戻る場所』。","最初は速さより再現性。毎回同じ位置へ戻れる方が後で速くなる。"],videos:[["🥇 SHADOW｜26万+","京口紘人｜シャドーボクシング","https://www.youtube.com/watch?v=cRl38Who8Q0"],["🥇 JAB・1-2｜32万+","元東洋太平洋王者｜ジャブとワンツー","https://www.youtube.com/watch?v=T0dnez-VG9U"]],shortq:"ボクシング 初心者 ジャブ ストレート ワンツー 日本語 shorts"},
     {name:"FRONT KICK",sub:"土台を保ったまま前蹴りを追加",focus:["膝を先に上げる","蹴ったら同じ軌道で戻す","上体を倒しすぎない"],gates:["左右10回ずつバランスを崩さない","蹴った足を元の構えへ戻せる","パンチのガードが下がり続けない"],know:["力は床から伝わる","打撃は腕や脚だけでなく、床→脚→骨盤→体幹へ力を伝える連鎖で考える。","前蹴りは大きく振るより、膝を上げて直線的に出す。","体幹は固め続けるのでなく、必要な瞬間に安定させる。"],videos:[["🥊 BASIC","初心者｜前蹴りを検索","https://www.youtube.com/results?search_query=%E3%82%AD%E3%83%83%E3%82%AF%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E5%89%8D%E8%B9%B4%E3%82%8A+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"キックボクシング 前蹴り 初心者 shorts"},
     {name:"HOOK",sub:"左右フック＋腰と足の回転",focus:["腕だけで振らない","肩・腰・足を一緒に回す","反対の手は顔を守る"],gates:["左右フックで軸が流れない","打った後に構えへ戻れる","大振りせず近い軌道で出せる"],know:["ボクシングのスタイル","アウトボクサー、プレッシャー型、カウンター型など、得意な距離と戦い方でスタイルが分かれる。","フックは直線パンチと違う角度を作れる。","自分の型を決める前に、基本を広く触る。"],videos:[["🥊 HOOK","初心者｜フックを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%95%E3%83%83%E3%82%AF+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング フック 初心者 shorts"},
     {name:"DEFENSE",sub:"ガード・パリー・スリップ・距離を外す",focus:["攻撃後に顔を守る","小さく避ける","避けた後に位置を変える"],gates:["1-2後にガードが戻る","スリップで頭だけ大きく振らない","防御後に一歩動ける"],know:["防御は『避ける技』だけではない","距離、角度、ガード、足運びを合わせて相手の攻撃を受けにくい場所へ移る。","大きく避けるほど次の動作が遅れやすい。","攻撃後の位置まで考えるのがFight IQの入口。"],videos:[["🛡 DEFENSE","初心者｜ディフェンスを検索","https://www.youtube.com/results?search_query=%E3%83%9C%E3%82%AF%E3%82%B7%E3%83%B3%E3%82%B0+%E3%83%87%E3%82%A3%E3%83%95%E3%82%A7%E3%83%B3%E3%82%B9+%E5%88%9D%E5%BF%83%E8%80%85"]],shortq:"ボクシング ディフェンス スリップ パリー shorts"},
@@ -152,11 +152,11 @@ button,a{font:inherit}.top{display:flex;align-items:center;justify-content:space
     var l=current();
     if(data.level===1){
       return [
-        {name:"R1｜構え・ガード",sec:90,cue:"最初はパンチしなくてOK。鏡で姿勢だけ反復。",title:"① まず立ち方を作る",steps:["右利き：左足を前、右足を後ろ。両足を一直線にせず少し左右へ開く","左手は頬〜目の高さ、右手は顎の横。肘は体の近く","顎を軽く引く。前へは左足→右足、後ろへは右足→左足。足を交差させない"],video:"https://www.youtube.com/watch?v=PLU3-tlD3y4"},
+        {name:"R1｜構え・ガード",sec:90,cue:"最初はパンチしなくてOK。鏡で姿勢だけ反復。",title:"① まず立ち方を作る",steps:["右利き：左足を前、右足を後ろ。両足を一直線にせず少し左右へ開く","左手は頬〜目の高さ、右手は顎の横。肘は体の近く","顎を軽く引く。前へは左足→右足、後ろへは右足→左足。足を交差させない"],video:"https://www.youtube.com/watch?v=cRl38Who8Q0"},
         {name:"REST",sec:15,cue:"肩を脱力。次はパンチを1個ずつ。"},
-        {name:"R2｜ジャブ・ストレート",sec:90,cue:"30秒ジャブだけ → 30秒ストレートだけ → 残りは交互。全力禁止。",title:"② パンチを1個ずつ覚える",steps:["ジャブ：左手をまっすぐ出して、すぐ同じ道で顔へ戻す。右手は顎の横に残す","ストレート：右手をまっすぐ。右腰と後ろ足が自然に少し回る。左手は顔を守る","どちらも『打つ』より『戻す』までを1回として練習"],video:"https://www.youtube.com/watch?v=nfpMcHt3viA"},
+        {name:"R2｜ジャブ・ストレート",sec:90,cue:"30秒ジャブだけ → 30秒ストレートだけ → 残りは交互。全力禁止。",title:"② パンチを1個ずつ覚える",steps:["ジャブ：左手をまっすぐ出して、すぐ同じ道で顔へ戻す。右手は顎の横に残す","ストレート：右手をまっすぐ。右腰と後ろ足が自然に少し回る。左手は顔を守る","どちらも『打つ』より『戻す』までを1回として練習"],video:"https://www.youtube.com/watch?v=T0dnez-VG9U"},
         {name:"REST",sec:15,cue:"速くしなくていい。形が分からなくなったら動画へ戻る。"},
-        {name:"R3｜1-2＋小さい移動",sec:90,cue:"ゆっくり1-2 → 構えへ戻る → 小さく1歩。これだけ。",title:"③ 1-2をつないで終わる",steps:["ジャブ→ストレートをゆっくり。パンチの間に肩へ力を入れっぱなしにしない","2発終わったら両手を顔へ戻してから、小さく前か後ろへ1歩","今日は速さ・派手さ不要。鏡で『毎回同じ構えに戻る』ことだけ確認"],video:"https://www.youtube.com/watch?v=nfpMcHt3viA"}
+        {name:"R3｜1-2＋小さい移動",sec:90,cue:"ゆっくり1-2 → 構えへ戻る → 小さく1歩。これだけ。",title:"③ 1-2をつないで終わる",steps:["ジャブ→ストレートをゆっくり。パンチの間に肩へ力を入れっぱなしにしない","2発終わったら両手を顔へ戻してから、小さく前か後ろへ1歩","今日は速さ・派手さ不要。鏡で『毎回同じ構えに戻る』ことだけ確認"],video:"https://www.youtube.com/watch?v=T0dnez-VG9U"}
       ];
     }
     return [
