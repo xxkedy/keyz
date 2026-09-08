@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Appz">
-<link rel="manifest" href="./manifest.json?v=20260904-1">
+<link rel="manifest" href="./manifest.json?v=20260908-1">
 <link rel="apple-touch-icon" href="./icon-180.png?v=20260729-1">
 <link rel="icon" href="./icon-192.png?v=20260729-1">
 <title>Appz</title>
@@ -39,13 +39,16 @@ footer{text-align:center;color:#465161;font-size:7px;margin-top:8px;letter-spaci
 .now-section .head{margin-top:0;margin-bottom:0}dialog{max-width:480px;width:calc(100% - 24px);border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:18px;font-size:13px;line-height:1.6}dialog::backdrop{background:rgba(0,0,0,.75)}.dialog-head{display:flex;justify-content:space-between;align-items:center}.setup-option{display:flex;align-items:center;gap:8px;min-height:44px}#deviceNote{color:var(--muted);font-size:11px}
 @media(max-width:699px){.apps{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.app{min-height:59px}.app b{font-size:10px}.start small{display:block;font-size:9px;color:var(--muted)}.start{min-height:92px}.now-title{font-size:18px}#sessionTime{font-size:22px}}
 @media(min-width:700px){.start b{font-size:18px}.mode-card .start{min-height:116px}}
+.launch-row{display:flex;align-items:center;gap:8px;min-height:44px;border-top:1px solid var(--line)}.launch-row:first-of-type{border-top:0}.launch-row b{flex:0 0 74px;font-size:11px}.launch-row .st{font-size:9.5px;font-weight:900;letter-spacing:.6px}.launch-row .st.ok{color:var(--green)}.launch-row .st.no{color:var(--amber)}.launch-row label{display:flex;align-items:center;gap:6px;margin-left:auto;font-size:10.5px;color:var(--muted);min-height:44px}.launch-row .here{font-size:8px;color:var(--dim);letter-spacing:.6px}
+.launch-note{margin:8px 0 0;font-size:10.5px;color:var(--muted);line-height:1.55}.launch-note code{font-size:10px;color:var(--cyan)}
+.setup-link{white-space:nowrap;font-size:9.5px;font-weight:850;letter-spacing:.4px}
 </style>
 </head>
 <body>
-<header><div class="brand">App<span>z</span></div><div class="header-right"><div class="version">v11.0 · 2026.09.07</div></div></header>
+<header><div class="brand">App<span>z</span></div><div class="header-right"><div class="version">v11.1 · 2026.09.08</div></div></header>
 
 <section class="now-section" id="nowSection" aria-label="Current session">
-<div class="head"><b>NOW</b><button class="setup-link" id="setupBtn">Mac起動設定</button></div>
+<div class="head"><b>NOW</b><button class="setup-link" id="setupBtn">DAW LAUNCH</button></div>
 <div class="now" id="nowCard"><div class="now-top"><div><div class="now-title" id="nowTitle">READY</div><div class="session-detail" id="nowDetail">REC / BEAT / MIX を選ぶ</div></div><output id="sessionTime" aria-label="経過時間" hidden>00:00:00</output></div>
 <div class="session-actions" id="sessionActions" hidden><button class="resume" id="resumeBtn">▶ RESUME</button><button class="resume end" id="endBtn">■ END</button></div></div>
 <p class="status" id="status" role="status"></p>
@@ -53,12 +56,14 @@ footer{text-align:center;color:#465161;font-size:7px;margin-top:8px;letter-spaci
 <div class="head"><b>⚡ START</b><span>制作を始める</span></div>
 <div class="start-grid">
 <div class="mode-card rec"><button class="start rec" type="button" data-mode="REC"><span class="start-icon">🎙️</span><b>START REC</b><small>Cubase / Vocal</small></button><button class="mode-key" data-keyz-tab="cubase">Cubase Keyz ↗</button></div><div class="mode-card beat"><button class="start beat" type="button" data-mode="BEAT"><span class="start-icon">🎹</span><b>START BEAT</b><small>FL Studio / Quick Beat Make</small></button><button class="mode-key" data-keyz-tab="fl">FL Keyz ↗</button></div><div class="mode-card mix"><button class="start mix" type="button" data-mode="MIX"><span class="start-icon">🎚️</span><b>START MIX</b><small>Cubase / Mix & Master</small></button><button class="mode-key" data-keyz-tab="cubase">Cubase Keyz ↗</button></div></div>
-<dialog id="launchSetup"><form method="dialog"><div class="dialog-head"><b>Mac起動設定</b><button class="resume" value="close">閉じる</button></div>
-<p>Macの「ショートカット」で下の3つを作成。各アクションは「アプリを開く」だけ。</p>
-<ul><li><b>Appz REC</b> → Cubase 12</li><li><b>Appz BEAT</b> → FL Studio 2026</li><li><b>Appz MIX</b> → Cubase 12</li></ul>
-<p>同名で保存してから有効にする。START / RESUMEでアプリを開く。録音開始やプロジェクト保存はDAW内で操作。</p>
-<label class="setup-option"><input type="checkbox" id="launchEnabled"> このMacでショートカットを作成済み</label>
-<p id="deviceNote">iPhoneではSessionのみ開始。Macへの遠隔起動・端末間同期はなし。</p>
+<dialog id="launchSetup"><form method="dialog"><div class="dialog-head"><b>DAW LAUNCH</b><button class="resume" value="close">閉じる</button></div>
+<div class="launch-row"><b>🍎 Mac</b><span class="st no" id="macState">SETUP</span><span class="here" id="macHere" hidden>THIS</span><label><input type="checkbox" id="macEnabled"> 設定済み</label></div>
+<div class="launch-row"><b>🪟 Windows</b><span class="st no" id="winState">SETUP</span><span class="here" id="winHere" hidden>THIS</span><label><input type="checkbox" id="winEnabled"> 設定済み</label></div>
+<p class="launch-note">REC → Cubase 12 ／ BEAT → FL Studio ／ MIX → Cubase 12<br>
+🍎 ショートカット <b>Appz REC / Appz BEAT / Appz MIX</b> を作成（アクションは「アプリを開く」だけ）。<br>
+🪟 <code>appz/launcher/appz-setup.ps1</code> を1回実行して <code>appz://</code> を登録。<br>
+📱 iPhoneはSessionのみ開始。遠隔起動・端末間同期はなし。</p>
+<p id="deviceNote"></p>
 <button class="resume" id="sessionOnly" type="button">Sessionのみ開始</button></form></dialog>
 
 <div class="head"><b>⌨️ QUICK KEYZ</b><span>Kで開く</span></div>
@@ -103,34 +108,50 @@ footer{text-align:center;color:#465161;font-size:7px;margin-top:8px;letter-spaci
   function rememberTool(el){var item={name:el.dataset.name||el.textContent.trim(),emoji:el.dataset.emoji||'↗',href:el.href,at:Date.now()},items=[];try{items=JSON.parse(read(KEYS.recent,'[]'));if(!Array.isArray(items))items=[]}catch(e){items=[]}items=items.filter(function(x){return x&&x.href!==item.href});items.unshift(item);write(KEYS.recent,JSON.stringify(items.slice(0,3)));renderRecent()}
   function renderRecent(){var box=document.getElementById('recentGrid');if(!box)return;var items=[];try{items=JSON.parse(read(KEYS.recent,'[]'));if(!Array.isArray(items))items=[]}catch(e){items=[]}if(!items.length){box.innerHTML='<div class="recent-item"><span class="emoji">↗️</span><span class="recent-copy"><b>まだ履歴なし</b><small>Appを開くとここに3件出る</small></span></div>';return}box.innerHTML=items.slice(0,3).map(function(x){var mins=Math.max(0,Math.floor((Date.now()-Number(x.at||Date.now()))/60000)),when=mins<1?'たった今':mins<60?mins+'分前':Math.floor(mins/60)+'時間前';return '<a class="recent-item" href="'+String(x.href).replace(/"/g,'&quot;')+'"><span class="emoji">'+(x.emoji||'↗️')+'</span><span class="recent-copy"><b>'+String(x.name||'App')+'</b><small>'+when+'</small></span></a>'}).join('')}
   var MODES={REC:{icon:'🎙️',app:'Cubase / Vocal',color:'var(--orange)'},BEAT:{icon:'🎹',app:'FL Studio / Quick Beat Make',color:'var(--amber)'},MIX:{icon:'🎚️',app:'Cubase / Mix & Master',color:'var(--cyan)'}};
-  var setup=document.getElementById('launchSetup'),enabled=document.getElementById('launchEnabled'),pendingMode=null;
-  var isMac=/Mac/.test(navigator.platform)&&!(/iPhone|iPad|iPod/.test(navigator.userAgent))&&navigator.maxTouchPoints<2;
+  var setup=document.getElementById('launchSetup'),pendingMode=null;
+  var OS=(function(){var ua=navigator.userAgent||'',pf=(navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||'';
+    if(/iPhone|iPad|iPod/.test(ua)||(/Mac/i.test(pf)&&navigator.maxTouchPoints>1))return 'ios';
+    if(/Android/i.test(ua))return 'android';
+    if(/Mac/i.test(pf)||/Mac OS X/.test(ua))return 'mac';
+    if(/Win/i.test(pf)||/Windows/.test(ua))return 'win';
+    return 'other'})();
+  var ADAPTERS={
+    mac:{label:'Mac',key:'appz_mac_launch_v11',el:'mac',url:function(mode){return 'shortcuts://run-shortcut?name='+encodeURIComponent('Appz '+mode)}},
+    win:{label:'Windows',key:'appz_win_launch_v11',el:'win',url:function(mode){return 'appz://'+mode.toLowerCase()}}
+  };
+  var adapter=ADAPTERS[OS]||null;
+  function adapterReady(a){return !!a&&read(a.key,'')==='1'}
+  function launchDAW(mode){if(!MODES[mode])return false;if(!adapterReady(adapter))return false;location.href=adapter.url(mode);return true}
   var session=loadSession();
   function loadSession(){try{var s=JSON.parse(read(SESSION_KEY,'null'));return s&&MODES[s.mode]&&Number.isFinite(s.startedAt)&&s.startedAt>0&&s.startedAt<=Date.now()&&Number.isFinite(s.elapsed)&&s.elapsed>=0&&typeof s.running==='boolean'?s:null}catch(e){return null}}
   function status(text){document.getElementById('status').textContent=text}
   function saveSession(){if(!write(SESSION_KEY,session?JSON.stringify(session):null))status('保存できません。この画面を閉じるとSessionが失われます。')}
   function renderSession(){var mode=session&&MODES[session.mode];document.getElementById('nowTitle').textContent=mode?mode.icon+' '+session.mode+' MODE':'READY';document.getElementById('nowDetail').textContent=mode?mode.app:'REC / BEAT / MIX を選ぶ';document.getElementById('sessionActions').hidden=!session;var time=document.getElementById('sessionTime');time.hidden=!session;document.getElementById('nowCard').classList.toggle('active',!!session);document.getElementById('nowCard').style.setProperty('--session-color',mode?mode.color:'var(--line)');if(session){var seconds=Math.floor((session.elapsed+(session.running?Math.max(0,Date.now()-session.startedAt):0))/1000);time.textContent=[Math.floor(seconds/3600),Math.floor(seconds/60)%60,seconds%60].map(n=>String(n).padStart(2,'0')).join(':')}}
-  function startSession(mode,launch){if(session&&session.mode!==mode&&!confirm(session.mode+' Sessionを終了して'+mode+'を開始しますか？'))return;status('');if(!session||session.mode!==mode)session={mode:mode,startedAt:Date.now(),elapsed:0,running:true,lastAction:'start'};else{if(!session.running){session.startedAt=Date.now();session.running=true}session.lastAction='resume'}saveSession();renderSession();if(launch){session.lastAction='launch-request';saveSession();status('起動をリクエストしました。開かない場合はMac起動設定を確認。');location.href='shortcuts://run-shortcut?name='+encodeURIComponent('Appz '+mode)}}
-  function requestStart(mode){if(isMac&&read('appz_mac_launch_v11','')==='1'){startSession(mode,true)}else if(isMac){pendingMode=mode;showSetup()}else{startSession(mode,false);status('Session開始。この端末からMacのDAWは起動しません。')}}
-  function showSetup(){enabled.checked=read('appz_mac_launch_v11','')==='1';enabled.disabled=!isMac;document.getElementById('sessionOnly').hidden=!pendingMode;setup.showModal()}
+  function startSession(mode,launch){if(session&&session.mode!==mode&&!confirm(session.mode+' Sessionを終了して'+mode+'を開始しますか？'))return;status('');if(!session||session.mode!==mode)session={mode:mode,startedAt:Date.now(),elapsed:0,running:true,lastAction:'start'};else{if(!session.running){session.startedAt=Date.now();session.running=true}session.lastAction='resume'}saveSession();renderSession();if(launch){session.lastAction='launch-request';saveSession();if(launchDAW(mode))status((adapter?adapter.label:'')+'でDAW起動をリクエスト。開かない場合はDAW LAUNCHを確認。');else status('この端末ではDAWを起動できません。Sessionのみ開始。')}}
+  function requestStart(mode){if(adapterReady(adapter)){startSession(mode,true)}else if(adapter){pendingMode=mode;showSetup()}else{startSession(mode,false);status('Session開始。この端末からDAWは起動しません。')}}
+  function renderLaunchState(){Object.keys(ADAPTERS).forEach(function(os){var a=ADAPTERS[os],ready=adapterReady(a),st=document.getElementById(a.el+'State'),box=document.getElementById(a.el+'Enabled'),here=document.getElementById(a.el+'Here');
+      st.textContent=ready?'READY':'SETUP';st.className='st '+(ready?'ok':'no');box.checked=ready;box.disabled=false;here.hidden=(OS!==os)});
+    var btn=document.getElementById('setupBtn');btn.textContent=adapter?('DAW LAUNCH · '+adapter.label+' '+(adapterReady(adapter)?'READY':'SETUP')):'DAW LAUNCH · Session only';
+    document.getElementById('deviceNote').textContent=adapter?('この端末：'+adapter.label+' · '+(adapterReady(adapter)?'READY':'SETUP')):'この端末はDAWローカル起動の対象外（Sessionのみ）。'}
+  function showSetup(){renderLaunchState();document.getElementById('sessionOnly').hidden=!pendingMode;setup.showModal()}
   document.getElementById('setupBtn').addEventListener('click',function(){pendingMode=null;showSetup()});
-  enabled.addEventListener('change',function(){if(!write('appz_mac_launch_v11',enabled.checked?'1':'0'))status('起動設定を保存できません。');if(enabled.checked&&pendingMode){var mode=pendingMode;setup.close();requestStart(mode)}});
+  Object.keys(ADAPTERS).forEach(function(os){var a=ADAPTERS[os];document.getElementById(a.el+'Enabled').addEventListener('change',function(){var on=this.checked;if(!write(a.key,on?'1':'0'))status('起動設定を保存できません。');renderLaunchState();if(on&&pendingMode&&adapter===a){var mode=pendingMode;setup.close();requestStart(mode)}})});
   document.getElementById('sessionOnly').addEventListener('click',function(){var mode=pendingMode;setup.close();if(mode)startSession(mode,false)});
   setup.addEventListener('close',function(){pendingMode=null});
   document.querySelectorAll('[data-mode]').forEach(function(button){button.addEventListener('click',function(){requestStart(button.dataset.mode)})});
   document.getElementById('resumeBtn').addEventListener('click',function(){if(session)requestStart(session.mode)});
   document.getElementById('endBtn').addEventListener('click',function(){session=null;status('Session終了');saveSession();renderSession()});
-  window.addEventListener('storage',function(e){if(e.key===SESSION_KEY||e.key===null){session=loadSession();renderSession()}});
+  window.addEventListener('storage',function(e){if(e.key===SESSION_KEY||e.key===null){session=loadSession();renderSession()}if(e.key===null||e.key==='appz_mac_launch_v11'||e.key==='appz_win_launch_v11')renderLaunchState()});
   setInterval(renderSession,1000);
   document.querySelectorAll('[data-keyz-tab]').forEach(function(el){el.addEventListener('click',function(){openKeyz(el.dataset.keyzTab)})});
   document.getElementById('keyzClose').addEventListener('click',closeKeyz);overlay.addEventListener('click',function(e){if(e.target===overlay)closeKeyz()});
   document.querySelectorAll('a[data-tool]').forEach(function(card){card.addEventListener('click',function(e){if(card.dataset.name==='Keyz'&&isDesktop()){e.preventDefault();rememberTool(card);openKeyz();return}rememberTool(card);if(navigator.vibrate)navigator.vibrate(12)})});
   document.addEventListener('keydown',function(e){if(!isDesktop())return;var tag=(e.target&&e.target.tagName||'').toLowerCase();if(setup.open||e.repeat||e.target.isContentEditable||tag==='input'||tag==='textarea'||e.ctrlKey||e.altKey||e.metaKey)return;if(overlay.classList.contains('open')){if(e.key==='Escape'){e.preventDefault();closeKeyz()}return}if(e.key.toLowerCase()==='k'){e.preventDefault();openKeyz();return}var n=Number(e.key);if(n>=1&&n<=8&&toolEls[n-1]){e.preventDefault();toolEls[n-1].click()}});
-  document.addEventListener('visibilitychange',function(){if(!document.hidden){session=loadSession();renderSession();renderRecent()}});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden){session=loadSession();renderSession();renderRecent();renderLaunchState()}});
   keyzFrame.addEventListener('load',function(){try{keyzFrame.contentDocument.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();closeKeyz()}})}catch(e){}});
   window.addEventListener('resize',function(){if(!isDesktop()&&overlay.classList.contains('open'))closeKeyz()});
   if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(function(){});
-  renderRecent();renderSession();
+  renderRecent();renderSession();renderLaunchState();
 })();
 </script>
 </body>

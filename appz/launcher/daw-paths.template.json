@@ -1,0 +1,10 @@
+{
+  "_comment": "Template only. appz-setup.ps1 writes the real file to %LOCALAPPDATA%\\Appz\\daw-paths.json. Never commit real paths here.",
+  "cubase": "<full path to Cubase12.exe>",
+  "flstudio": "<full path to FL64.exe of the newest installed FL Studio>",
+  "modes": {
+    "rec": "cubase",
+    "beat": "flstudio",
+    "mix": "cubase"
+  }
+}

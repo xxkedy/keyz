@@ -1,5 +1,5 @@
-const CACHE='appz-v11.0-20260907';
-const LOCAL=['./','./index.html','./manifest.json?v=20260904-1','./icon-180.png?v=20260729-1','./icon-192.png?v=20260729-1','./icon-512.png?v=20260729-1'];
+const CACHE='appz-v11.1-20260908';
+const LOCAL=['./','./index.html','./manifest.json?v=20260908-1','./icon-180.png?v=20260729-1','./icon-192.png?v=20260729-1','./icon-512.png?v=20260729-1'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(LOCAL.map(url=>new Request(url,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('appz-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',event=>{
