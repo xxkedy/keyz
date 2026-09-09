@@ -1,4 +1,4 @@
-const CACHE='streetometry-v0.1.1-20260909';
+const CACHE='streetometry-v0.2.0-20260909';
 const LOCAL=['./','./index.html','./manifest.json?v=20260909-1','./icon.svg'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(LOCAL.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x.startsWith('streetometry-')&&x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));

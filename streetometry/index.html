@@ -25,7 +25,7 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 </style>
 </head>
 <body>
-<header><div><div class="brand">Streetometry <span>Studio</span></div><div class="ver">v0.1.1 · 2026.09.09</div></div><div class="row"><button class="b" id="share">SHARE</button><button class="b" id="saveV">SAVE v</button></div></header>
+<header><div><div class="brand">Streetometry <span>Studio</span></div><div class="ver">v0.2.0 · 2026.09.09</div></div><div class="row"><button class="b" id="openProject">OPEN</button><button class="b" id="saveProject">SAVE PROJECT</button><button class="b" id="saveV">SAVE v</button></div></header>
 
 <section class="card hero">
 <div class="k">CURRENT PROJECT</div><h2>P01 · PANTS</h2>
@@ -48,7 +48,7 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 <div class="f wide"><label>OPACITY <output id="oo"></output></label><input id="o" type="range" min="20" max="100"></div>
 <div class="f wide"><label>CANVA DESIGN URL</label><input id="canva" type="url" placeholder="https://www.canva.com/design/..."></div>
 </div>
-<input id="file" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>
+<input id="file" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden><input id="projectFile" type="file" accept=".json,.streetometry,application/json" hidden>
 <div class="btns">
 <button class="btn c" id="import">IMPORT PNG / SVG</button><button class="btn" id="openCanva">OPEN CANVA ↗</button>
 <button class="btn a" id="template">CANVA 100×350</button><button class="btn" id="reset">RESET</button>
@@ -59,7 +59,7 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 </div>
 </article>
 
-<article class="card"><div class="head"><b>FLOW</b><span>制作→販売</span></div><div class="links">
+<article class="card"><div class="head"><b>PROJECT</b><span id="autosaveState">AUTO-SAVED · THIS DEVICE</span></div><div class="api"><h3>P01 Project Save</h3><p>Studio本体はGitHub。作業状態はこの端末へ自動保存。正式なProject fileはiCloud Driveへ保存する。</p><div class="btns"><button class="btn c" id="saveProject2">SAVE TO FILES / iCLOUD</button><button class="btn" id="openProject2">OPEN PROJECT FILE</button></div><div class="note">推奨保存先：iCloud Drive / Streetometry / 04_Pants / P01_WORK_20260905 / Studio</div></div></article><article class="card"><div class="head"><b>FLOW</b><span>制作→販売</span></div><div class="links">
 <a class="q" href="https://app.notion.com/p/38882bbb7f6f81b39ae8fe2d302d9f4a" target="_blank" rel="noopener"><i>🧭</i><b>Notion</b><small>判断正本</small></a>
 <a class="q" href="https://originalprint.jp/pants/p/818" target="_blank" rel="noopener"><i>🖨️</i><b>Originalprint</b><small>入稿/連携</small></a>
 <a class="q" href="https://streetometry.base.shop/" target="_blank" rel="noopener"><i>🛍️</i><b>BASE</b><small>販売</small></a>
@@ -77,15 +77,21 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 <script>
 (function(){
 'use strict';
-var SKEY='streetometry_state_v01',VKEY='streetometry_versions_v01';
+var SKEY='streetometry_state_v02',VKEY='streetometry_versions_v02',DB='streetometry_db_v02',STORE='assets',ASSET_KEY='P01';
 var ST=['DESIGN','PRINT READY','ORIGINALPRINT','BASE','SAMPLE','LIVE'];
 var SPEC={product:'7219-01',placement:'front-left',printW:100,printH:350,dpi:300,pxW:1181,pxH:4134};
 var DEF={stage:'DESIGN',next:'Streetometry全体を1本の縦3Dロゴに統一。Sとt以降を同一軸・同一設計言語にする。',t:{w:74,x:13,y:18,r:0,o:1},canva:'',custom:false};
-var st=load(),custom=null,timer=null,$=function(x){return document.getElementById(x)},cv=$('cv'),c=cv.getContext('2d');
+var st=load(),custom=null,customBlob=null,timer=null,$=function(x){return document.getElementById(x)},cv=$('cv'),c=cv.getContext('2d');
 
 function copy(x){return JSON.parse(JSON.stringify(x))}
 function load(){try{var x=JSON.parse(localStorage.getItem(SKEY)||'null');var d=copy(DEF);if(x){Object.assign(d,x);d.t=Object.assign({},DEF.t,x.t||{})}return d}catch(e){return copy(DEF)}}
-function save(){try{localStorage.setItem(SKEY,JSON.stringify(st))}catch(e){}}
+function save(){try{localStorage.setItem(SKEY,JSON.stringify(st));$('autosaveState')&&($('autosaveState').textContent='AUTO-SAVED · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}))}catch(e){}}
+function idb(){return new Promise(function(resolve,reject){var r=indexedDB.open(DB,1);r.onupgradeneeded=function(){if(!r.result.objectStoreNames.contains(STORE))r.result.createObjectStore(STORE)};r.onsuccess=function(){resolve(r.result)};r.onerror=function(){reject(r.error)}})}
+async function dbPut(blob){try{var d=await idb();await new Promise(function(resolve,reject){var tx=d.transaction(STORE,'readwrite');tx.objectStore(STORE).put(blob,ASSET_KEY);tx.oncomplete=resolve;tx.onerror=function(){reject(tx.error)}});d.close()}catch(e){}}
+async function dbGet(){try{var d=await idb();var v=await new Promise(function(resolve,reject){var tx=d.transaction(STORE,'readonly'),r=tx.objectStore(STORE).get(ASSET_KEY);r.onsuccess=function(){resolve(r.result||null)};r.onerror=function(){reject(r.error)}});d.close();return v}catch(e){return null}}
+async function dbDel(){try{var d=await idb();await new Promise(function(resolve,reject){var tx=d.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(ASSET_KEY);tx.oncomplete=resolve;tx.onerror=function(){reject(tx.error)}});d.close()}catch(e){}}
+function setCustomFromBlob(blob){return new Promise(function(resolve){if(!blob){custom=null;customBlob=null;resolve();return}customBlob=blob;var u=URL.createObjectURL(blob),im=new Image();im.onload=function(){custom=im;URL.revokeObjectURL(u);resolve()};im.onerror=function(){URL.revokeObjectURL(u);resolve()};im.src=u})}
+async function restoreAsset(){var b=await dbGet();if(b){await setCustomFromBlob(b);st.custom=true}else if(st.custom){st.custom=false;save()}render()}
 function msg(s){$('status').textContent=s;$('status').classList.add('show');clearTimeout(timer);timer=setTimeout(function(){$('status').classList.remove('show')},1600)}
 function stages(){var box=$('stages'),idx=ST.indexOf(st.stage);box.innerHTML='';ST.forEach(function(s,n){var b=document.createElement('button');b.className='stage '+(n<idx?'done':n===idx?'on':'');b.innerHTML='<span>'+(n<idx?'✓':n===idx?'●':'○')+'</span>'+s;b.onclick=function(){st.stage=s;save();stages();msg('STATE → '+s)};box.appendChild(b)})}
 
@@ -130,10 +136,16 @@ function openCanva(){window.open(st.canva||'https://www.canva.com/','_blank','no
 $('openCanva').onclick=openCanva;$('canvaQ').onclick=openCanva;
 $('reset').onclick=function(){st.t=copy(DEF.t);save();render();msg('RESET')};
 $('import').onclick=function(){$('file').click()};
-$('file').onchange=function(){var f=$('file').files&&$('file').files[0];if(!f)return;var u=URL.createObjectURL(f);custom=new Image();custom.onload=function(){st.custom=true;save();render();msg('IMPORTED')};custom.src=u};
-$('builtin').onclick=function(){custom=null;st.custom=false;save();render();msg('WORKING PREVIEW')};
+$('file').onchange=async function(){var f=$('file').files&&$('file').files[0];if(!f)return;await dbPut(f);await setCustomFromBlob(f);st.custom=true;st.assetName=f.name;save();render();msg('IMPORTED + AUTO-SAVED')};
+$('builtin').onclick=async function(){custom=null;customBlob=null;st.custom=false;delete st.assetName;await dbDel();save();render();msg('WORKING PREVIEW')};
 
 function dl(blob,name){var a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},1200)}
+function blobDataUrl(blob){return new Promise(function(resolve,reject){if(!blob){resolve(null);return}var r=new FileReader();r.onload=function(){resolve(r.result)};r.onerror=function(){reject(r.error)};r.readAsDataURL(blob)})}
+function dataUrlBlob(s){if(!s)return null;var p=s.split(','),m=(p[0].match(/data:([^;]+)/)||[])[1]||'application/octet-stream',bin=atob(p[1]||''),a=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return new Blob([a],{type:m})}
+function projectName(){var d=new Date(),pad=function(n){return String(n).padStart(2,'0')};return 'Streetometry_P01_'+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'_'+pad(d.getHours())+pad(d.getMinutes())+'.streetometry.json'}
+async function projectBlob(){var asset=await blobDataUrl(customBlob);var pack={format:'streetometry.project',version:2,project:'P01',savedAt:new Date().toISOString(),spec:SPEC,state:st,asset:{name:st.assetName||'',data:asset}};return new Blob([JSON.stringify(pack,null,2)],{type:'application/json'})}
+async function saveProject(){var blob=await projectBlob(),name=projectName(),file=new File([blob],name,{type:'application/json'});try{if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){await navigator.share({title:'Streetometry P01',files:[file]});msg('共有→ファイルに保存→iCloud Drive');return}}catch(e){}dl(blob,name);msg('PROJECT DOWNLOADED')}
+async function openProjectFile(f){try{var pack=JSON.parse(await f.text());if(pack.format!=='streetometry.project'||!pack.state)throw new Error('bad format');st=pack.state;custom=null;customBlob=null;if(pack.asset&&pack.asset.data){var b=dataUrlBlob(pack.asset.data);await dbPut(b);await setCustomFromBlob(b);st.custom=true;st.assetName=pack.asset.name||'imported'}else{await dbDel();st.custom=false}save();stages();showVersions();render();msg('PROJECT OPENED')}catch(e){msg('PROJECT FILE ERROR')}}
 $('template').onclick=function(){var s='<svg xmlns="http://www.w3.org/2000/svg" width="100mm" height="350mm" viewBox="0 0 100 350"><rect width="100" height="350" fill="none"/><rect x="1" y="1" width="98" height="348" fill="none" stroke="#00bfe8" stroke-width=".35" stroke-dasharray="2 2"/><rect x="5" y="5" width="90" height="340" fill="none" stroke="#999" stroke-width=".2" stroke-dasharray="1 2"/></svg>';dl(new Blob([s],{type:'image/svg+xml'}),'Streetometry_P01_Canva_100x350mm.svg');msg('CANVA TEMPLATE')};
 $('mock').onclick=function(){cv.toBlob(function(b){dl(b,'Streetometry_P01_mock.png');msg('MOCK PNG')},'image/png')};
 $('print').onclick=function(){var x=document.createElement('canvas');x.width=SPEC.pxW;x.height=SPEC.pxH;var q=x.getContext('2d'),old=c;c=q;q.clearRect(0,0,x.width,x.height);drawDesign({x:0,y:0,w:x.width,h:x.height});c=old;x.toBlob(function(b){dl(b,'Streetometry_P01_7219-01_front-left_100x350mm_1181x4134.png');msg('300dpi PRINT PNG')},'image/png')};
@@ -142,13 +154,16 @@ function snaps(){try{var x=JSON.parse(localStorage.getItem(VKEY)||'[]');return A
 function saveVersion(){var a=snaps(),d=new Date();a.unshift({n:'P01 '+(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'),s:copy(st)});localStorage.setItem(VKEY,JSON.stringify(a.slice(0,5)));showVersions();msg('VERSION SAVED')}
 function showVersions(){var box=$('snaps'),a=snaps();box.innerHTML='';if(!a.length){box.innerHTML='<div class="note">まだ保存版なし。</div>';return}a.forEach(function(v){var r=document.createElement('div');r.className='snap';r.innerHTML='<div><b>'+v.n+'</b><small>'+v.s.stage+' · W '+v.s.t.w+'mm · Y '+v.s.t.y+'mm</small></div>';var b=document.createElement('button');b.textContent='RESTORE';b.onclick=function(){st=copy(v.s);custom=null;save();stages();render();msg('RESTORED')};r.appendChild(b);box.appendChild(r)})}
 $('saveV').onclick=saveVersion;$('saveV2').onclick=saveVersion;
+$('saveProject').onclick=saveProject;$('saveProject2').onclick=saveProject;
+$('openProject').onclick=function(){$('projectFile').click()};$('openProject2').onclick=function(){$('projectFile').click()};
+$('projectFile').onchange=function(){var f=$('projectFile').files&&$('projectFile').files[0];if(f)openProjectFile(f)};
 
 function stateUrl(){var u=new URL(location.href),raw=unescape(encodeURIComponent(JSON.stringify(st)));u.hash='s='+btoa(raw).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');return u.href}
-$('share').onclick=async function(){var u=stateUrl();try{if(navigator.share)await navigator.share({title:'Streetometry P01',url:u});else{await navigator.clipboard.writeText(u);msg('STATE URL COPIED')}}catch(e){}};
+
 $('handoff').onclick=async function(){var t=st.t,txt='Streetometry Studio P01\nState: '+st.stage+'\n7219-01 / Black / L / front-left 100×350mm\nTransform: W '+t.w+'mm / X '+t.x+' / Y '+t.y+' / R '+t.r+'° / O '+Math.round(t.o*100)+'%\nNEXT: '+st.next+'\nCanva: '+(st.canva||'(未登録)')+'\nOriginalprint spec: '+SPEC.product+' / '+SPEC.placement+' / '+SPEC.printW+'×'+SPEC.printH+'mm (LOCKED)\nState URL: '+stateUrl();try{await navigator.clipboard.writeText(txt);msg('CHAT HANDOFF COPIED')}catch(e){}};
 function loadHash(){if(!location.hash.startsWith('#s='))return;try{var x=location.hash.slice(3).replace(/-/g,'+').replace(/_/g,'/');while(x.length%4)x+='=';st=JSON.parse(decodeURIComponent(escape(atob(x))));custom=null;save();history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
 
-loadHash();stages();showVersions();render();
+loadHash();stages();showVersions();render();restoreAsset();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(function(){});
 })();
 </script>
