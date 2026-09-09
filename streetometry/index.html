@@ -25,11 +25,12 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 </style>
 </head>
 <body>
-<header><div><div class="brand">Streetometry <span>Studio</span></div><div class="ver">v0.1.0 · 2026.09.09</div></div><div class="row"><button class="b" id="share">SHARE</button><button class="b" id="saveV">SAVE v</button></div></header>
+<header><div><div class="brand">Streetometry <span>Studio</span></div><div class="ver">v0.1.1 · 2026.09.09</div></div><div class="row"><button class="b" id="share">SHARE</button><button class="b" id="saveV">SAVE v</button></div></header>
 
 <section class="card hero">
 <div class="k">CURRENT PROJECT</div><h2>P01 · PANTS</h2>
-<div class="meta">United Athle 7219-01 · Black · L<br>前左足 100 × 350 mm · オンデマンド転写</div>
+<div class="meta">United Athle 7219-01 · Black · L<br>前左足 · オンデマンド転写</div>
+<div class="next"><b>ORIGINALPRINT SPEC · LOCKED</b><div style="margin-top:4px;font-size:12px;font-weight:900">PRINT AREA 100 × 350 mm</div><div style="margin-top:2px;font-size:8px;color:var(--m)">1181 × 4134 px @ 300dpi-equivalent · この枠自体は変更不可</div></div>
 <div class="next"><b>NEXT 1</b><textarea id="next">Streetometry全体を1本の縦3Dロゴに統一。Sとt以降を同一軸・同一設計言語にする。</textarea></div>
 <div class="stages" id="stages"></div>
 </section>
@@ -40,10 +41,10 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 <div class="mock"><div class="shell"><canvas id="cv" width="720" height="709"></canvas><div class="badge">LAYOUT PREVIEW · IMPORT正式素材可</div></div></div>
 <div class="controls">
 <div class="cg">
-<div class="f"><label>WIDTH <output id="wo"></output></label><input id="w" type="range" min="35" max="100"></div>
+<div class="f"><label>ART WIDTH <output id="wo"></output></label><input id="w" type="range" min="35" max="100"></div>
 <div class="f"><label>ROTATE <output id="ro"></output></label><input id="r" type="range" min="-30" max="30"></div>
-<div class="f"><label>X <output id="xo"></output></label><input id="x" type="range" min="0" max="100"></div>
-<div class="f"><label>Y <output id="yo"></output></label><input id="y" type="range" min="0" max="350"></div>
+<div class="f"><label>ART X <output id="xo"></output></label><input id="x" type="range" min="0" max="100"></div>
+<div class="f"><label>ART Y <output id="yo"></output></label><input id="y" type="range" min="0" max="350"></div>
 <div class="f wide"><label>OPACITY <output id="oo"></output></label><input id="o" type="range" min="20" max="100"></div>
 <div class="f wide"><label>CANVA DESIGN URL</label><input id="canva" type="url" placeholder="https://www.canva.com/design/..."></div>
 </div>
@@ -78,6 +79,7 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 'use strict';
 var SKEY='streetometry_state_v01',VKEY='streetometry_versions_v01';
 var ST=['DESIGN','PRINT READY','ORIGINALPRINT','BASE','SAMPLE','LIVE'];
+var SPEC={product:'7219-01',placement:'front-left',printW:100,printH:350,dpi:300,pxW:1181,pxH:4134};
 var DEF={stage:'DESIGN',next:'Streetometry全体を1本の縦3Dロゴに統一。Sとt以降を同一軸・同一設計言語にする。',t:{w:74,x:13,y:18,r:0,o:1},canva:'',custom:false};
 var st=load(),custom=null,timer=null,$=function(x){return document.getElementById(x)},cv=$('cv'),c=cv.getContext('2d');
 
@@ -134,7 +136,7 @@ $('builtin').onclick=function(){custom=null;st.custom=false;save();render();msg(
 function dl(blob,name){var a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},1200)}
 $('template').onclick=function(){var s='<svg xmlns="http://www.w3.org/2000/svg" width="100mm" height="350mm" viewBox="0 0 100 350"><rect width="100" height="350" fill="none"/><rect x="1" y="1" width="98" height="348" fill="none" stroke="#00bfe8" stroke-width=".35" stroke-dasharray="2 2"/><rect x="5" y="5" width="90" height="340" fill="none" stroke="#999" stroke-width=".2" stroke-dasharray="1 2"/></svg>';dl(new Blob([s],{type:'image/svg+xml'}),'Streetometry_P01_Canva_100x350mm.svg');msg('CANVA TEMPLATE')};
 $('mock').onclick=function(){cv.toBlob(function(b){dl(b,'Streetometry_P01_mock.png');msg('MOCK PNG')},'image/png')};
-$('print').onclick=function(){var x=document.createElement('canvas');x.width=Math.round(100/25.4*300);x.height=Math.round(350/25.4*300);var q=x.getContext('2d'),old=c;c=q;q.clearRect(0,0,x.width,x.height);drawDesign({x:0,y:0,w:x.width,h:x.height});c=old;x.toBlob(function(b){dl(b,'Streetometry_P01_100x350mm_300dpi.png');msg('300dpi PRINT PNG')},'image/png')};
+$('print').onclick=function(){var x=document.createElement('canvas');x.width=SPEC.pxW;x.height=SPEC.pxH;var q=x.getContext('2d'),old=c;c=q;q.clearRect(0,0,x.width,x.height);drawDesign({x:0,y:0,w:x.width,h:x.height});c=old;x.toBlob(function(b){dl(b,'Streetometry_P01_7219-01_front-left_100x350mm_1181x4134.png');msg('300dpi PRINT PNG')},'image/png')};
 
 function snaps(){try{var x=JSON.parse(localStorage.getItem(VKEY)||'[]');return Array.isArray(x)?x:[]}catch(e){return[]}}
 function saveVersion(){var a=snaps(),d=new Date();a.unshift({n:'P01 '+(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'),s:copy(st)});localStorage.setItem(VKEY,JSON.stringify(a.slice(0,5)));showVersions();msg('VERSION SAVED')}
@@ -143,7 +145,7 @@ $('saveV').onclick=saveVersion;$('saveV2').onclick=saveVersion;
 
 function stateUrl(){var u=new URL(location.href),raw=unescape(encodeURIComponent(JSON.stringify(st)));u.hash='s='+btoa(raw).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');return u.href}
 $('share').onclick=async function(){var u=stateUrl();try{if(navigator.share)await navigator.share({title:'Streetometry P01',url:u});else{await navigator.clipboard.writeText(u);msg('STATE URL COPIED')}}catch(e){}};
-$('handoff').onclick=async function(){var t=st.t,txt='Streetometry Studio P01\nState: '+st.stage+'\n7219-01 / Black / L / front-left 100×350mm\nTransform: W '+t.w+'mm / X '+t.x+' / Y '+t.y+' / R '+t.r+'° / O '+Math.round(t.o*100)+'%\nNEXT: '+st.next+'\nCanva: '+(st.canva||'(未登録)')+'\nState URL: '+stateUrl();try{await navigator.clipboard.writeText(txt);msg('CHAT HANDOFF COPIED')}catch(e){}};
+$('handoff').onclick=async function(){var t=st.t,txt='Streetometry Studio P01\nState: '+st.stage+'\n7219-01 / Black / L / front-left 100×350mm\nTransform: W '+t.w+'mm / X '+t.x+' / Y '+t.y+' / R '+t.r+'° / O '+Math.round(t.o*100)+'%\nNEXT: '+st.next+'\nCanva: '+(st.canva||'(未登録)')+'\nOriginalprint spec: '+SPEC.product+' / '+SPEC.placement+' / '+SPEC.printW+'×'+SPEC.printH+'mm (LOCKED)\nState URL: '+stateUrl();try{await navigator.clipboard.writeText(txt);msg('CHAT HANDOFF COPIED')}catch(e){}};
 function loadHash(){if(!location.hash.startsWith('#s='))return;try{var x=location.hash.slice(3).replace(/-/g,'+').replace(/_/g,'/');while(x.length%4)x+='=';st=JSON.parse(decodeURIComponent(escape(atob(x))));custom=null;save();history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
 
 loadHash();stages();showVersions();render();
