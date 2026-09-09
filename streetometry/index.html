@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Streetometry">
-<link rel="manifest" href="./manifest.json?v=20260909-1">
+<link rel="manifest" href="./manifest.json?v=20260909-2">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Streetometry Studio</title>
 <style>
@@ -25,7 +25,7 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 </style>
 </head>
 <body>
-<header><div><div class="brand">Streetometry <span>Studio</span></div><div class="ver">v0.3.0 · 2026.09.09</div></div><div class="row"><button class="b" id="openProject">OPEN</button><button class="b" id="saveProject">SAVE PROJECT</button><button class="b" id="saveV">SAVE v</button></div></header>
+<header><div><div class="brand">Streetometry <span>Studio</span></div><div class="ver">v0.3.1 · 2026.09.09</div></div><div class="row"><button class="b" id="openProject">OPEN</button><button class="b" id="saveProject">SAVE PROJECT</button><button class="b" id="saveV">SAVE v</button></div></header>
 
 <section class="card hero">
 <div class="k">CURRENT PROJECT</div><h2>P01 · PANTS</h2>
@@ -38,7 +38,7 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 <section class="grid">
 <article class="card editor">
 <div class="head"><b>DESIGN</b><span>7219-01 / 100×350mm</span></div>
-<div class="mock"><div class="shell"><canvas id="cv" width="720" height="709"></canvas><div class="badge">LAYOUT PREVIEW · IMPORT正式素材可</div></div></div>
+<div class="mock"><div class="shell"><canvas id="cv" width="720" height="709"></canvas><div class="badge">P01 · FORMAL F20 WHITE · 90° LOCKED</div></div></div>
 <div class="controls">
 <div class="cg">
 <div class="f"><label>LOGO LENGTH <output id="wo"></output></label><input id="w" type="range" min="180" max="330"></div>
@@ -50,10 +50,10 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 </div>
 <input id="file" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden><input id="projectFile" type="file" accept=".json,.streetometry,application/json" hidden>
 <div class="btns">
-<button class="btn c" id="import">IMPORT PNG / SVG</button><button class="btn" id="openCanva">OPEN CANVA ↗</button>
+<button class="btn c" id="import">IMPORT FORMAL F20 SVG</button><button class="btn" id="openCanva">OPEN CANVA ↗</button>
 <button class="btn a" id="template">CANVA 100×350</button><button class="btn" id="reset">RESET</button>
 <button class="btn g" id="print">300dpi PRINT PNG</button><button class="btn g" id="mock">MOCK PNG</button>
-<button class="btn" id="handoff">COPY CHAT HANDOFF</button><button class="btn" id="builtin" disabled>FORMAL F20 REQUIRED</button>
+<button class="btn" id="handoff">COPY CHAT HANDOFF</button><button class="btn" id="builtin">USE P01 FORMAL F20</button>
 </div>
 <div class="note" id="assetNote">WORKING PREVIEW：配置確認用。最終入稿は正式Streetometry PNG/SVGをIMPORTしてから出力。</div>
 </div>
@@ -78,9 +78,10 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 (function(){
 'use strict';
 var SKEY='streetometry_state_v02',VKEY='streetometry_versions_v02',DB='streetometry_db_v02',STORE='assets',ASSET_KEY='P01';
+var FORMAL_F20={white:'./assets/streetometry-logo-white.svg',black:'./assets/streetometry-logo-black.svg'};
 var ST=['DESIGN','PRINT READY','ORIGINALPRINT','BASE','SAMPLE','LIVE'];
 var SPEC={product:'7219-01',placement:'front-left',printW:100,printH:350,dpi:300,pxW:1181,pxH:4134};
-var DEF={stage:'DESIGN',next:'正式F20ワードマークを横組みのまま90°回転。S〜yを1本のワードマークとして100×350mm内でサイズ/位置だけ詰める。',t:{w:280,x:50,y:175,r:90,o:1},canva:'',custom:false,assetRole:'formal-f20'};
+var DEF={stage:'DESIGN',next:'正式F20ワードマークを横組みのまま90°回転。S〜yを1本のワードマークとして100×350mm内でサイズ/位置だけ詰める。',t:{w:280,x:50,y:175,r:90,o:1},canva:'',custom:true,assetName:'streetometry-logo-white.svg',assetRole:'formal-f20'};
 var st=load(),custom=null,customBlob=null,timer=null,$=function(x){return document.getElementById(x)},cv=$('cv'),c=cv.getContext('2d');
 
 function copy(x){return JSON.parse(JSON.stringify(x))}
@@ -91,7 +92,8 @@ async function dbPut(blob){try{var d=await idb();await new Promise(function(reso
 async function dbGet(){try{var d=await idb();var v=await new Promise(function(resolve,reject){var tx=d.transaction(STORE,'readonly'),r=tx.objectStore(STORE).get(ASSET_KEY);r.onsuccess=function(){resolve(r.result||null)};r.onerror=function(){reject(r.error)}});d.close();return v}catch(e){return null}}
 async function dbDel(){try{var d=await idb();await new Promise(function(resolve,reject){var tx=d.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(ASSET_KEY);tx.oncomplete=resolve;tx.onerror=function(){reject(tx.error)}});d.close()}catch(e){}}
 function setCustomFromBlob(blob){return new Promise(function(resolve){if(!blob){custom=null;customBlob=null;resolve();return}customBlob=blob;var u=URL.createObjectURL(blob),im=new Image();im.onload=function(){custom=im;URL.revokeObjectURL(u);resolve()};im.onerror=function(){URL.revokeObjectURL(u);resolve()};im.src=u})}
-async function restoreAsset(){var b=await dbGet();if(b){await setCustomFromBlob(b);st.custom=true}else if(st.custom){st.custom=false;save()}render()}
+async function useFormalF20(){try{var b=await fetch(FORMAL_F20.white,{cache:'reload'}).then(function(r){if(!r.ok)throw new Error('asset');return r.blob()});await setCustomFromBlob(b);customBlob=b;st.custom=true;st.assetName='streetometry-logo-white.svg';st.assetRole='formal-f20';st.t.r=90;save();render();return true}catch(e){custom=null;customBlob=null;st.custom=false;save();render();return false}}
+async function restoreAsset(){var b=await dbGet();if(b){await setCustomFromBlob(b);st.custom=true;render()}else await useFormalF20()}
 function msg(s){$('status').textContent=s;$('status').classList.add('show');clearTimeout(timer);timer=setTimeout(function(){$('status').classList.remove('show')},1600)}
 function stages(){var box=$('stages'),idx=ST.indexOf(st.stage);box.innerHTML='';ST.forEach(function(s,n){var b=document.createElement('button');b.className='stage '+(n<idx?'done':n===idx?'on':'');b.innerHTML='<span>'+(n<idx?'✓':n===idx?'●':'○')+'</span>'+s;b.onclick=function(){st.stage=s;save();stages();msg('STATE → '+s)};box.appendChild(b)})}
 
@@ -128,7 +130,7 @@ function sync(){
 var t=st.t;
 [['w','wo',t.w,' mm'],['r','ro',t.r,'° LOCKED'],['x','xo',t.x,' mm'],['y','yo',t.y,' mm'],['o','oo',Math.round(t.o*100),'%']].forEach(function(a){$(a[0]).value=a[0]==='o'?Math.round(t.o*100):a[2];$(a[1]).textContent=a[2]+a[3]});
 $('next').value=st.next;$('canva').value=st.canva||'';
-$('assetNote').textContent=custom?'FORMAL F20 ASSET：読み込んだSVG/PNGを使用中。P01は90°回転固定。':'FORMAL F20 REQUIRED：正式streetometry-logo-white.svg / black.svg以外から字形を再構築しない。'
+$('assetNote').textContent=custom?'FORMAL F20：7219-01 Black用の正式white SVG。横組み1本のまま90°回転固定。':'FORMAL F20 LOAD ERROR：仮ロゴ・1文字縦積み・S-symbol / R05代用は禁止。'
 }
 ['w','x','y','o'].forEach(function(id){$(id).oninput=function(){st.t.w=+$('w').value;st.t.r=90;st.t.x=+$('x').value;st.t.y=+$('y').value;st.t.o=+$('o').value/100;save();render()}});
 $('next').onchange=function(){st.next=$('next').value.trim();save()};
@@ -142,7 +144,7 @@ $('file').onchange=async function(){var f=$('file').files&&$('file').files[0];if
 var ok=/^streetometry-logo-(white|black)\.svg$/i.test(f.name);
 if(!ok){msg('P01は正式F20 SVGのみ');$('file').value='';return}
 await dbPut(f);await setCustomFromBlob(f);st.custom=true;st.assetName=f.name;st.assetRole='formal-f20';st.t.r=90;save();render();msg('FORMAL F20 IMPORTED')};
-$('builtin').onclick=function(){msg('FORMAL F20 REQUIRED')};
+$('builtin').onclick=async function(){await dbDel();if(await useFormalF20())msg('P01 FORMAL F20 RESTORED');else msg('FORMAL F20 LOAD ERROR')};
 
 function dl(blob,name){var a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},1200)}
 function blobDataUrl(blob){return new Promise(function(resolve,reject){if(!blob){resolve(null);return}var r=new FileReader();r.onload=function(){resolve(r.result)};r.onerror=function(){reject(r.error)};r.readAsDataURL(blob)})}
