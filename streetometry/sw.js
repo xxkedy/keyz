@@ -1,5 +1,5 @@
-const CACHE='streetometry-v0.3.0-20260909';
-const LOCAL=['./','./index.html','./manifest.json?v=20260909-1','./icon.svg'];
+const CACHE='streetometry-v0.3.1-20260909';
+const LOCAL=['./','./index.html','./manifest.json?v=20260909-2','./icon.svg','./assets/streetometry-logo-white.svg','./assets/streetometry-logo-black.svg'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(LOCAL.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x.startsWith('streetometry-')&&x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url),s=new URL(self.registration.scope);if(e.request.method!=='GET'||u.origin!==s.origin||!u.pathname.startsWith(s.pathname))return;e.respondWith(fetch(e.request,{cache:'reload'}).then(r=>{if(r.ok){const copy=r.clone();e.waitUntil(caches.open(CACHE).then(c=>c.put(e.request,copy)))}return r}).catch(async()=>{const c=await caches.open(CACHE);return await c.match(e.request)||(e.request.mode==='navigate'?await c.match('./'):null)||Response.error()}))});
