@@ -1,0 +1,56 @@
+name: Barz v0.6 Type Beat relevance
+
+on:
+  push:
+    branches: [barz-v0.6-phase2-ready]
+    paths:
+      - '.github/scripts/patch-barz-v060-typebeat-relevance.mjs'
+      - '.github/workflows/barz-v060-typebeat-relevance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: barz-v060-typebeat-relevance
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Phase 2 branch
+        uses: actions/checkout@v4
+        with:
+          ref: barz-v0.6-phase2-ready
+          fetch-depth: 0
+
+      - name: Patch Type Beat relevance
+        run: node .github/scripts/patch-barz-v060-typebeat-relevance.mjs
+
+      - name: Validate inline JavaScript
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const html=fs.readFileSync('barz/index.html','utf8');
+          if(!html.includes("order:'relevance'")) throw new Error('relevance order missing');
+          if(!html.includes("videoCategoryId:'10'")) throw new Error('music category missing');
+          if(!html.includes('typeBeatTitleMatch(t.title,artist)')) throw new Error('artist title filter missing');
+          const blocks=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m=>m[1]).filter(Boolean);
+          fs.writeFileSync('/tmp/barz-v060-inline.js',blocks.join('\n'));
+          NODE
+          node --check /tmp/barz-v060-inline.js
+
+      - name: Commit patched Barz core
+        shell: bash
+        run: |
+          if git diff --quiet -- barz/index.html; then
+            echo "No Barz core changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add barz/index.html
+          git commit -m "fix(barz): keep Type Beat picks artist-relevant [skip ci]"
+          git push origin HEAD:barz-v0.6-phase2-ready
