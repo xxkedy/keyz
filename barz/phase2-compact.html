@@ -33,30 +33,47 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0b0d}
 
       .readyCenter{display:block!important;place-content:initial!important;text-align:left!important;min-height:0!important;padding:0!important;width:100%!important}
       .readyCenter:before{display:none!important}
-      .readyDashboard{height:100%;min-height:0;display:grid;grid-template-columns:minmax(250px,.9fr) minmax(380px,1.35fr) minmax(250px,.9fr);gap:14px;align-items:stretch}
+      .readyDashboard{height:100%;min-height:0;display:grid;grid-template-columns:minmax(280px,.95fr) minmax(380px,1.3fr) minmax(250px,.82fr);gap:14px;align-items:stretch}
       .dashPanel{min-height:0;border:1px solid #263036;border-radius:24px;background:linear-gradient(180deg,rgba(17,21,24,.98),rgba(10,13,15,.98));box-shadow:0 20px 54px rgba(0,0,0,.3);padding:18px;display:flex;flex-direction:column;overflow:hidden}
       .dashPanel.accent{border-color:#1d4d52;background:linear-gradient(180deg,rgba(14,35,38,.98),rgba(10,16,18,.98))}
       .dashEyebrow{font-size:9px;font-weight:950;letter-spacing:1.8px;color:#7f898f;margin-bottom:10px}
       .dashTitle{font-size:18px;font-weight:950;letter-spacing:-.4px;margin:0 0 12px;color:#f4f1e9}
       .dashSub{font-size:10px;color:#8f989f;line-height:1.5}
       .dashSpacer{flex:1}
-      .dashMetric{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+      .dashMetric{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
       .dashMetric>div{border:1px solid #252c31;border-radius:14px;background:#0d1012;padding:11px}
       .dashMetric small{display:block;font-size:8px;letter-spacing:1.2px;color:#707a82;font-weight:900}
       .dashMetric b{display:block;margin-top:5px;font-size:13px;color:#f2e5c7}
 
-      .beatPanelQA .conditionButton{width:100%!important;padding:14px 12px!important;border:1px solid #214a50!important;background:#0b1719!important;border-radius:16px!important;font-size:clamp(22px,2.4vw,34px)!important;line-height:1!important;text-align:left!important}
-      .beatPanelQA .readyStatus{margin-top:10px!important;min-height:18px!important;color:#aab2b8!important;font-size:10px!important;letter-spacing:.3px!important}
+      .beatModeTabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px}
+      .beatMode{min-height:42px;border:1px solid #2a3136;border-radius:12px;background:#0e1214;color:#9aa4ab;font-size:9px;font-weight:950;letter-spacing:.2px}
+      .beatMode.on{border-color:#277d86;background:#0b2023;color:#29d6df}
+      .beatMode:active,.artistBtn:active,.beatTool:active{transform:scale(.985)}
+      .beatModeBody{min-height:0}
+      .beatLead{border:1px solid #214a50;background:#0b1719;border-radius:16px;padding:13px 12px;margin-bottom:9px}
+      .beatLead small{display:block;font-size:8px;letter-spacing:1.3px;color:#6f7b82;font-weight:950}
+      .beatLead b{display:block;margin-top:6px;color:#29d6df;font-size:20px;line-height:1.05}
+      .beatLead span{display:block;margin-top:5px;color:#8e999f;font-size:9px;line-height:1.4}
+      .artistGrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+      .artistBtn{min-height:38px;border:1px solid #293137;border-radius:11px;background:#101416;color:#f4f1e9;font-size:9.5px;font-weight:900;text-align:left;padding:0 10px}
+      .artistBtn.on{border-color:#29d6df;background:#0d2529;color:#29d6df}
+      .beatToolRow{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
+      .beatTool{min-height:44px;border:1px solid #2b3137;border-radius:12px;background:#121619;color:#f4f1e9;font-size:9.5px;font-weight:900}
+      .beatTool.primary{border-color:#1d5960;background:#0e2427;color:#42dae1}
+      .beatTool.full{grid-column:1/-1}
+      .nativeConditionSlot{display:none}
+      .beatPanelQA.genreMode .nativeConditionSlot{display:block}
+      .beatPanelQA.genreMode .conditionButton{width:100%!important;padding:12px!important;border:1px solid #214a50!important;background:#0b1719!important;border-radius:14px!important;font-size:20px!important;line-height:1!important;text-align:left!important}
+      .beatPanelQA .readyStatus{margin-top:9px!important;min-height:16px!important;color:#aab2b8!important;font-size:9px!important;letter-spacing:.2px!important;line-height:1.35}
       .beatPanelQA .readyStatus:before{content:'🎧 ';}
-      .beatChange{margin-top:12px;min-height:48px;border:1px solid #2b3137;border-radius:14px;background:#121619;color:#f4f1e9;font-size:11px;font-weight:900}
-      .beatChange:active{transform:scale(.985)}
 
       .rapPanelQA{justify-content:center;text-align:center;padding:24px!important}
       .rapPanelQA .heroMark{font-size:10px;color:#58e1c0;font-weight:950;letter-spacing:2px;margin-bottom:12px}
       .rapPanelQA .heroTitle{font-size:clamp(44px,5.2vw,72px);line-height:.94;font-weight:1000;letter-spacing:-3px;margin:0;color:#f4f1e9}
       .rapPanelQA .heroTitle span{color:#29d6df}
       .rapPanelQA .heroHint{margin:14px auto 18px;max-width:420px;font-size:11px;color:#909aa1;line-height:1.55}
-      .goHero{width:100%!important;min-height:112px!important;height:auto!important;border-radius:24px!important;font-size:clamp(34px,4vw,52px)!important;letter-spacing:-1.6px!important;background:linear-gradient(135deg,#20c0ca 0%,#29d6df 56%,#54dec2 100%)!important;color:#05272a!important;box-shadow:0 18px 44px rgba(41,214,223,.14)!important;margin:0!important}
+      .goHero{width:100%!important;min-height:112px!important;height:auto!important;border-radius:24px!important;font-size:clamp(30px,3.6vw,48px)!important;letter-spacing:-1.2px!important;background:linear-gradient(135deg,#20c0ca 0%,#29d6df 56%,#54dec2 100%)!important;color:#05272a!important;box-shadow:0 18px 44px rgba(41,214,223,.14)!important;margin:0!important}
+      .goHero:disabled{background:#162024!important;color:#657279!important;box-shadow:none!important;cursor:not-allowed}
       .goHero:active{transform:scale(.988)!important}
       .heroFoot{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
       .heroFoot div{border:1px solid #253036;border-radius:13px;background:#0d1214;padding:9px 6px;font-size:9px;color:#98a2a9;font-weight:850}
@@ -95,15 +112,15 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0b0d}
         .readyShell,.rapScreen{width:calc(100% - 20px)!important;max-width:720px!important}
         .readyDashboard{grid-template-columns:1fr!important;grid-template-rows:auto minmax(0,1fr) auto!important;gap:8px!important}
         .beatPanelQA,.quickPanelQA{padding:11px!important;border-radius:18px!important}
-        .beatPanelQA{display:grid!important;grid-template-columns:1fr auto;gap:8px!important;align-items:center}
         .beatPanelQA .dashEyebrow,.beatPanelQA .dashTitle,.beatPanelQA .dashMetric,.beatPanelQA .dashSpacer{display:none!important}
-        .beatPanelQA .conditionButton{font-size:20px!important;padding:10px!important}
-        .beatPanelQA .readyStatus{grid-column:1/-1;margin:0!important}
-        .beatChange{margin:0!important;min-height:42px;padding:0 12px}
+        .beatModeTabs{grid-template-columns:repeat(3,1fr)}
+        .artistGrid{grid-template-columns:repeat(4,1fr)}
+        .artistBtn{padding:0 6px;text-align:center;font-size:8px}
+        .beatToolRow{grid-template-columns:1fr 1fr}
         .rapPanelQA{padding:16px!important;border-radius:20px!important}
         .rapPanelQA .heroTitle{font-size:40px}
         .rapPanelQA .heroHint{margin:8px auto 12px}
-        .goHero{min-height:78px!important;font-size:32px!important;border-radius:18px!important}
+        .goHero{min-height:78px!important;font-size:28px!important;border-radius:18px!important}
         .heroFoot{margin-top:8px}
         .quickPanelQA .dashEyebrow,.quickPanelQA .dashTitle,.quickPanelQA .dashSub{display:none!important}
         .quickGrid{grid-template-columns:repeat(4,1fr)!important}
@@ -144,15 +161,27 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0b0d}
     const review=d.getElementById('reviewButton');
     const condition=d.getElementById('conditionButton');
     const status=d.getElementById('quickRapStatus');
-    const menuButton=d.getElementById('menuButton');
     const readyCenter=d.querySelector('.readyCenter');
     const go=d.getElementById('quickRapBtn');
     const menuSheet=d.getElementById('menuSheet');
+    const findBeat=d.getElementById('findBeat');
+    const clipboardBeat=d.getElementById('clipboardBeat');
+
+    const ARTISTS=[
+      ['Bladee','🗡️'],['Ecco2k','💠'],['Future','🦅'],['Travis Scott','🌵'],
+      ['Ken Carson','🧛'],['Playboi Carti','🦋'],['Destroy Lonely','🕷️'],['Yeat','🔔']
+    ];
+    const MODE_KEY='barz_phase2_beat_mode';
+    const ARTIST_KEY='barz_phase2_artist';
+    let beatMode=localStorage.getItem(MODE_KEY)||'forYou';
+    let selectedArtist=localStorage.getItem(ARTIST_KEY)||'Bladee';
 
     const openSecondary=(key)=>{
       const btn=menuSheet&&menuSheet.querySelector(`[data-open-secondary="${key}"]`);
       if(btn)btn.click();
     };
+    const ytSearchUrl=(q)=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
+    const markImportPending=()=>{try{sessionStorage.setItem('barz_import_pending','1')}catch(e){}};
 
     if(readyCenter && condition && status && go){
       readyCenter.innerHTML='';
@@ -162,16 +191,21 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0b0d}
         <section class="dashPanel beatPanelQA">
           <div class="dashEyebrow">🎧 BEAT</div>
           <h2 class="dashTitle">Pick the lane</h2>
-          <div data-slot="condition"></div>
+          <div class="beatModeTabs">
+            <button class="beatMode" type="button" data-beat-mode="forYou">✨ FOR YOU</button>
+            <button class="beatMode" type="button" data-beat-mode="type">👤 TYPE BEAT</button>
+            <button class="beatMode" type="button" data-beat-mode="genre">🎨 GENRE</button>
+          </div>
+          <div class="beatModeBody" data-beat-body></div>
+          <div class="nativeConditionSlot" data-slot="condition"></div>
           <div data-slot="status"></div>
-          <button class="beatChange" type="button">🎛 CHANGE BEAT</button>
           <div class="dashSpacer"></div>
-          <div class="dashMetric"><div><small>SORT</small><b>🔥 HOT</b></div><div><small>PICK</small><b>✨ FOR YOU</b></div></div>
+          <div class="dashMetric"><div><small>SORT</small><b>🔥 HOT</b></div><div><small>PICK</small><b data-pick-label>✨ FOR YOU</b></div></div>
         </section>
         <section class="dashPanel accent rapPanelQA">
           <div class="heroMark">⚡ READY TO RAP</div>
           <h2 class="heroTitle">RAP <span>NOW</span></h2>
-          <div class="heroHint">Beatが決まったら、ここだけ押せば3秒カウント→録音開始。</div>
+          <div class="heroHint">Beatが準備できたら1タップ。未準備なら左で選ぶだけ。</div>
           <div data-slot="go"></div>
           <div class="heroFoot"><div>3 SEC COUNT-IN</div><div>LOCAL SAVE</div><div>ONE TAP START</div></div>
         </section>
@@ -193,7 +227,74 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0b0d}
       dashboard.querySelector('[data-slot="condition"]').appendChild(condition);
       dashboard.querySelector('[data-slot="status"]').appendChild(status);
       dashboard.querySelector('[data-slot="go"]').appendChild(go);
-      dashboard.querySelector('.beatChange').addEventListener('click',()=>condition.click());
+
+      const beatPanel=dashboard.querySelector('.beatPanelQA');
+      const beatBody=dashboard.querySelector('[data-beat-body]');
+      const pickLabel=dashboard.querySelector('[data-pick-label]');
+
+      const setSearchQuery=(query)=>{
+        if(findBeat)findBeat.href=ytSearchUrl(query);
+      };
+      const renderBeatMode=()=>{
+        dashboard.querySelectorAll('[data-beat-mode]').forEach(btn=>btn.classList.toggle('on',btn.dataset.beatMode===beatMode));
+        beatPanel.classList.toggle('genreMode',beatMode==='genre');
+        if(beatMode==='forYou'){
+          pickLabel.textContent='✨ FOR YOU';
+          beatBody.innerHTML=`
+            <div class="beatLead"><small>AUTO PICK</small><b>FOR YOU · HOT</b><span>KEEP / BUILD / SKIPから好みを育てる本線。候補が空ならTYPE BEATかGENREへ。</span></div>
+            <div class="beatToolRow"><button class="beatTool primary full" type="button" data-beat-action="openGenre">🎨 条件を変える</button></div>`;
+        }else if(beatMode==='type'){
+          pickLabel.textContent='👤 '+selectedArtist;
+          beatBody.innerHTML=`
+            <div class="beatLead"><small>TYPE BEAT</small><b>${selectedArtist}</b><span>${selectedArtist} type beat 2026 を探す。</span></div>
+            <div class="artistGrid">${ARTISTS.map(([name,emoji])=>`<button class="artistBtn${name===selectedArtist?' on':''}" type="button" data-artist="${name}">${emoji} ${name}</button>`).join('')}</div>
+            <div class="beatToolRow">
+              <button class="beatTool primary" type="button" data-beat-action="search">🔎 YouTube</button>
+              <button class="beatTool" type="button" data-beat-action="clipboard">📋 コピーBeat</button>
+            </div>`;
+          setSearchQuery(`${selectedArtist} type beat 2026`);
+        }else{
+          pickLabel.textContent='🎨 GENRE';
+          beatBody.innerHTML=`
+            <div class="beatLead"><small>GENRE</small><b>ジャンルから選ぶ</b><span>TRAP / CLOUD / PLUG / RAGE / POP / DIGI / Blend。</span></div>
+            <div class="beatToolRow">
+              <button class="beatTool primary" type="button" data-beat-action="openGenre">🎛 条件を開く</button>
+              <button class="beatTool" type="button" data-beat-action="clipboard">📋 コピーBeat</button>
+            </div>`;
+        }
+      };
+
+      dashboard.addEventListener('click',(e)=>{
+        const modeBtn=e.target.closest('[data-beat-mode]');
+        if(modeBtn){
+          beatMode=modeBtn.dataset.beatMode;
+          localStorage.setItem(MODE_KEY,beatMode);
+          renderBeatMode();
+          return;
+        }
+        const artistBtn=e.target.closest('[data-artist]');
+        if(artistBtn){
+          selectedArtist=artistBtn.dataset.artist;
+          beatMode='type';
+          localStorage.setItem(ARTIST_KEY,selectedArtist);
+          localStorage.setItem(MODE_KEY,beatMode);
+          status.textContent=`${selectedArtist} TYPE BEAT · YouTubeで選んでURLをコピー`;
+          renderBeatMode();
+          return;
+        }
+        const action=e.target.closest('[data-beat-action]')?.dataset.beatAction;
+        if(!action)return;
+        if(action==='search'&&findBeat){
+          markImportPending();
+          findBeat.click();
+        }else if(action==='clipboard'&&clipboardBeat){
+          clipboardBeat.click();
+        }else if(action==='openGenre'){
+          condition.click();
+        }
+      });
+      renderBeatMode();
+
       dashboard.querySelector('[data-role="beats"]').addEventListener('click',()=>condition.click());
       dashboard.querySelector('[data-role="sessions"]').addEventListener('click',()=>openSecondary('sessions'));
       dashboard.querySelector('[data-role="builds"]').addEventListener('click',()=>openSecondary('builds'));
@@ -214,8 +315,15 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0b0d}
     }
 
     if(go){
-      const syncGo=()=>{if((go.textContent||'').trim()==='GO')go.textContent='🎤 RAP';};
-      new MutationObserver(syncGo).observe(go,{childList:true,subtree:true});
+      const syncGo=()=>{
+        const raw=(go.textContent||'').trim();
+        if(go.disabled){
+          if(raw==='GO'||raw==='🎤 RAP'||raw==='…')go.textContent='🎧 BEATを選ぶ';
+        }else if(raw==='GO'||raw==='🎧 BEATを選ぶ'){
+          go.textContent='🎤 RAP';
+        }
+      };
+      new MutationObserver(syncGo).observe(go,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled']});
       syncGo();
     }
 
