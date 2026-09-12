@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/scripts/patch-barz-v060-inline-typebeat.mjs'
       - '.github/scripts/fix-barz-v060-inline-cards.mjs'
+      - '.github/scripts/patch-barz-v060-api-connect.mjs'
       - '.github/workflows/barz-v060-inline-typebeat.yml'
   workflow_dispatch:
 
@@ -28,6 +29,8 @@ jobs:
         run: node .github/scripts/patch-barz-v060-inline-typebeat.mjs
       - name: Fix candidate card branch
         run: node .github/scripts/fix-barz-v060-inline-cards.mjs
+      - name: Add inline YouTube API connect
+        run: node .github/scripts/patch-barz-v060-api-connect.mjs
       - name: Validate
         shell: bash
         run: |
@@ -42,10 +45,15 @@ jobs:
           const core=fs.readFileSync('barz/index.html','utf8');
           const qa=fs.readFileSync('barz/phase2-desktop-v2.html','utf8');
           if(!core.includes('window.BarzPhase2=')) throw new Error('BarzPhase2 API missing');
+          if(!core.includes('hasApiKey:')) throw new Error('hasApiKey missing');
+          if(!core.includes('setApiKey:async')) throw new Error('setApiKey missing');
           if(!core.includes('TYPE:')) throw new Error('TYPE slot missing');
           if(!qa.includes('<div class="candidateList" data-candidate-slot></div>')) throw new Error('candidate list UI missing');
           if(!qa.includes('setTimeout(loadTypeCandidates,0)')) throw new Error('candidate loader missing');
+          if(!qa.includes('data-api-connect')) throw new Error('inline API connect missing');
+          if(!qa.includes('data-api-retry')) throw new Error('inline API retry missing');
           if(!qa.includes('playTypeCandidate')) throw new Error('candidate click missing');
+          if(/AIza[0-9A-Za-z_-]{20,}/.test(core+qa)) throw new Error('API key leaked into repo');
           NODE
           node --check /tmp/index.html.js
           node --check /tmp/phase2-desktop-v2.html.js
@@ -59,5 +67,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add barz/index.html barz/phase2-desktop-v2.html
-          git commit -m 'feat(barz): keep Type Beat discovery inside Barz [skip ci]'
+          git commit -m 'feat(barz): connect YouTube API inside Barz [skip ci]'
           git push origin HEAD:barz-v0.6-phase2-ready
