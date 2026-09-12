@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<title>Barz v0.6 Desktop QA v2</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090b}
+#barz{display:block;width:100%;height:100dvh;border:0;background:#08090b}
+</style>
+</head>
+<body>
+<iframe id="barz" src="./?phase2=1" allow="microphone; autoplay; encrypted-media; picture-in-picture" title="Barz v0.6 desktop QA v2"></iframe>
+<script>
+(()=>{
+  const frame=document.getElementById('barz');
+  frame.addEventListener('load',()=>{
+    const d=frame.contentDocument;
+    if(!d)return;
+
+    const css=d.createElement('style');
+    css.textContent=`
+      body{overflow:hidden!important;background:#08090b!important}
+      .readyShell{height:100dvh!important;min-height:100dvh!important;max-width:1280px!important;width:calc(100% - 28px)!important;padding:12px 0 14px!important;grid-template-rows:auto minmax(0,1fr)!important;gap:10px!important}
+      .readyHeader{min-height:48px!important;margin:0!important;padding:0 4px!important;align-items:center!important}
+      .readyHeader .brand h1{font-size:36px!important;letter-spacing:-1.4px!important}
+      .readyVersion{font-size:9px!important;opacity:.65}.menuButton{width:42px!important;height:42px!important;border-radius:13px!important}.reviewButton{display:none!important}
+      .readyCenter{display:block!important;min-height:0!important;width:100%!important;padding:0!important;text-align:left!important;place-content:initial!important}
+      .readyDashboard{height:100%;display:grid;grid-template-columns:minmax(300px,.95fr) minmax(420px,1.25fr) minmax(270px,.82fr);gap:12px}
+      .dashPanel{min-height:0;border:1px solid #293137;border-radius:24px;background:linear-gradient(180deg,#111518,#0b0e10);padding:18px;display:flex;flex-direction:column;overflow:hidden}
+      .dashPanel.hero{border-color:#1e5c63;background:linear-gradient(180deg,#0c2529,#0a1113);justify-content:center;text-align:center}
+      .eyebrow{font-size:9px;letter-spacing:1.7px;font-weight:950;color:#7f8990;margin-bottom:9px}.title{margin:0 0 12px;font-size:19px;font-weight:950;color:#f4f1e9}.sub{font-size:10px;line-height:1.5;color:#8f999f}.spacer{flex:1}
+      .modeTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}.modeBtn{min-height:42px;border:1px solid #2b3338;border-radius:12px;background:#0e1214;color:#9ba4aa;font-size:9px;font-weight:950}.modeBtn.on{border-color:#2aa9b2;background:#0d2528;color:#31d9df}
+      .lead{border:1px solid #214b50;border-radius:16px;background:#0b181a;padding:12px;margin-bottom:9px}.lead small{display:block;font-size:8px;letter-spacing:1.3px;font-weight:950;color:#748087}.lead b{display:block;margin-top:5px;font-size:21px;color:#2bd8df}.lead span{display:block;margin-top:5px;font-size:9px;line-height:1.4;color:#919ba1}
+      .artistGrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.artistBtn{min-height:38px;border:1px solid #2a3237;border-radius:11px;background:#101416;color:#f4f1e9;padding:0 10px;text-align:left;font-size:9.5px;font-weight:900}.artistBtn.on{border-color:#2bd8df;background:#0d2528;color:#2bd8df}
+      .toolRow{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.toolBtn{min-height:44px;border:1px solid #2c3439;border-radius:12px;background:#121719;color:#f4f1e9;font-size:9.5px;font-weight:900}.toolBtn.primary{border-color:#23616a;background:#0e2528;color:#43dce2}.toolBtn.full{grid-column:1/-1}
+      .nowBeat{margin-top:10px;border:1px solid #252d31;border-radius:14px;background:#0d1113;padding:11px}.nowBeat small{display:block;font-size:8px;letter-spacing:1.2px;color:#707a80;font-weight:950}.nowBeat b{display:block;margin-top:5px;font-size:11px;line-height:1.35;color:#f2e5c7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.beatState{margin-top:8px;min-height:18px;font-size:9.5px;line-height:1.4;color:#98a2a8}.beatState.ok{color:#58e1c0}.beatState.warn{color:#f0c879}
+      .nativeCondition{display:none}.beatPanel.genre .nativeCondition{display:block}.beatPanel.genre .conditionButton{width:100%!important;border:1px solid #214b50!important;border-radius:14px!important;background:#0b181a!important;font-size:19px!important;text-align:left!important;padding:12px!important}
+      .heroMark{font-size:10px;letter-spacing:2px;font-weight:950;color:#58e1c0}.heroTitle{font-size:clamp(48px,5.4vw,76px);line-height:.94;font-weight:1000;letter-spacing:-3px;color:#f4f1e9;margin:12px 0 0}.heroTitle span{color:#2bd8df}.heroHint{margin:14px auto 18px;max-width:430px;color:#909aa0;font-size:11px;line-height:1.55}
+      .hero .goHero{width:100%!important;min-height:112px!important;height:auto!important;border-radius:24px!important;font-size:clamp(30px,3.8vw,50px)!important;background:linear-gradient(135deg,#20c0ca,#31d9df 55%,#54dec2)!important;color:#05272a!important;box-shadow:0 18px 44px rgba(41,214,223,.14)!important;margin:0!important}.hero .goHero:disabled{background:#151d20!important;color:#667278!important;box-shadow:none!important;cursor:not-allowed}.heroFoot{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:11px}.heroFoot div{border:1px solid #263036;border-radius:13px;background:#0d1214;padding:9px 6px;color:#9aa3a9;font-size:9px;font-weight:850}
+      .quickGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.quickBtn{min-height:62px;border:1px solid #2b3338;border-radius:15px;background:#111518;color:#f4f1e9;text-align:left;padding:10px 12px;font-size:11px;font-weight:900}.quickBtn span{display:block;margin-top:4px;color:#737e84;font-size:8px}.quickBtn.wide{grid-column:1/-1}.quickBtn:disabled{opacity:.4}
+      .metric{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.metric>div{border:1px solid #252d31;border-radius:14px;background:#0d1113;padding:10px}.metric small{display:block;font-size:8px;color:#707a80;letter-spacing:1.1px}.metric b{display:block;margin-top:4px;font-size:12px;color:#f2e5c7}
+      .rapScreen{height:100dvh!important;max-width:1280px!important;width:calc(100% - 28px)!important;display:none!important;grid-template-columns:minmax(330px,.95fr) minmax(390px,1.2fr) minmax(260px,.75fr)!important;grid-template-rows:minmax(0,1fr)!important;gap:12px!important;padding:12px 0 14px!important;background:#08090b!important}.rapScreen.on{display:grid!important}.rapCol{min-height:0;border:1px solid #293137;border-radius:24px;background:linear-gradient(180deg,#111518,#0b0e10);padding:15px;overflow:hidden}.rapMediaCol{display:flex;flex-direction:column;gap:10px}.rapPlayer{width:100%!important;min-height:210px!important;max-height:none!important;margin:0!important;aspect-ratio:16/9!important;border-radius:16px!important}.rapPlayer .playerWrap{display:block!important;width:100%;height:100%;max-width:none!important;margin:0!important}.rapMeta{text-align:left!important;font-size:11px!important;color:#a7b0b6!important}.rapPromptCol{display:flex;flex-direction:column;justify-content:center;text-align:center;border-color:#1e5c63;background:linear-gradient(180deg,#0c2529,#0a1113)}.rapPrompt{border:0!important;background:transparent!important;padding:18px!important}.rapPrompt:before{content:'💭 WORD PROMPT';display:block;margin-bottom:12px;color:#7f8990;font-size:9px;font-weight:950;letter-spacing:1.6px}.rapWord{font-size:clamp(48px,6vw,84px)!important;line-height:.95!important}.rapActionCol{display:flex;flex-direction:column;gap:9px}.rapKeep{min-height:94px!important;border-radius:20px!important}.rapActions{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}.rapAction{min-height:58px!important;border-radius:15px!important}.rapAction.next{min-height:76px!important;font-size:18px!important;order:-1}
+      @media(max-width:900px){.readyDashboard{grid-template-columns:1fr!important;grid-template-rows:auto minmax(0,1fr) auto!important}.dashPanel{padding:12px}.artistGrid{grid-template-columns:repeat(4,1fr)}.artistBtn{text-align:center;padding:0 5px}.quickGrid{grid-template-columns:repeat(4,1fr)}.quickBtn{min-height:44px;text-align:center;padding:7px;font-size:9px}.quickBtn span{display:none}.quickBtn.wide{grid-column:auto}.rapScreen{grid-template-columns:1fr!important;grid-template-rows:auto minmax(0,1fr) auto!important}.rapActionCol{display:grid!important;grid-template-columns:1.1fr 1fr 1.45fr 1fr}.rapActions{display:contents!important}.rapAction,.rapAction.next,.rapKeep{min-height:54px!important}}
+    `;
+    d.head.appendChild(css);
+
+    const readyCenter=d.querySelector('.readyCenter');
+    const go=d.getElementById('quickRapBtn');
+    const status=d.getElementById('quickRapStatus');
+    const condition=d.getElementById('conditionButton');
+    const menuSheet=d.getElementById('menuSheet');
+    const review=d.getElementById('reviewButton');
+    const findBeat=d.getElementById('findBeat');
+    const clipboardBeat=d.getElementById('clipboardBeat');
+    const radioTitle=d.getElementById('radioTitle');
+    const playerWrap=d.getElementById('playerWrap');
+    if(!readyCenter||!go||!status||!condition)return;
+
+    const ARTISTS=[['Bladee','🗡️'],['Ecco2k','💠'],['Future','🦅'],['Travis Scott','🌵'],['Ken Carson','🧛'],['Playboi Carti','🦋'],['Destroy Lonely','🕷️'],['Yeat','🔔']];
+    const MODE_KEY='barz_phase2_beat_mode',ARTIST_KEY='barz_phase2_artist';
+    let beatMode=localStorage.getItem(MODE_KEY)||'forYou';
+    let selectedArtist=localStorage.getItem(ARTIST_KEY)||'Bladee';
+    let searching=false;
+
+    const dashboard=d.createElement('div');
+    dashboard.className='readyDashboard';
+    dashboard.innerHTML=`
+      <section class="dashPanel beatPanel">
+        <div class="eyebrow">🎧 BEAT</div><h2 class="title">Pick the lane</h2>
+        <div class="modeTabs"><button class="modeBtn" data-mode="forYou">✨ FOR YOU</button><button class="modeBtn" data-mode="type">👤 TYPE BEAT</button><button class="modeBtn" data-mode="genre">🎨 GENRE</button></div>
+        <div data-beat-body></div><div class="nativeCondition" data-condition-slot></div>
+        <div class="nowBeat"><small>NOW BEAT</small><b data-now-title>まだBeatなし</b></div><div class="beatState warn" data-beat-state>Beat未準備</div><div class="spacer"></div>
+        <div class="metric"><div><small>SORT</small><b>🔥 HOT</b></div><div><small>PICK</small><b data-pick>✨ FOR YOU</b></div></div>
+      </section>
+      <section class="dashPanel hero"><div class="heroMark">⚡ READY TO RAP</div><h2 class="heroTitle">RAP <span>NOW</span></h2><div class="heroHint">Beatが準備できた時だけ開始。未準備なら左で選ぶ。</div><div data-go-slot></div><div class="heroFoot"><div>3 SEC COUNT-IN</div><div>LOCAL SAVE</div><div>ONE TAP START</div></div></section>
+      <section class="dashPanel"><div class="eyebrow">⚡ QUICK</div><h2 class="title">Jump anywhere</h2><div class="sub">よく使う場所へ1階層で移動。</div><div class="quickGrid"><button class="quickBtn" data-role="review">↺ REVIEW<span>未判定Take</span></button><button class="quickBtn" data-role="sessions">🎙 SESSIONS<span>録音履歴</span></button><button class="quickBtn" data-role="builds">🔥 BUILDS<span>曲候補</span></button><button class="quickBtn" data-role="beats">🎧 BEATS<span>Beat条件</span></button><button class="quickBtn wide" data-role="settings">⚙ SETTINGS<span>細かい設定</span></button></div><div class="spacer"></div><div class="metric"><div><small>MODE</small><b>RAP</b></div><div><small>SAVE</small><b>DEVICE</b></div></div></section>`;
+    readyCenter.innerHTML='';readyCenter.appendChild(dashboard);
+    dashboard.querySelector('[data-condition-slot]').appendChild(condition);
+    dashboard.querySelector('[data-go-slot]').appendChild(go);
+
+    const beatPanel=dashboard.querySelector('.beatPanel'),beatBody=dashboard.querySelector('[data-beat-body]'),pick=dashboard.querySelector('[data-pick]'),nowTitle=dashboard.querySelector('[data-now-title]'),beatState=dashboard.querySelector('[data-beat-state]');
+    const openSecondary=(key)=>{const b=menuSheet&&menuSheet.querySelector(`[data-open-secondary="${key}"]`);if(b)b.click()};
+    const yt=(q)=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
+    const cleanTitle=()=>{const t=(radioTitle?.textContent||'').trim();return (!t||t==='まだBeatなし'||/PLAYで先頭/.test(t))?'':t};
+    const manualBeatReady=()=>!!(cleanTitle()&&playerWrap?.classList.contains('on'));
+    const nativeAutoReady=()=>!go.disabled&&!/BEAT RETRY|PREPARING|FALLBACK|未準備/i.test(status.textContent||'');
+
+    function setBeatState(text,kind){beatState.textContent=text;beatState.className='beatState '+(kind||'warn')}
+    function syncCTA(){
+      const title=cleanTitle();nowTitle.textContent=title||'まだBeatなし';
+      let ready=false;
+      if(beatMode==='type') ready=manualBeatReady();
+      else ready=nativeAutoReady()||manualBeatReady();
+      if(ready){go.disabled=false;go.textContent='🎤 RAP';setBeatState('✓ Beat準備完了','ok');searching=false}
+      else{go.disabled=true;go.textContent='🎧 BEATを選ぶ';if(searching)setBeatState('YouTubeでBeatを選んでURLコピー → 戻れば自動読込','warn');else if(beatMode==='type')setBeatState(`${selectedArtist} Type Beat · Beat未準備`,'warn');else setBeatState('Beat未準備 · 左で条件を選ぶ','warn')}
+    }
+    function renderBeat(){
+      dashboard.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('on',b.dataset.mode===beatMode));beatPanel.classList.toggle('genre',beatMode==='genre');
+      if(beatMode==='forYou'){
+        pick.textContent='✨ FOR YOU';beatBody.innerHTML=`<div class="lead"><small>AUTO PICK</small><b>FOR YOU · HOT</b><span>KEEP / BUILD / SKIPから好みを育てる本線。</span></div><div class="toolRow"><button class="toolBtn primary full" data-action="genre">🎨 条件を変える</button></div>`;
+      }else if(beatMode==='type'){
+        pick.textContent='👤 '+selectedArtist;beatBody.innerHTML=`<div class="lead"><small>TYPE BEAT</small><b>${selectedArtist}</b><span>${selectedArtist} type beat 2026</span></div><div class="artistGrid">${ARTISTS.map(([n,e])=>`<button class="artistBtn${n===selectedArtist?' on':''}" data-artist="${n}">${e} ${n}</button>`).join('')}</div><div class="toolRow"><button class="toolBtn primary" data-action="search">🔎 YouTubeで探す</button><button class="toolBtn" data-action="clip">📋 コピーBeat</button></div>`;if(findBeat)findBeat.href=yt(`${selectedArtist} type beat 2026`);
+      }else{
+        pick.textContent='🎨 GENRE';beatBody.innerHTML=`<div class="lead"><small>GENRE</small><b>ジャンルから選ぶ</b><span>TRAP / CLOUD / PLUG / RAGE / POP / DIGI / Blend</span></div><div class="toolRow"><button class="toolBtn primary" data-action="genre">🎛 条件を開く</button><button class="toolBtn" data-action="clip">📋 コピーBeat</button></div>`;
+      }
+      syncCTA();
+    }
+
+    dashboard.addEventListener('click',(e)=>{
+      const m=e.target.closest('[data-mode]');if(m){beatMode=m.dataset.mode;localStorage.setItem(MODE_KEY,beatMode);searching=false;renderBeat();return}
+      const a=e.target.closest('[data-artist]');if(a){selectedArtist=a.dataset.artist;beatMode='type';localStorage.setItem(ARTIST_KEY,selectedArtist);localStorage.setItem(MODE_KEY,'type');searching=false;renderBeat();return}
+      const act=e.target.closest('[data-action]')?.dataset.action;if(!act)return;
+      if(act==='search'&&findBeat){searching=true;syncCTA();try{sessionStorage.setItem('barz_import_pending','1')}catch(_){ }findBeat.click()}
+      if(act==='clip'&&clipboardBeat){clipboardBeat.click();setTimeout(syncCTA,500);setTimeout(syncCTA,1800)}
+      if(act==='genre')condition.click();
+    });
+
+    dashboard.querySelector('[data-role="beats"]').onclick=()=>condition.click();
+    dashboard.querySelector('[data-role="sessions"]').onclick=()=>openSecondary('sessions');dashboard.querySelector('[data-role="builds"]').onclick=()=>openSecondary('builds');dashboard.querySelector('[data-role="settings"]').onclick=()=>openSecondary('settings');
+    const reviewProxy=dashboard.querySelector('[data-role="review"]');reviewProxy.onclick=()=>review&&review.click();
+    const syncReview=()=>{if(!review)return;const raw=(review.textContent||'').trim(),n=(raw.match(/\d+/)||[])[0],on=review.classList.contains('on');reviewProxy.innerHTML=on?`↺ REVIEW${n?` ${n}`:''}<span>未判定Take</span>`:'✓ CLEAR<span>未判定なし</span>';reviewProxy.disabled=!on};if(review)new MutationObserver(syncReview).observe(review,{subtree:true,childList:true,attributes:true});syncReview();
+
+    [go,status,radioTitle,playerWrap].filter(Boolean).forEach(el=>new MutationObserver(()=>setTimeout(syncCTA,0)).observe(el,{subtree:true,childList:true,attributes:true,characterData:true}));
+    window.addEventListener('focus',()=>{setTimeout(syncCTA,350);setTimeout(syncCTA,1500)});d.addEventListener('visibilitychange',()=>{if(!d.hidden){setTimeout(syncCTA,350);setTimeout(syncCTA,1500)}});
+    renderBeat();
+
+    const rap=d.getElementById('rapScreen'),rapPlayer=d.getElementById('rapPlayer'),rapMeta=d.querySelector('.rapMeta'),rapPrompt=d.querySelector('.rapPrompt'),rapKeep=d.getElementById('rapKeep'),rapActions=d.querySelector('.rapActions');
+    if(rap&&rapPlayer&&rapMeta&&rapPrompt&&rapKeep&&rapActions){rap.innerHTML='';const media=d.createElement('section');media.className='rapCol rapMediaCol';const prompt=d.createElement('section');prompt.className='rapCol rapPromptCol';const actions=d.createElement('section');actions.className='rapCol rapActionCol';media.append(rapPlayer,rapMeta);prompt.appendChild(rapPrompt);actions.append(rapKeep,rapActions);rap.append(media,prompt,actions)}
+    [['rapRetake','🔁 RETAKE'],['rapNext','⏭ NEXT'],['rapEnd','⏹ END']].forEach(([id,t])=>{const el=d.getElementById(id);if(el)el.textContent=t});
+  });
+})();
+</script>
+</body>
+</html>
