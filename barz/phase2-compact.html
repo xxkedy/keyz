@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a0b0d">
-<title>Barz v0.6 Compact QA</title>
+<title>Barz v0.6 Desktop QA</title>
 <style>
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0b0d}
 #barz{display:block;width:100%;height:100dvh;border:0;background:#0a0b0d}
 </style>
 </head>
 <body>
-<iframe id="barz" src="./?phase2=1" allow="microphone; autoplay; encrypted-media; picture-in-picture" title="Barz v0.6 compact QA"></iframe>
+<iframe id="barz" src="./?phase2=1" allow="microphone; autoplay; encrypted-media; picture-in-picture" title="Barz v0.6 desktop QA"></iframe>
 <script>
 (()=>{
   const frame=document.getElementById('barz');
@@ -22,105 +22,221 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0b0d}
     const css=d.createElement('style');
     css.id='phase2CompactOverride';
     css.textContent=`
-      body{overflow:hidden!important;background:#090a0c!important}
-      .readyShell{position:relative;min-height:100dvh!important;height:100dvh!important;max-width:720px!important;padding:max(10px,env(safe-area-inset-top)) 16px calc(12px + env(safe-area-inset-bottom))!important;grid-template-rows:auto minmax(0,1fr)!important;gap:8px!important}
-      .readyHeader{align-items:center!important;min-height:42px!important;margin:0!important}
-      .readyHeader .brand h1{font-size:29px!important;letter-spacing:-1px!important}
-      .readyMeta{gap:7px!important}
-      .readyVersion{font-size:8px!important;opacity:.68}
-      .menuButton{width:40px!important;height:40px!important;border-radius:12px!important;background:#111417!important}
-
-      .readyCenter{align-self:center!important;justify-self:center!important;place-content:initial!important;display:flex!important;flex-direction:column!important;align-items:center!important;width:min(100%,560px)!important;min-height:0!important;padding:18px!important;border:1px solid #1d383c!important;border-radius:24px!important;background:linear-gradient(180deg,rgba(17,34,37,.94),rgba(13,17,19,.94))!important;box-shadow:0 18px 46px rgba(0,0,0,.28)!important}
-      .readyCenter:before{content:'⚡ READY';display:block;margin-bottom:8px;color:#58e1c0;font-size:9px;font-weight:950;letter-spacing:1.8px}
-      .conditionButton{padding:7px 10px!important;border-radius:14px!important;font-size:clamp(26px,5vw,38px)!important;line-height:1!important}
-      .readyStatus{margin-top:7px!important;min-height:16px!important;color:#aab2b8!important;font-size:10px!important;letter-spacing:.35px!important}
-      .readyStatus:before{content:'🎧 ';filter:saturate(.85)}
+      body{overflow:hidden!important;background:#08090b!important}
+      .readyShell{position:relative;min-height:100dvh!important;height:100dvh!important;max-width:1220px!important;width:calc(100% - 40px)!important;padding:max(14px,env(safe-area-inset-top)) 0 calc(16px + env(safe-area-inset-bottom))!important;grid-template-rows:auto minmax(0,1fr)!important;gap:12px!important}
+      .readyHeader{align-items:center!important;min-height:46px!important;margin:0!important;padding:0 2px!important}
+      .readyHeader .brand h1{font-size:34px!important;letter-spacing:-1.2px!important}
+      .readyMeta{gap:8px!important}
+      .readyVersion{font-size:9px!important;opacity:.7}
+      .menuButton{width:42px!important;height:42px!important;border-radius:13px!important;background:#111417!important}
       .reviewButton{display:none!important}
-      .readyQuickRow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;width:100%;margin-top:14px}
-      .readyQuickRow button{min-height:42px;border:1px solid #2b3137;border-radius:13px;background:#101316;color:#f4f1e9;font-size:10px;font-weight:900;letter-spacing:.35px}
-      .readyQuickRow button:active{transform:scale(.985)}
-      .readyQuickRow button[data-role="review"].hasReview{border-color:#655a42;color:#f0dcae;background:#17140e}
-      .readyQuickRow button:disabled{opacity:.42}
 
-      .goHero{order:10!important;width:100%!important;min-height:76px!important;height:auto!important;border-radius:18px!important;font-size:clamp(27px,6vw,38px)!important;letter-spacing:-1px!important;background:linear-gradient(135deg,#20c0ca 0%,#29d6df 58%,#54dec2 100%)!important;color:#05272a!important;box-shadow:0 12px 30px rgba(41,214,223,.14)!important;margin:12px 0 0!important}
+      .readyCenter{display:block!important;place-content:initial!important;text-align:left!important;min-height:0!important;padding:0!important;width:100%!important}
+      .readyCenter:before{display:none!important}
+      .readyDashboard{height:100%;min-height:0;display:grid;grid-template-columns:minmax(250px,.9fr) minmax(380px,1.35fr) minmax(250px,.9fr);gap:14px;align-items:stretch}
+      .dashPanel{min-height:0;border:1px solid #263036;border-radius:24px;background:linear-gradient(180deg,rgba(17,21,24,.98),rgba(10,13,15,.98));box-shadow:0 20px 54px rgba(0,0,0,.3);padding:18px;display:flex;flex-direction:column;overflow:hidden}
+      .dashPanel.accent{border-color:#1d4d52;background:linear-gradient(180deg,rgba(14,35,38,.98),rgba(10,16,18,.98))}
+      .dashEyebrow{font-size:9px;font-weight:950;letter-spacing:1.8px;color:#7f898f;margin-bottom:10px}
+      .dashTitle{font-size:18px;font-weight:950;letter-spacing:-.4px;margin:0 0 12px;color:#f4f1e9}
+      .dashSub{font-size:10px;color:#8f989f;line-height:1.5}
+      .dashSpacer{flex:1}
+      .dashMetric{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+      .dashMetric>div{border:1px solid #252c31;border-radius:14px;background:#0d1012;padding:11px}
+      .dashMetric small{display:block;font-size:8px;letter-spacing:1.2px;color:#707a82;font-weight:900}
+      .dashMetric b{display:block;margin-top:5px;font-size:13px;color:#f2e5c7}
+
+      .beatPanelQA .conditionButton{width:100%!important;padding:14px 12px!important;border:1px solid #214a50!important;background:#0b1719!important;border-radius:16px!important;font-size:clamp(22px,2.4vw,34px)!important;line-height:1!important;text-align:left!important}
+      .beatPanelQA .readyStatus{margin-top:10px!important;min-height:18px!important;color:#aab2b8!important;font-size:10px!important;letter-spacing:.3px!important}
+      .beatPanelQA .readyStatus:before{content:'🎧 ';}
+      .beatChange{margin-top:12px;min-height:48px;border:1px solid #2b3137;border-radius:14px;background:#121619;color:#f4f1e9;font-size:11px;font-weight:900}
+      .beatChange:active{transform:scale(.985)}
+
+      .rapPanelQA{justify-content:center;text-align:center;padding:24px!important}
+      .rapPanelQA .heroMark{font-size:10px;color:#58e1c0;font-weight:950;letter-spacing:2px;margin-bottom:12px}
+      .rapPanelQA .heroTitle{font-size:clamp(44px,5.2vw,72px);line-height:.94;font-weight:1000;letter-spacing:-3px;margin:0;color:#f4f1e9}
+      .rapPanelQA .heroTitle span{color:#29d6df}
+      .rapPanelQA .heroHint{margin:14px auto 18px;max-width:420px;font-size:11px;color:#909aa1;line-height:1.55}
+      .goHero{width:100%!important;min-height:112px!important;height:auto!important;border-radius:24px!important;font-size:clamp(34px,4vw,52px)!important;letter-spacing:-1.6px!important;background:linear-gradient(135deg,#20c0ca 0%,#29d6df 56%,#54dec2 100%)!important;color:#05272a!important;box-shadow:0 18px 44px rgba(41,214,223,.14)!important;margin:0!important}
       .goHero:active{transform:scale(.988)!important}
+      .heroFoot{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+      .heroFoot div{border:1px solid #253036;border-radius:13px;background:#0d1214;padding:9px 6px;font-size:9px;color:#98a2a9;font-weight:850}
 
-      .rapScreen{height:100dvh!important;max-width:720px!important;grid-template-rows:auto auto minmax(0,1fr) auto auto!important;gap:6px!important;padding:max(7px,env(safe-area-inset-top)) 10px calc(8px + env(safe-area-inset-bottom))!important;background:#090a0c!important}
-      .rapPlayer{width:min(100%,460px)!important;margin:0 auto!important;min-height:200px!important;max-height:32dvh!important;border-radius:14px!important;box-shadow:0 10px 28px rgba(0,0,0,.34)!important}
+      .quickPanelQA{gap:8px}
+      .quickGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+      .quickBtn{min-height:62px;border:1px solid #2b3137;border-radius:15px;background:#111518;color:#f4f1e9;text-align:left;padding:10px 12px;font-size:11px;font-weight:900;line-height:1.2}
+      .quickBtn span{display:block;margin-top:5px;color:#747f86;font-size:8px;font-weight:800;letter-spacing:.35px}
+      .quickBtn:active{transform:scale(.985)}
+      .quickBtn.reviewOn{border-color:#655a42;background:#17140e;color:#f0dcae}
+      .quickBtn:disabled{opacity:.42}
+      .quickBtn.wide{grid-column:1/-1}
+
+      .rapScreen{height:100dvh!important;max-width:1220px!important;width:calc(100% - 40px)!important;display:none!important;grid-template-columns:minmax(320px,.95fr) minmax(360px,1.15fr) minmax(250px,.75fr)!important;grid-template-rows:minmax(0,1fr)!important;gap:14px!important;padding:max(14px,env(safe-area-inset-top)) 0 calc(16px + env(safe-area-inset-bottom))!important;background:#08090b!important}
+      .rapScreen.on{display:grid!important}
+      .rapCol{min-height:0;border:1px solid #263036;border-radius:24px;background:linear-gradient(180deg,rgba(17,21,24,.98),rgba(10,13,15,.98));padding:16px;overflow:hidden}
+      .rapMediaCol{display:flex;flex-direction:column;gap:10px}
+      .rapPlayer{width:100%!important;margin:0!important;min-height:200px!important;max-height:none!important;aspect-ratio:16/9!important;border-radius:16px!important;box-shadow:none!important;flex:0 0 auto}
       .rapPlayer .playerWrap{display:block!important;width:100%;height:100%;max-width:none;margin:0;aspect-ratio:auto;border-radius:0}
-      .rapMeta{font-size:10px!important;letter-spacing:.45px!important;line-height:1!important;color:#9da5ab!important}
-      .rapPrompt{align-self:stretch!important;padding:10px 12px!important;align-content:center!important;border:1px solid #1d383c!important;border-radius:18px!important;background:#0d1214!important}
-      .rapPrompt:before{content:'💭 WORD';display:block;margin-bottom:5px;color:#7f898f;font-size:8px;font-weight:950;letter-spacing:1.45px}
-      .rapWord{font-size:clamp(36px,9vw,64px)!important;letter-spacing:-1.8px!important}
-      .rapRel{min-height:15px!important;margin-top:4px!important;font-size:11px!important;color:#f4f1e9!important}
-      .rapKeep{min-height:58px!important;border-radius:17px!important;font-size:clamp(20px,4.7vw,28px)!important;background:#f2e5c7!important;color:#20180a!important}
-      .rapActions{grid-template-columns:.82fr 1.55fr .82fr!important;gap:7px!important}
-      .rapAction{min-height:46px!important;border-radius:13px!important;font-size:10px!important}
-      .rapAction.next{font-size:14px!important}
+      .rapMeta{font-size:11px!important;letter-spacing:.45px!important;color:#a6afb5!important;text-align:left!important;padding:2px 3px}
+      .rapMediaNote{margin-top:auto;border:1px solid #242c31;border-radius:14px;background:#0d1113;padding:12px;font-size:9px;line-height:1.55;color:#7f8990}
+      .rapPromptCol{display:flex;flex-direction:column;justify-content:center;text-align:center;border-color:#1d4d52;background:linear-gradient(180deg,rgba(14,35,38,.98),rgba(10,16,18,.98))}
+      .rapPrompt{align-self:stretch!important;min-height:0!important;padding:20px!important;align-content:center!important;border:0!important;border-radius:0!important;background:transparent!important}
+      .rapPrompt:before{content:'💭 WORD PROMPT';display:block;margin-bottom:12px;color:#7f898f;font-size:9px;font-weight:950;letter-spacing:1.6px}
+      .rapWord{font-size:clamp(46px,6vw,82px)!important;letter-spacing:-2.4px!important;line-height:.95!important}
+      .rapRel{min-height:18px!important;margin-top:10px!important;font-size:12px!important;color:#f4f1e9!important}
+      .rapActionCol{display:flex;flex-direction:column;gap:9px}
+      .rapActionCol .sideTitle{font-size:9px;font-weight:950;letter-spacing:1.6px;color:#7f898f;margin:2px 2px 4px}
+      .rapKeep{min-height:94px!important;border-radius:20px!important;font-size:clamp(24px,3vw,34px)!important;background:#f2e5c7!important;color:#20180a!important}
+      .rapActions{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}
+      .rapAction{min-height:58px!important;border-radius:15px!important;font-size:12px!important}
+      .rapAction.next{min-height:74px!important;font-size:18px!important;order:-1}
+      .rapActionCol .tapHint{margin-top:auto;font-size:8.5px;line-height:1.55;color:#707b82;padding:0 2px}
 
-      @media(max-width:520px){
-        .readyShell{padding-left:10px!important;padding-right:10px!important}
-        .readyVersion{display:none!important}
-        .readyCenter{padding:15px 12px 12px!important;border-radius:20px!important}
-        .conditionButton{font-size:28px!important}
-        .readyQuickRow{gap:5px!important;margin-top:11px!important}
-        .readyQuickRow button{min-height:40px!important;font-size:9px!important}
-        .goHero{min-height:70px!important;font-size:30px!important;margin-top:10px!important}
-        .rapScreen{padding-left:7px!important;padding-right:7px!important;gap:5px!important}
-        .rapPlayer{width:100%!important;min-height:200px!important;max-height:30dvh!important}
+      @media(max-width:820px){
+        .readyShell,.rapScreen{width:calc(100% - 20px)!important;max-width:720px!important}
+        .readyDashboard{grid-template-columns:1fr!important;grid-template-rows:auto minmax(0,1fr) auto!important;gap:8px!important}
+        .beatPanelQA,.quickPanelQA{padding:11px!important;border-radius:18px!important}
+        .beatPanelQA{display:grid!important;grid-template-columns:1fr auto;gap:8px!important;align-items:center}
+        .beatPanelQA .dashEyebrow,.beatPanelQA .dashTitle,.beatPanelQA .dashMetric,.beatPanelQA .dashSpacer{display:none!important}
+        .beatPanelQA .conditionButton{font-size:20px!important;padding:10px!important}
+        .beatPanelQA .readyStatus{grid-column:1/-1;margin:0!important}
+        .beatChange{margin:0!important;min-height:42px;padding:0 12px}
+        .rapPanelQA{padding:16px!important;border-radius:20px!important}
+        .rapPanelQA .heroTitle{font-size:40px}
+        .rapPanelQA .heroHint{margin:8px auto 12px}
+        .goHero{min-height:78px!important;font-size:32px!important;border-radius:18px!important}
+        .heroFoot{margin-top:8px}
+        .quickPanelQA .dashEyebrow,.quickPanelQA .dashTitle,.quickPanelQA .dashSub{display:none!important}
+        .quickGrid{grid-template-columns:repeat(4,1fr)!important}
+        .quickBtn{min-height:44px!important;padding:8px!important;text-align:center;font-size:9px!important}
+        .quickBtn span{display:none!important}
+        .quickBtn.wide{grid-column:auto!important}
+        .rapScreen{grid-template-columns:1fr!important;grid-template-rows:auto minmax(0,1fr) auto!important;gap:6px!important}
+        .rapCol{padding:8px!important;border-radius:16px!important}
+        .rapMediaCol{display:block!important}
+        .rapPlayer{width:min(100%,460px)!important;margin:0 auto!important;min-height:200px!important;max-height:30dvh!important}
+        .rapMeta{text-align:center!important;font-size:10px!important;margin-top:5px}
+        .rapMediaNote{display:none!important}
+        .rapPromptCol{min-height:0!important}
         .rapPrompt{padding:8px 10px!important}
-        .rapKeep{min-height:54px!important}
-        .rapAction{min-height:44px!important;font-size:9.5px!important}
+        .rapPrompt:before{margin-bottom:5px!important;font-size:8px!important}
+        .rapWord{font-size:clamp(36px,10vw,64px)!important}
+        .rapActionCol{display:grid!important;grid-template-columns:1.1fr 1fr 1.45fr 1fr;gap:6px!important;align-items:stretch}
+        .rapActionCol .sideTitle,.rapActionCol .tapHint{display:none!important}
+        .rapKeep{min-height:54px!important;font-size:18px!important;border-radius:14px!important}
+        .rapActions{display:contents!important}
+        .rapAction{min-height:54px!important;font-size:9px!important}
+        .rapAction.next{min-height:54px!important;font-size:13px!important;order:initial}
       }
-      @media(max-height:720px){
-        .readyCenter{padding:12px!important}
-        .readyCenter:before{margin-bottom:4px!important}
-        .readyQuickRow{margin-top:9px!important}
-        .goHero{min-height:62px!important;margin-top:9px!important}
-        .rapPlayer{width:min(44vh,100%)!important;min-height:200px!important}
-        .rapPrompt{padding-top:7px!important;padding-bottom:7px!important}
-        .rapKeep{min-height:50px!important}
-        .rapAction{min-height:40px!important}
+      @media(max-height:700px) and (min-width:821px){
+        .readyShell{gap:8px!important;padding-top:8px!important;padding-bottom:8px!important}
+        .dashPanel{padding:14px!important}
+        .rapPanelQA .heroTitle{font-size:50px}
+        .goHero{min-height:86px!important}
+        .quickBtn{min-height:52px!important}
+        .rapScreen{padding-top:8px!important;padding-bottom:8px!important;gap:9px!important}
+        .rapCol{padding:12px!important}
+        .rapKeep{min-height:76px!important}
+        .rapAction{min-height:48px!important}.rapAction.next{min-height:62px!important}
       }
     `;
     d.head.appendChild(css);
 
     const review=d.getElementById('reviewButton');
     const condition=d.getElementById('conditionButton');
+    const status=d.getElementById('quickRapStatus');
     const menuButton=d.getElementById('menuButton');
     const readyCenter=d.querySelector('.readyCenter');
+    const go=d.getElementById('quickRapBtn');
+    const menuSheet=d.getElementById('menuSheet');
 
-    if(readyCenter){
-      const row=d.createElement('div');
-      row.className='readyQuickRow';
-      row.innerHTML='<button type="button" data-role="beat">🎧 BEAT</button><button type="button" data-role="review">↺ REVIEW</button><button type="button" data-role="more">⚙ MENU</button>';
-      readyCenter.appendChild(row);
-      row.querySelector('[data-role="beat"]').addEventListener('click',()=>condition&&condition.click());
-      row.querySelector('[data-role="more"]').addEventListener('click',()=>menuButton&&menuButton.click());
-      const reviewProxy=row.querySelector('[data-role="review"]');
+    const openSecondary=(key)=>{
+      const btn=menuSheet&&menuSheet.querySelector(`[data-open-secondary="${key}"]`);
+      if(btn)btn.click();
+    };
+
+    if(readyCenter && condition && status && go){
+      readyCenter.innerHTML='';
+      const dashboard=d.createElement('div');
+      dashboard.className='readyDashboard';
+      dashboard.innerHTML=`
+        <section class="dashPanel beatPanelQA">
+          <div class="dashEyebrow">🎧 BEAT</div>
+          <h2 class="dashTitle">Pick the lane</h2>
+          <div data-slot="condition"></div>
+          <div data-slot="status"></div>
+          <button class="beatChange" type="button">🎛 CHANGE BEAT</button>
+          <div class="dashSpacer"></div>
+          <div class="dashMetric"><div><small>SORT</small><b>🔥 HOT</b></div><div><small>PICK</small><b>✨ FOR YOU</b></div></div>
+        </section>
+        <section class="dashPanel accent rapPanelQA">
+          <div class="heroMark">⚡ READY TO RAP</div>
+          <h2 class="heroTitle">RAP <span>NOW</span></h2>
+          <div class="heroHint">Beatが決まったら、ここだけ押せば3秒カウント→録音開始。</div>
+          <div data-slot="go"></div>
+          <div class="heroFoot"><div>3 SEC COUNT-IN</div><div>LOCAL SAVE</div><div>ONE TAP START</div></div>
+        </section>
+        <section class="dashPanel quickPanelQA">
+          <div class="dashEyebrow">⚡ QUICK</div>
+          <h2 class="dashTitle">Jump anywhere</h2>
+          <div class="dashSub">よく使う場所を1階層で。設定画面を掘らずに直接移動。</div>
+          <div class="quickGrid">
+            <button class="quickBtn" type="button" data-role="review">↺ REVIEW<span>未判定Take</span></button>
+            <button class="quickBtn" type="button" data-role="sessions">🎙 SESSIONS<span>録音履歴</span></button>
+            <button class="quickBtn" type="button" data-role="builds">🔥 BUILDS<span>曲候補</span></button>
+            <button class="quickBtn" type="button" data-role="beats">🎧 BEATS<span>Beat条件</span></button>
+            <button class="quickBtn wide" type="button" data-role="settings">⚙ SETTINGS<span>細かい設定</span></button>
+          </div>
+          <div class="dashSpacer"></div>
+          <div class="dashMetric"><div><small>MODE</small><b>RAP</b></div><div><small>SAVE</small><b>DEVICE</b></div></div>
+        </section>`;
+      readyCenter.appendChild(dashboard);
+      dashboard.querySelector('[data-slot="condition"]').appendChild(condition);
+      dashboard.querySelector('[data-slot="status"]').appendChild(status);
+      dashboard.querySelector('[data-slot="go"]').appendChild(go);
+      dashboard.querySelector('.beatChange').addEventListener('click',()=>condition.click());
+      dashboard.querySelector('[data-role="beats"]').addEventListener('click',()=>condition.click());
+      dashboard.querySelector('[data-role="sessions"]').addEventListener('click',()=>openSecondary('sessions'));
+      dashboard.querySelector('[data-role="builds"]').addEventListener('click',()=>openSecondary('builds'));
+      dashboard.querySelector('[data-role="settings"]').addEventListener('click',()=>openSecondary('settings'));
+      const reviewProxy=dashboard.querySelector('[data-role="review"]');
       reviewProxy.addEventListener('click',()=>review&&review.click());
       const syncReview=()=>{
         if(!review)return;
         const raw=(review.textContent||'').trim();
         const n=(raw.match(/\d+/)||[])[0];
         const on=review.classList.contains('on');
-        reviewProxy.textContent=on?(n?`↺ REVIEW ${n}`:'↺ REVIEW'):'✓ CLEAR';
-        reviewProxy.classList.toggle('hasReview',on);
+        reviewProxy.innerHTML=on?`↺ REVIEW${n?` ${n}`:''}<span>未判定Take</span>`:'✓ CLEAR<span>未判定なし</span>';
+        reviewProxy.classList.toggle('reviewOn',on);
         reviewProxy.disabled=!on;
       };
       if(review)new MutationObserver(syncReview).observe(review,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
       syncReview();
     }
 
-    const go=d.getElementById('quickRapBtn');
     if(go){
-      if(readyCenter)readyCenter.appendChild(go);
-      const syncGo=()=>{
-        const t=(go.textContent||'').trim();
-        if(t==='GO')go.textContent='🎤 RAP';
-      };
+      const syncGo=()=>{if((go.textContent||'').trim()==='GO')go.textContent='🎤 RAP';};
       new MutationObserver(syncGo).observe(go,{childList:true,subtree:true});
       syncGo();
+    }
+
+    const rap=d.getElementById('rapScreen');
+    const rapPlayer=d.getElementById('rapPlayer');
+    const rapMeta=d.querySelector('.rapMeta');
+    const rapPrompt=d.querySelector('.rapPrompt');
+    const rapKeep=d.getElementById('rapKeep');
+    const rapActions=d.querySelector('.rapActions');
+    if(rap&&rapPlayer&&rapMeta&&rapPrompt&&rapKeep&&rapActions){
+      rap.innerHTML='';
+      const media=d.createElement('section');media.className='rapCol rapMediaCol';
+      const promptCol=d.createElement('section');promptCol.className='rapCol rapPromptCol';
+      const actionCol=d.createElement('section');actionCol.className='rapCol rapActionCol';
+      media.appendChild(rapPlayer);media.appendChild(rapMeta);
+      const note=d.createElement('div');note.className='rapMediaNote';note.textContent='🎧 Beatを見ながら録る。Session中はマイク接続を維持。';media.appendChild(note);
+      promptCol.appendChild(rapPrompt);
+      const sideTitle=d.createElement('div');sideTitle.className='sideTitle';sideTitle.textContent='⚡ ACTIONS';actionCol.appendChild(sideTitle);
+      actionCol.appendChild(rapKeep);actionCol.appendChild(rapActions);
+      const tapHint=d.createElement('div');tapHint.className='tapHint';tapHint.textContent='KEEP / NEXT = 1 tap  ·  RETAKE / END = hold';actionCol.appendChild(tapHint);
+      rap.appendChild(media);rap.appendChild(promptCol);rap.appendChild(actionCol);
     }
 
     const labels={rapRetake:'🔁 RETAKE',rapNext:'⏭ NEXT',rapEnd:'⏹ END'};
