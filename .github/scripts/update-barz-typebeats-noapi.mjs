@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 
 const OUT = 'barz/beat-cache.json';
 const MAX_PER_ARTIST = 6;
-const SEARCH_COUNT = 12;
+const SEARCH_COUNT = 8;
 const MIN_SEC = 60;
 const MAX_SEC = 480;
 const YEAR = 2026;
@@ -33,7 +33,7 @@ function normalize(entry, artist) {
   const uploadDate = String(entry?.upload_date || '');
   const publishedAt = /^\d{8}$/.test(uploadDate)
     ? Date.parse(`${uploadDate.slice(0,4)}-${uploadDate.slice(4,6)}-${uploadDate.slice(6,8)}T00:00:00Z`)
-    : Date.now();
+    : (Number(entry?.timestamp) ? Number(entry.timestamp) * 1000 : Date.now());
   return {
     videoId: id,
     url: id ? `https://www.youtube.com/watch?v=${id}` : '',
@@ -60,18 +60,19 @@ function keep(t) {
 function search(query, artist) {
   const target = `ytsearch${SEARCH_COUNT}:${query}`;
   const args = [
-    '--dump-single-json',
+    '--dump-json',
     '--skip-download',
     '--ignore-errors',
     '--no-warnings',
     '--no-playlist',
     target
   ];
-  const r = spawnSync('yt-dlp', args, { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024 });
+  const r = spawnSync('yt-dlp', args, { encoding: 'utf8', maxBuffer: 30 * 1024 * 1024 });
   if (r.error) throw r.error;
   if (r.status !== 0 && !r.stdout.trim()) throw new Error(r.stderr.trim() || `yt-dlp exited ${r.status}`);
-  const data = JSON.parse(r.stdout || '{}');
-  const entries = Array.isArray(data.entries) ? data.entries : [];
+  const entries = r.stdout.split(/\r?\n/).map(x => x.trim()).filter(Boolean).map(line => {
+    try { return JSON.parse(line); } catch { return null; }
+  }).filter(Boolean);
   const tracks = entries.map(x => normalize(x, artist)).filter(keep);
   tracks.sort((a, b) => score(b) - score(a) || b.views - a.views);
   const seen = new Set();
