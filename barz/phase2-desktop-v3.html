@@ -91,20 +91,21 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090b}
       function beatState(){
         try{return inner.contentWindow.BarzPhase2?.getBeatState?.()||{}}catch(_){return{}}
       }
+      function hasBeat(s){return !!(s&&s.videoId&&!s.reason)}
       function setNote(text,kind=''){
         note.textContent=text;
         note.className='listenRapNote'+(kind?' '+kind:'');
       }
       function persist(){try{localStorage.setItem(ACTION_KEY,actionMode)}catch(_){ }}
       function sync(){
-        const s=beatState();
+        const s=beatState(),selected=hasBeat(s);
         mode.querySelectorAll('[data-action-mode]').forEach(b=>b.classList.toggle('on',b.dataset.actionMode===actionMode));
         hero.classList.toggle('listenMode',actionMode==='listen');
         if(actionMode==='listen'){
           if(mark)mark.textContent='🎧 MIC OFF · JUST LISTEN';
           if(title)title.innerHTML='LISTEN <span>NOW</span>';
           if(hint)hint.textContent='Beat探しはマイクなし。気に入ったらRAPへ切り替える。';
-          if(s.ready){primary.disabled=false;primary.textContent=s.live?'■ STOP LISTEN':'▶ LISTEN';setNote('マイクOFF · Beatだけ流してOK','ok')}
+          if(selected){primary.disabled=false;primary.textContent=s.live?'■ STOP LISTEN':'▶ LISTEN';setNote('マイクOFF · Beatだけ流してOK','ok')}
           else{primary.disabled=true;primary.textContent='🎧 BEATを選ぶ';setNote('LISTENではマイク権限を一切出さへん。')}
           playBtn.disabled=!radioPlay||radioPlay.disabled;
           nextBtn.disabled=!radioSkip||radioSkip.disabled;
@@ -112,10 +113,10 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090b}
           if(mark)mark.textContent='🎤 MIC ON WHEN YOU START';
           if(title)title.innerHTML='RAP <span>NOW</span>';
           if(hint)hint.textContent='RAPを押した時だけマイクを使う。今のBeatを0秒へ戻して3秒後にREC。';
-          primary.disabled=!s.ready;
-          primary.textContent=s.ready?'🎤 RAP':'🎧 Beatを先に選ぶ';
+          primary.disabled=!selected;
+          primary.textContent=selected?'🎤 RAP':'🎧 Beatを先に選ぶ';
           playBtn.disabled=true;nextBtn.disabled=true;
-          setNote(s.ready?'マイクはRAP開始時だけ確認する。':'先に左でBeatを選ぶ。');
+          setNote(selected?'マイクはRAP開始時だけ確認する。':'先に左でBeatを選ぶ。');
         }
       }
       function setMode(next){
@@ -142,7 +143,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090b}
       primary.addEventListener('click',()=>{
         if(actionMode==='rap'){
           const s=beatState();
-          if(!s.ready)return sync();
+          if(!hasBeat(s))return sync();
           nativeGo.click();
           return;
         }
