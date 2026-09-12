@@ -9,7 +9,7 @@ if (!key) {
 const OUT = 'barz/beat-cache.json';
 const YEAR = 2026;
 const MAX = 20;
-const MIN_SEC = 120;
+const MIN_SEC = 60;
 const MAX_SEC = 480;
 const FRESH_DAYS = 30;
 const EXCLUDE = /(^|[^a-z])(mix|mixtape|playlist|tutorial|shorts?|how ?to)([^a-z]|$)/i;
@@ -22,6 +22,16 @@ const GENRES = {
   DIGI: 'digicore type beat 2026',
   'CLOUD DRILL': 'cloud drill type beat 2026',
   'CLOUD JERSEY': 'cloud jersey club type beat 2026'
+};
+const TYPE_ARTISTS = {
+  Bladee: 'Bladee type beat 2026',
+  Ecco2k: 'Ecco2k type beat 2026',
+  Future: 'Future type beat 2026',
+  'Travis Scott': 'Travis Scott type beat 2026',
+  'Ken Carson': 'Ken Carson type beat 2026',
+  'Playboi Carti': 'Playboi Carti type beat 2026',
+  'Destroy Lonely': 'Destroy Lonely type beat 2026',
+  Yeat: 'Yeat type beat 2026'
 };
 const MODES = ['HOT', 'TOP', 'FRESH'];
 
@@ -54,7 +64,7 @@ async function yt(path, params) {
   if (!r.ok || j.error) throw new Error(j?.error?.message || `YouTube API ${r.status}`);
   return j;
 }
-async function slot(genre, mode) {
+async function slot(query, mode) {
   const now = Date.now();
   const publishedAfter = mode === 'FRESH'
     ? new Date(now - FRESH_DAYS * 86400000).toISOString()
@@ -63,7 +73,7 @@ async function slot(genre, mode) {
     part: 'snippet',
     type: 'video',
     maxResults: '25',
-    q: GENRES[genre],
+    q: query,
     order: mode === 'FRESH' ? 'date' : 'viewCount',
     publishedAfter,
     videoEmbeddable: 'true'
@@ -94,11 +104,11 @@ async function slot(genre, mode) {
 
 const slots = {};
 let total = 0;
-for (const genre of Object.keys(GENRES)) {
+for (const [genre, query] of Object.entries(GENRES)) {
   for (const mode of MODES) {
     const name = `${genre}|${mode}`;
     try {
-      const tracks = await slot(genre, mode);
+      const tracks = await slot(query, mode);
       slots[name] = tracks;
       total += tracks.length;
       console.log(`${name}: ${tracks.length}`);
@@ -108,13 +118,27 @@ for (const genre of Object.keys(GENRES)) {
     }
   }
 }
+for (const [artist, query] of Object.entries(TYPE_ARTISTS)) {
+  const name = `TYPE:${artist}|HOT`;
+  try {
+    const tracks = await slot(query, 'HOT');
+    slots[name] = tracks;
+    total += tracks.length;
+    console.log(`${name}: ${tracks.length}`);
+  } catch (e) {
+    console.error(`${name}: ${e.message}`);
+    slots[name] = [];
+  }
+}
 if (!total) throw new Error('No Barz beat candidates were generated');
 
 const data = {
-  version: 1,
+  version: 2,
   generatedAt: new Date().toISOString(),
   year: YEAR,
   rules: { minSec: MIN_SEC, maxSec: MAX_SEC, freshDays: FRESH_DAYS, max: MAX },
+  genres: Object.keys(GENRES),
+  typeArtists: Object.keys(TYPE_ARTISTS),
   slots
 };
 fs.writeFileSync(OUT, JSON.stringify(data, null, 2) + '\n');
