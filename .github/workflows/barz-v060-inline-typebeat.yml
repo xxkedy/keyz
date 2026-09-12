@@ -5,6 +5,7 @@ on:
     branches: [barz-v0.6-phase2-ready]
     paths:
       - '.github/scripts/patch-barz-v060-inline-typebeat.mjs'
+      - '.github/scripts/fix-barz-v060-inline-cards.mjs'
       - '.github/workflows/barz-v060-inline-typebeat.yml'
   workflow_dispatch:
 
@@ -25,6 +26,8 @@ jobs:
           fetch-depth: 0
       - name: Apply in-app candidate patch
         run: node .github/scripts/patch-barz-v060-inline-typebeat.mjs
+      - name: Fix candidate card branch
+        run: node .github/scripts/fix-barz-v060-inline-cards.mjs
       - name: Validate
         shell: bash
         run: |
@@ -40,7 +43,8 @@ jobs:
           const qa=fs.readFileSync('barz/phase2-desktop-v2.html','utf8');
           if(!core.includes('window.BarzPhase2=')) throw new Error('BarzPhase2 API missing');
           if(!core.includes('TYPE:')) throw new Error('TYPE slot missing');
-          if(!qa.includes('data-candidate-slot')) throw new Error('candidate list missing');
+          if(!qa.includes('<div class="candidateList" data-candidate-slot></div>')) throw new Error('candidate list UI missing');
+          if(!qa.includes('setTimeout(loadTypeCandidates,0)')) throw new Error('candidate loader missing');
           if(!qa.includes('playTypeCandidate')) throw new Error('candidate click missing');
           NODE
           node --check /tmp/index.html.js
