@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<title>Barz v0.6 Desktop QA v3</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090b}
+#stage{display:block;width:100%;height:100dvh;border:0;background:#08090b}
+</style>
+</head>
+<body>
+<iframe id="stage" src="./phase2-desktop-v2.html" allow="microphone; autoplay; encrypted-media; picture-in-picture" title="Barz v0.6 desktop QA v3"></iframe>
+<script>
+(()=>{
+  const stage=document.getElementById('stage');
+  const ACTION_KEY='barz_phase2_action_mode';
+  let actionMode='listen';
+  try{actionMode=localStorage.getItem(ACTION_KEY)||'listen'}catch(_){ }
+  if(actionMode!=='listen'&&actionMode!=='rap')actionMode='listen';
+
+  function boot(){
+    const v2doc=stage.contentDocument;
+    const inner=v2doc?.getElementById('barz');
+    if(!inner)return setTimeout(boot,120);
+    const install=()=>{
+      const d=inner.contentDocument;
+      if(!d)return setTimeout(install,120);
+      const dashboard=d.querySelector('.readyDashboard');
+      const hero=dashboard?.querySelector('.hero');
+      const nativeGo=d.getElementById('quickRapBtn');
+      const status=d.getElementById('quickRapStatus');
+      const radioPlay=d.getElementById('radioPlay');
+      const radioSkip=d.getElementById('radioSkip');
+      if(!dashboard||!hero||!nativeGo||!status)return setTimeout(install,120);
+      if(d.getElementById('listenRapMode'))return;
+
+      const css=d.createElement('style');
+      css.textContent=`
+        .listenRapMode{width:100%;max-width:520px;margin:14px auto 12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:5px;border:1px solid #29343a;border-radius:16px;background:#090d0f}
+        .listenRapMode button{min-height:48px;border:1px solid transparent;border-radius:12px;background:transparent;color:#7f8990;font-size:11px;font-weight:950;letter-spacing:.35px}
+        .listenRapMode button.on{border-color:#24616a;background:#0d2528;color:#43dce2;box-shadow:inset 0 0 0 1px rgba(67,220,226,.08)}
+        .listenRapAction{width:100%;max-width:520px;margin:0 auto;display:grid;gap:8px}
+        .listenRapPrimary{width:100%;min-height:112px;border:0;border-radius:24px;background:linear-gradient(135deg,#20c0ca,#31d9df 55%,#54dec2);color:#05272a;font-size:clamp(27px,3.3vw,46px);font-weight:1000;letter-spacing:-1px;box-shadow:0 18px 44px rgba(41,214,223,.14)}
+        .listenRapPrimary:disabled{background:#151d20;color:#667278;box-shadow:none;cursor:not-allowed}
+        .listenRapTools{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .listenRapTools button{min-height:44px;border:1px solid #2b3439;border-radius:12px;background:#111719;color:#d9d6cf;font-size:9.5px;font-weight:900}
+        .listenRapTools button:disabled{opacity:.35}
+        .listenRapNote{min-height:18px;text-align:center;color:#8d989e;font-size:9px;line-height:1.45}
+        .listenRapNote.warn{color:#f0c879}.listenRapNote.ok{color:#58e1c0}
+        .hero.listenMode{border-color:#285259;background:linear-gradient(180deg,#0b2023,#0a1113)}
+        .hero.listenMode .heroMark{color:#43dce2}
+        .hero.listenMode .heroTitle span{color:#58e1c0}
+        .hero [data-go-slot]{display:none!important}
+        @media(max-width:900px){.listenRapMode{margin:8px auto}.listenRapMode button{min-height:42px}.listenRapPrimary{min-height:72px;font-size:28px}.listenRapTools button{min-height:40px}.listenRapAction{gap:6px}}
+      `;
+      d.head.appendChild(css);
+
+      const mark=hero.querySelector('.heroMark');
+      const title=hero.querySelector('.heroTitle');
+      const hint=hero.querySelector('.heroHint');
+      const foot=hero.querySelector('.heroFoot');
+      const goSlot=hero.querySelector('[data-go-slot]');
+
+      const mode=d.createElement('div');
+      mode.id='listenRapMode';
+      mode.className='listenRapMode';
+      mode.innerHTML='<button type="button" data-action-mode="listen">🎧 LISTEN</button><button type="button" data-action-mode="rap">🎤 RAP</button>';
+
+      const action=d.createElement('div');
+      action.className='listenRapAction';
+      action.innerHTML=`
+        <button type="button" class="listenRapPrimary" data-listen-primary>🎧 BEATを選ぶ</button>
+        <div class="listenRapTools">
+          <button type="button" data-listen-play>▶ PLAY / STOP</button>
+          <button type="button" data-listen-next>⏭ NEXT</button>
+        </div>
+        <div class="listenRapNote" data-listen-note>LISTENではマイクを使わへん。</div>
+      `;
+      hero.insertBefore(mode,title||hint||goSlot||foot);
+      if(goSlot)hero.insertBefore(action,goSlot);
+      else if(foot)hero.insertBefore(action,foot);
+      else hero.appendChild(action);
+
+      const primary=action.querySelector('[data-listen-primary]');
+      const playBtn=action.querySelector('[data-listen-play]');
+      const nextBtn=action.querySelector('[data-listen-next]');
+      const note=action.querySelector('[data-listen-note]');
+
+      function beatState(){
+        try{return inner.contentWindow.BarzPhase2?.getBeatState?.()||{}}catch(_){return{}}
+      }
+      function setNote(text,kind=''){
+        note.textContent=text;
+        note.className='listenRapNote'+(kind?' '+kind:'');
+      }
+      function persist(){try{localStorage.setItem(ACTION_KEY,actionMode)}catch(_){ }}
+      function sync(){
+        const s=beatState();
+        mode.querySelectorAll('[data-action-mode]').forEach(b=>b.classList.toggle('on',b.dataset.actionMode===actionMode));
+        hero.classList.toggle('listenMode',actionMode==='listen');
+        if(actionMode==='listen'){
+          if(mark)mark.textContent='🎧 MIC OFF · JUST LISTEN';
+          if(title)title.innerHTML='LISTEN <span>NOW</span>';
+          if(hint)hint.textContent='Beat探しはマイクなし。気に入ったらRAPへ切り替える。';
+          if(s.ready){primary.disabled=false;primary.textContent=s.live?'■ STOP LISTEN':'▶ LISTEN';setNote('マイクOFF · Beatだけ流してOK','ok')}
+          else{primary.disabled=true;primary.textContent='🎧 BEATを選ぶ';setNote('LISTENではマイク権限を一切出さへん。')}
+          playBtn.disabled=!radioPlay||radioPlay.disabled;
+          nextBtn.disabled=!radioSkip||radioSkip.disabled;
+        }else{
+          if(mark)mark.textContent='🎤 MIC ON WHEN YOU START';
+          if(title)title.innerHTML='RAP <span>NOW</span>';
+          if(hint)hint.textContent='RAPを押した時だけマイクを使う。今のBeatを0秒へ戻して3秒後にREC。';
+          primary.disabled=!s.ready;
+          primary.textContent=s.ready?'🎤 RAP':'🎧 Beatを先に選ぶ';
+          playBtn.disabled=true;nextBtn.disabled=true;
+          setNote(s.ready?'マイクはRAP開始時だけ確認する。':'先に左でBeatを選ぶ。');
+        }
+      }
+      function setMode(next){
+        actionMode=next==='rap'?'rap':'listen';
+        persist();sync();
+      }
+      function resumeListenAfterMicFailure(){
+        setMode('listen');
+        setNote('マイクを使えんかったからLISTENへ戻した。Beatはそのまま。','warn');
+        if(!radioPlay||radioPlay.disabled)return;
+        const t=(radioPlay.textContent||'').trim();
+        if(/STOP|■/.test(t))radioPlay.click();
+        setTimeout(()=>{
+          const now=(radioPlay.textContent||'').trim();
+          if(/PLAY|▶/.test(now))radioPlay.click();
+          setTimeout(sync,120);
+        },120);
+      }
+
+      mode.addEventListener('click',e=>{
+        const b=e.target.closest('[data-action-mode]');
+        if(b)setMode(b.dataset.actionMode);
+      });
+      primary.addEventListener('click',()=>{
+        if(actionMode==='rap'){
+          const s=beatState();
+          if(!s.ready)return sync();
+          nativeGo.click();
+          return;
+        }
+        if(radioPlay&&!radioPlay.disabled)radioPlay.click();
+        setTimeout(sync,120);
+      });
+      playBtn.addEventListener('click',()=>{if(radioPlay&&!radioPlay.disabled)radioPlay.click();setTimeout(sync,120)});
+      nextBtn.addEventListener('click',()=>{if(radioSkip&&!radioSkip.disabled)radioSkip.click();setTimeout(sync,180)});
+
+      if(status){
+        new MutationObserver(()=>{
+          const txt=(status.textContent||'').trim();
+          if(actionMode==='rap'&&/マイクを確認|マイク.*(失敗|拒否|使え|許可)/.test(txt))resumeListenAfterMicFailure();
+          else setTimeout(sync,0);
+        }).observe(status,{subtree:true,childList:true,characterData:true});
+      }
+      [radioPlay,radioSkip].filter(Boolean).forEach(el=>new MutationObserver(()=>setTimeout(sync,0)).observe(el,{subtree:true,childList:true,attributes:true,characterData:true}));
+      const api=inner.contentWindow.BarzPhase2;
+      if(api?.getBeatState){
+        let last='';
+        setInterval(()=>{
+          const s=beatState(),sig=[s.ready,s.live,s.videoId,s.reason].join('|');
+          if(sig!==last){last=sig;sync()}
+        },500);
+      }
+      setMode(actionMode);
+    };
+    inner.addEventListener('load',install,{once:true});
+    setTimeout(install,120);
+  }
+  stage.addEventListener('load',boot);
+})();
+</script>
+</body>
+</html>
