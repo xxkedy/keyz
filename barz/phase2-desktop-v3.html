@@ -53,7 +53,16 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090b}
         .hero.listenMode .heroMark{color:#43dce2}
         .hero.listenMode .heroTitle span{color:#58e1c0}
         .hero [data-go-slot]{display:none!important}
-        @media(max-width:900px){.listenRapMode{margin:8px auto}.listenRapMode button{min-height:42px}.listenRapPrimary{min-height:72px;font-size:28px}.listenRapTools button{min-height:40px}.listenRapAction{gap:6px}}
+        @media(max-width:900px){
+          .readyShell{padding-bottom:118px!important}
+          .hero{display:flex!important;position:fixed!important;z-index:1000;left:14px!important;right:14px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;width:auto!important;height:auto!important;min-height:0!important;padding:8px!important;border-radius:18px!important;overflow:visible!important;gap:6px!important;background:linear-gradient(180deg,#10171a,#0a0f11)!important;box-shadow:0 14px 42px rgba(0,0,0,.42)}
+          .hero .heroMark,.hero .heroTitle,.hero .heroHint,.hero .heroFoot{display:none!important}
+          .listenRapMode{max-width:none;margin:0 0 6px;padding:3px;border-radius:12px;gap:4px}
+          .listenRapMode button{min-height:36px;font-size:10px;border-radius:9px}
+          .listenRapAction{max-width:none;margin:0;display:block}
+          .listenRapPrimary{min-height:48px;border-radius:12px;font-size:18px;letter-spacing:-.3px}
+          .listenRapTools,.listenRapNote{display:none!important}
+        }
       `;
       d.head.appendChild(css);
 
@@ -62,6 +71,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090b}
       const hint=hero.querySelector('.heroHint');
       const foot=hero.querySelector('.heroFoot');
       const goSlot=hero.querySelector('[data-go-slot]');
+      const modeMetric=dashboard.querySelector('.dashPanel:last-child .metric>div:first-child b');
 
       const mode=d.createElement('div');
       mode.id='listenRapMode';
@@ -101,6 +111,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090b}
         const s=beatState(),selected=hasBeat(s);
         mode.querySelectorAll('[data-action-mode]').forEach(b=>b.classList.toggle('on',b.dataset.actionMode===actionMode));
         hero.classList.toggle('listenMode',actionMode==='listen');
+        if(modeMetric)modeMetric.textContent=actionMode==='listen'?'🎧 LISTEN':'🎤 RAP';
         if(actionMode==='listen'){
           if(mark)mark.textContent='🎧 MIC OFF · JUST LISTEN';
           if(title)title.innerHTML='LISTEN <span>NOW</span>';
